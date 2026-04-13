@@ -1,0 +1,20 @@
+{
+  "name": "com.sim.faciem.material",
+  "version": "1.0.0-alpha.1",
+  "displayName": "Sim.Faciem.Material",
+  "description": "Material Design Package for Sim Faciem UI Tookit extensions.",
+  "dependencies": {
+    "com.sim.faciem": "1.0.0-alpha.1",
+ },
+ "keywords": [
+    "Unity",
+    "Simplicitas",
+	"Faciem",
+	"Material"
+  ],
+  "author": {
+    "name": "Simplicitas-Studios",
+    "email": "pasdaa13@gmail.com",
+    "url": "https://github.com/Simplicitas-Studios"
+  }
+}
