@@ -1,0 +1,40 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <engine:VisualElement name="Root" data-source-type="Sim.Faciem.Material.Samples.GettingStartedViewModel, Sim.Faciem.Material.Samples" class="mat-demo-content">
+        <engine:Label text="Getting Started" class="mat-demo-page-title" />
+        <engine:Label text="Sim.Faciem.Material brings Angular Material Design to the Unity UI Toolkit. Drop MatButton into any UXML, pick a Variant and ThemeColor, and assign a theme TSS to your PanelSettings." class="mat-demo-page-subtitle" />
+        <engine:Label text="Example — Pokédex Cards" class="mat-demo-section-title" />
+        <engine:Label text="The cards below are a static UXML layout. No code required — just VisualElements, Labels, and MatButtons consuming the active theme palette." class="mat-demo-body" />
+        <engine:VisualElement class="mat-demo-card-row">
+            <engine:VisualElement class="mat-demo-card">
+                <engine:Label text="#387" class="mat-demo-card-number" />
+                <engine:Label text="Turtwig" class="mat-demo-card-name" />
+                <engine:Label text="Grass · Tiny Leaf Pokémon" class="mat-demo-card-type" />
+                <engine:Label text="A shell of soil covers its back. It photosynthesises using solar energy to create nutrients. Hardy and dependable." class="mat-demo-card-desc" />
+            </engine:VisualElement>
+            <engine:VisualElement class="mat-demo-card">
+                <engine:Label text="#390" class="mat-demo-card-number" />
+                <engine:Label text="Chimchar" class="mat-demo-card-name" />
+                <engine:Label text="Fire · Chimp Pokémon" class="mat-demo-card-type" />
+                <engine:Label text="The fire on its tail is fuelled by gas in its stomach. Even rain cannot extinguish the flame. Energetic and agile." class="mat-demo-card-desc" />
+            </engine:VisualElement>
+            <engine:VisualElement class="mat-demo-card">
+                <engine:Label text="#393" class="mat-demo-card-number" />
+                <engine:Label text="Piplup" class="mat-demo-card-name" />
+                <engine:Label text="Water · Penguin Pokémon" class="mat-demo-card-type" />
+                <engine:Label text="A proud Pokémon that dislikes accepting food from people. It lives along shores in northern regions, diving for fish." class="mat-demo-card-desc" />
+            </engine:VisualElement>
+        </engine:VisualElement>
+        <engine:Label text="Quick Actions" class="mat-demo-section-title" />
+        <engine:Label text="MatButton mirrors Angular Material&apos;s button system. Assign a Variant and ThemeColor in UXML or via binding." class="mat-demo-body" />
+        <engine:VisualElement class="mat-demo-btn-row">
+            <Sim.Faciem.Controls.MatButton text="Raised · Primary" variant="Raised" theme-color="Primary" />
+            <Sim.Faciem.Controls.MatButton text="Flat · Accent" variant="Flat" theme-color="Accent" />
+            <Sim.Faciem.Controls.MatButton text="Stroked · Warn" variant="Stroked" theme-color="Warn" />
+            <Sim.Faciem.Controls.MatButton text="Basic" variant="Basic" />
+        </engine:VisualElement>
+        <engine:Label text="Installation" class="mat-demo-section-title" />
+        <engine:Label text="1. Open a PanelSettings asset and assign one of the MatXxxTheme.tss files as the Theme Style Sheet." class="mat-demo-body" />
+        <engine:Label text="2. For Editor windows, extend MatFaciemEditorWindow instead of EditorWindow — styles are injected automatically." class="mat-demo-body" />
+        <engine:Label text="3. Use &lt;Sim.Faciem.Controls.MatButton&gt; in UXML and set variant / theme-color attributes." class="mat-demo-body" />
+    </engine:VisualElement>
+</engine:UXML>

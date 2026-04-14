@@ -1,0 +1,154 @@
+﻿/*
+ * MatDemoStyles.uss
+ * Layout and typography styles for the Material Demo shell and nav panel.
+ * Mat-button token colours are inherited from MatEditorStyles injected on
+ * the window root — no additional @import needed here.
+ */
+
+/* ══ Shell root ═════════════════════════════════════════════════════════════ */
+.mat-demo-root {
+    flex-direction: row;
+    flex-grow: 1;
+}
+
+/* ══ Left navigation panel ══════════════════════════════════════════════════ */
+.mat-demo-nav-panel {
+    width: 200px;
+    flex-shrink: 0;
+    flex-direction: column;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    padding-left: 8px;
+    padding-right: 8px;
+    border-right-width: 1px;
+    border-right-color: rgba(0, 0, 0, 0.12);
+}
+
+.mat-demo-nav-title {
+    font-size: 13px;
+    -unity-font-style: bold;
+    -unity-text-align: upper-left;
+    padding-left: 8px;
+    padding-bottom: 8px;
+    letter-spacing: 0.5px;
+}
+
+.mat-demo-nav-divider {
+    height: 1px;
+    background-color: rgba(0, 0, 0, 0.10);
+    margin-bottom: 8px;
+    margin-left: 4px;
+    margin-right: 4px;
+}
+
+/* Nav buttons fill the panel width */
+.mat-demo-nav-btn {
+    width: 100%;
+    height: 36px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    -unity-text-align: middle-left;
+    padding-left: 12px;
+    border-radius: 4px;
+}
+
+/* ══ Content area (shared by all pages) ═════════════════════════════════════ */
+.mat-demo-content {
+    flex-grow: 1;
+    padding: 24px;
+    overflow: hidden scroll;
+}
+
+/* ══ Page typography ════════════════════════════════════════════════════════ */
+.mat-demo-page-title {
+    font-size: 22px;
+    -unity-font-style: bold;
+    margin-bottom: 4px;
+}
+
+.mat-demo-page-subtitle {
+    font-size: 13px;
+    margin-bottom: 24px;
+    opacity: 0.7;
+}
+
+.mat-demo-section-title {
+    font-size: 15px;
+    -unity-font-style: bold;
+    margin-top: 24px;
+    margin-bottom: 12px;
+    padding-bottom: 4px;
+    border-bottom-width: 1px;
+    border-bottom-color: rgba(0, 0, 0, 0.10);
+}
+
+.mat-demo-body {
+    font-size: 13px;
+    white-space: normal;
+    margin-bottom: 12px;
+}
+
+/* ══ Pokédex card ════════════════════════════════════════════════════════════ */
+.mat-demo-card-row {
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.mat-demo-card {
+    width: 180px;
+    padding: 16px;
+    margin-right: 12px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    border-width: 1px;
+    border-color: rgba(0, 0, 0, 0.12);
+}
+
+.mat-demo-card-number {
+    font-size: 11px;
+    opacity: 0.55;
+    margin-bottom: 2px;
+}
+
+.mat-demo-card-name {
+    font-size: 16px;
+    -unity-font-style: bold;
+    margin-bottom: 4px;
+}
+
+.mat-demo-card-type {
+    font-size: 11px;
+    margin-bottom: 8px;
+    opacity: 0.75;
+}
+
+.mat-demo-card-desc {
+    font-size: 11px;
+    white-space: normal;
+    opacity: 0.85;
+}
+
+/* ══ Button demo row ════════════════════════════════════════════════════════ */
+.mat-demo-btn-row {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 4px;
+    margin-bottom: 12px;
+}
+
+.mat-demo-btn-row > .mat-button-base {
+    margin-right: 8px;
+    margin-bottom: 4px;
+}
+
+/* ══ Type chip (Theming page) ════════════════════════════════════════════════ */
+.mat-demo-type-chip-row {
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+

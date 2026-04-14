@@ -17,5 +17,12 @@
     "name": "Simplicitas-Studios",
     "email": "pasdaa13@gmail.com",
     "url": "https://github.com/Simplicitas-Studios"
-  }
+  },
+  "samples": [
+    {
+      "displayName": "Material Demo",
+      "description": "Interactive demo showcasing Material Design controls with a Pokémon Sinnoh theme.",
+      "path": "Samples/MaterialDemo"
+    }
+  ]
 }

@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d89cf449c2c44a5f8474539a8bf9bc15, type: 3}
+  m_Name: MatButtonDemoEditorViewId
+  m_EditorClassIdentifier: 
+  ViewId:
+    _id: Sim.Faciem/Material/ButtonDemo
+  View: {fileID: 9197481963319205126, guid: f2b9cdd7243048e785c25b55e1a9291b, type: 3}
+  DataContext:
+    TypeName: Sim.Faciem.Material.Samples.IButtonDemoDataContext, Sim.Faciem.Material.Samples,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    Script: {fileID: 11500000, guid: 4c81fe943bd64287a1a279b6f71dc951, type: 3}
+  ViewModel:
+    TypeName: Sim.Faciem.Material.Samples.ButtonDemoViewModel, Sim.Faciem.Material.Samples,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    Script: {fileID: 11500000, guid: 358b3b238f30458ba59325e4760c6769, type: 3}
+  SourceCodeGeneration: 0
+  SourceFile: {fileID: 0}

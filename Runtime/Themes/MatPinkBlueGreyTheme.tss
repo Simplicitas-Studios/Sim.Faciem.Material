@@ -1,0 +1,9 @@
+﻿/*
+ * MatPinkBlueGreyTheme.tss
+ * Drop this file into PanelSettings.themeStyleSheet to apply the
+ * Pink / Blue Grey dark theme to all MatButton controls on that panel.
+ */
+
+@import url("../Controls/Styles/MatButtonStyles.uss");
+@import url("MatPinkBlueGreyTheme.uss");
+

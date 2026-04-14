@@ -1,0 +1,26 @@
+﻿{
+    "name": "Sim.Faciem.Material.Samples.Editor",
+    "rootNamespace": "Sim.Faciem.Material.Samples.Editor",
+    "references": [
+        "GUID:31f1748c6ebc4e4e816b7108bcf1bfc4",
+        "GUID:0256ac6985bf6624da798665f1d64436",
+        "GUID:a07876359cfdf6049a3eeb95261265b2",
+        "GUID:63f3d02dd7eddab4296ca4ed30850d64",
+        "GUID:0bd492a28c79c1746b204dae08fd9fae",
+        "GUID:77221876cc6b8244180b96e320b1bcd4",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23",
+        "GUID:c68e2f7abac45cd409bf1e2a2e91700e"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
+

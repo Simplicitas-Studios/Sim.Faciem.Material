@@ -1,0 +1,37 @@
+﻿/*
+ * MatEditorLightTheme.uss
+ * Material button palette tuned for Unity's Personal (light) editor skin.
+ * Applied programmatically by MatEditorStyles when EditorGUIUtility.isProSkin == false.
+ *
+ * Primary   — Blue 800        #1565C0  (visible on light editor bg)
+ * Accent    — Purple 800      #6A1B9A
+ * Warn      — Red 900         #B71C1C
+ */
+
+:root {
+    /* ── Primary ─────────────────────────────────────────────────────────── */
+    --mat-button-primary-color:       #1565C0;
+    --mat-button-primary-ripple:      rgba(21, 101, 192, 0.15);
+    --mat-button-primary-text-color:  #FFFFFF;
+
+    /* ── Accent ──────────────────────────────────────────────────────────── */
+    --mat-button-accent-color:        #6A1B9A;
+    --mat-button-accent-ripple:       rgba(106, 27, 154, 0.15);
+    --mat-button-accent-text-color:   #FFFFFF;
+
+    /* ── Warn ────────────────────────────────────────────────────────────── */
+    --mat-button-warn-color:          #B71C1C;
+    --mat-button-warn-ripple:         rgba(183, 28, 28, 0.15);
+    --mat-button-warn-text-color:     #FFFFFF;
+
+    /* ── Disabled ────────────────────────────────────────────────────────── */
+    --mat-button-disabled-color:      rgba(0, 0, 0, 0.38);
+    --mat-button-disabled-bg:         rgba(0, 0, 0, 0.12);
+
+    /* ── Surface — approximates Unity light editor button background ──────── */
+    --mat-button-surface-bg:          #E2E2E2;
+    --mat-button-on-surface:          rgba(0, 0, 0, 0.87);
+    --mat-button-hover-overlay:       rgba(0, 0, 0, 0.06);
+    --mat-button-active-overlay:      rgba(0, 0, 0, 0.14);
+}
+

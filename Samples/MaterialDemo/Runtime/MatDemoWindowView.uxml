@@ -1,0 +1,28 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Packages/com.sim.faciem-material/Samples/MaterialDemo/Runtime/MatDemoStyles.uss?fileID=7433441132597879392&amp;guid=8f5a45dce75a45af8563009861a44c89&amp;type=3#MatDemoStyles" />
+    <engine:VisualElement name="RootContainer" data-source-type="Sim.Faciem.Material.Samples.MatDemoWindowViewModel, Sim.Faciem.Material.Samples" class="mat-demo-root">
+        <engine:VisualElement name="NavPanel" class="mat-demo-nav-panel">
+            <engine:Label name="NavTitle" text="Material Demo" class="mat-demo-nav-title" />
+            <engine:VisualElement class="mat-demo-nav-divider" />
+            <Sim.Faciem.Controls.MatButton name="btnGettingStarted" text="Getting Started" variant="Basic" class="mat-demo-nav-btn">
+                <Bindings>
+                    <engine:DataBinding property="Command" data-source-path="NavigateToGettingStarted" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                    <engine:DataBinding property="ThemeColor" data-source-path="GettingStartedNavColor" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                </Bindings>
+            </Sim.Faciem.Controls.MatButton>
+            <Sim.Faciem.Controls.MatButton name="btnTheming" text="Theming" variant="Basic" class="mat-demo-nav-btn">
+                <Bindings>
+                    <engine:DataBinding property="Command" data-source-path="NavigateToTheming" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                    <engine:DataBinding property="ThemeColor" data-source-path="ThemingNavColor" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                </Bindings>
+            </Sim.Faciem.Controls.MatButton>
+            <Sim.Faciem.Controls.MatButton name="btnButton" text="Buttons" variant="Basic" class="mat-demo-nav-btn">
+                <Bindings>
+                    <engine:DataBinding property="Command" data-source-path="NavigateToButton" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                    <engine:DataBinding property="ThemeColor" data-source-path="ButtonNavColor" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                </Bindings>
+            </Sim.Faciem.Controls.MatButton>
+        </engine:VisualElement>
+        <Sim.Faciem.Region name="ContentRegion" region-name="project://database/Packages/com.sim.faciem-material/Samples/MaterialDemo/Runtime/MatDemoContentRegion.asset?fileID=11400000&amp;guid=4ea94f1bfabcb6344af7e5cb0afefbfc&amp;type=2#MatDemoContentRegion" style="flex-grow: 1;" />
+    </engine:VisualElement>
+</engine:UXML>

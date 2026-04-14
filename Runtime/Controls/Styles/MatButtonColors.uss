@@ -1,0 +1,35 @@
+﻿/*
+ * MatButtonColors.uss
+ * Default (fallback) CSS custom property definitions for MatButton.
+ * These values use the Indigo/Pink palette and are active whenever no
+ * theme USS file overrides them.  Add a theme .tss to your PanelSettings
+ * to replace these with your chosen palette.
+ */
+
+:root {
+    /* ── Primary – Indigo 500 ──────────────────────────────────────────── */
+    --mat-button-primary-color:       #3F51B5;
+    --mat-button-primary-ripple:      rgba(63, 81, 181, 0.15);
+    --mat-button-primary-text-color:  #FFFFFF;
+
+    /* ── Accent – Pink A200 ────────────────────────────────────────────── */
+    --mat-button-accent-color:        #FF4081;
+    --mat-button-accent-ripple:       rgba(255, 64, 129, 0.15);
+    --mat-button-accent-text-color:   #FFFFFF;
+
+    /* ── Warn – Red 500 ────────────────────────────────────────────────── */
+    --mat-button-warn-color:          #F44336;
+    --mat-button-warn-ripple:         rgba(244, 67, 54, 0.15);
+    --mat-button-warn-text-color:     #FFFFFF;
+
+    /* ── Disabled state ────────────────────────────────────────────────── */
+    --mat-button-disabled-color:      rgba(0, 0, 0, 0.38);
+    --mat-button-disabled-bg:         rgba(0, 0, 0, 0.12);
+
+    /* ── Surface ───────────────────────────────────────────────────────── */
+    --mat-button-surface-bg:          #FFFFFF;
+    --mat-button-on-surface:          rgba(0, 0, 0, 0.87);
+    --mat-button-hover-overlay:       rgba(0, 0, 0, 0.04);
+    --mat-button-active-overlay:      rgba(0, 0, 0, 0.12);
+}
+

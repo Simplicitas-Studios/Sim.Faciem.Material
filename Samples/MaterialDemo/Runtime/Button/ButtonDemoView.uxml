@@ -1,0 +1,138 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <engine:VisualElement name="Root" data-source-type="Sim.Faciem.Material.Samples.ButtonDemoViewModel, Sim.Faciem.Material.Samples" class="mat-demo-content">
+        <engine:Label text="Buttons" class="mat-demo-page-title" />
+        <engine:Label text="All seven MatButton variants — from subtle text buttons to eye-catching FABs. Toggle the disabled state to see the :disabled pseudo-class rules in action." class="mat-demo-page-subtitle" />
+        <engine:VisualElement class="mat-demo-btn-row">
+            <Sim.Faciem.Controls.MatButton name="btnToggleEnabled" text="Toggle Disabled State" variant="Stroked" theme-color="Warn">
+                <Bindings>
+                    <engine:DataBinding property="Command" data-source-path="ToggleEnabled" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                </Bindings>
+            </Sim.Faciem.Controls.MatButton>
+        </engine:VisualElement>
+        <engine:Label text="Basic  (mat-button)" class="mat-demo-section-title" />
+        <engine:Label text="No background, text colour only. Best for low-emphasis actions." class="mat-demo-body" />
+        <engine:VisualElement class="mat-demo-btn-row">
+            <Sim.Faciem.Controls.MatButton text="Swords Dance" variant="Basic">
+                <Bindings>
+                    <engine:DataBinding property="enabledSelf" data-source-path="ButtonsEnabled" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                </Bindings>
+            </Sim.Faciem.Controls.MatButton>
+            <Sim.Faciem.Controls.MatButton text="Stealth Rock" variant="Basic" theme-color="Primary">
+                <Bindings>
+                    <engine:DataBinding property="enabledSelf" data-source-path="ButtonsEnabled" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                </Bindings>
+            </Sim.Faciem.Controls.MatButton>
+            <Sim.Faciem.Controls.MatButton text="Will-O-Wisp" variant="Basic" theme-color="Warn">
+                <Bindings>
+                    <engine:DataBinding property="enabledSelf" data-source-path="ButtonsEnabled" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                </Bindings>
+            </Sim.Faciem.Controls.MatButton>
+            <Sim.Faciem.Controls.MatButton text="Nasty Plot" variant="Basic" theme-color="Accent">
+                <Bindings>
+                    <engine:DataBinding property="enabledSelf" data-source-path="ButtonsEnabled" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                </Bindings>
+            </Sim.Faciem.Controls.MatButton>
+        </engine:VisualElement>
+        <engine:Label text="Raised  (mat-raised-button)" class="mat-demo-section-title" />
+        <engine:Label text="Filled background with elevation shadow. Best for high-emphasis actions." class="mat-demo-body" />
+        <engine:VisualElement class="mat-demo-btn-row">
+            <Sim.Faciem.Controls.MatButton text="Close Combat" variant="Raised">
+                <Bindings>
+                    <engine:DataBinding property="enabledSelf" data-source-path="ButtonsEnabled" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                </Bindings>
+            </Sim.Faciem.Controls.MatButton>
+            <Sim.Faciem.Controls.MatButton text="Earthquake" variant="Raised" theme-color="Primary">
+                <Bindings>
+                    <engine:DataBinding property="enabledSelf" data-source-path="ButtonsEnabled" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                </Bindings>
+            </Sim.Faciem.Controls.MatButton>
+            <Sim.Faciem.Controls.MatButton text="Iron Head" variant="Raised" theme-color="Accent">
+                <Bindings>
+                    <engine:DataBinding property="enabledSelf" data-source-path="ButtonsEnabled" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                </Bindings>
+            </Sim.Faciem.Controls.MatButton>
+            <Sim.Faciem.Controls.MatButton text="Outrage" variant="Raised" theme-color="Warn">
+                <Bindings>
+                    <engine:DataBinding property="enabledSelf" data-source-path="ButtonsEnabled" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                </Bindings>
+            </Sim.Faciem.Controls.MatButton>
+        </engine:VisualElement>
+        <engine:Label text="Stroked  (mat-stroked-button)" class="mat-demo-section-title" />
+        <engine:Label text="Transparent background with an outline border. A lighter alternative to Raised." class="mat-demo-body" />
+        <engine:VisualElement class="mat-demo-btn-row">
+            <Sim.Faciem.Controls.MatButton text="Flamethrower" variant="Stroked">
+                <Bindings>
+                    <engine:DataBinding property="enabledSelf" data-source-path="ButtonsEnabled" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                </Bindings>
+            </Sim.Faciem.Controls.MatButton>
+            <Sim.Faciem.Controls.MatButton text="Surf" variant="Stroked" theme-color="Primary">
+                <Bindings>
+                    <engine:DataBinding property="enabledSelf" data-source-path="ButtonsEnabled" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                </Bindings>
+            </Sim.Faciem.Controls.MatButton>
+            <Sim.Faciem.Controls.MatButton text="Thunderbolt" variant="Stroked" theme-color="Accent">
+                <Bindings>
+                    <engine:DataBinding property="enabledSelf" data-source-path="ButtonsEnabled" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                </Bindings>
+            </Sim.Faciem.Controls.MatButton>
+            <Sim.Faciem.Controls.MatButton text="Psychic" variant="Stroked" theme-color="Warn">
+                <Bindings>
+                    <engine:DataBinding property="enabledSelf" data-source-path="ButtonsEnabled" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                </Bindings>
+            </Sim.Faciem.Controls.MatButton>
+        </engine:VisualElement>
+        <engine:Label text="Flat  (mat-flat-button)" class="mat-demo-section-title" />
+        <engine:Label text="Filled background without elevation. Cleaner alternative to Raised for secondary calls to action." class="mat-demo-body" />
+        <engine:VisualElement class="mat-demo-btn-row">
+            <Sim.Faciem.Controls.MatButton text="Roar of Time" variant="Flat">
+                <Bindings>
+                    <engine:DataBinding property="enabledSelf" data-source-path="ButtonsEnabled" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                </Bindings>
+            </Sim.Faciem.Controls.MatButton>
+            <Sim.Faciem.Controls.MatButton text="Spacial Rend" variant="Flat" theme-color="Primary">
+                <Bindings>
+                    <engine:DataBinding property="enabledSelf" data-source-path="ButtonsEnabled" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                </Bindings>
+            </Sim.Faciem.Controls.MatButton>
+            <Sim.Faciem.Controls.MatButton text="Shadow Force" variant="Flat" theme-color="Accent">
+                <Bindings>
+                    <engine:DataBinding property="enabledSelf" data-source-path="ButtonsEnabled" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                </Bindings>
+            </Sim.Faciem.Controls.MatButton>
+            <Sim.Faciem.Controls.MatButton text="Judgment" variant="Flat" theme-color="Warn">
+                <Bindings>
+                    <engine:DataBinding property="enabledSelf" data-source-path="ButtonsEnabled" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                </Bindings>
+            </Sim.Faciem.Controls.MatButton>
+        </engine:VisualElement>
+        <engine:Label text="Icon · FAB · Mini FAB" class="mat-demo-section-title" />
+        <engine:Label text="Circular buttons for high-prominence, contextual actions. Reserve these for the most important interaction on a panel." class="mat-demo-body" />
+        <engine:VisualElement class="mat-demo-btn-row" style="align-items: center;">
+            <Sim.Faciem.Controls.MatButton text="⚡" variant="Icon" theme-color="Primary">
+                <Bindings>
+                    <engine:DataBinding property="enabledSelf" data-source-path="ButtonsEnabled" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                </Bindings>
+            </Sim.Faciem.Controls.MatButton>
+            <Sim.Faciem.Controls.MatButton text="🌊" variant="Icon" theme-color="Accent">
+                <Bindings>
+                    <engine:DataBinding property="enabledSelf" data-source-path="ButtonsEnabled" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                </Bindings>
+            </Sim.Faciem.Controls.MatButton>
+            <Sim.Faciem.Controls.MatButton text="🔥" variant="Icon" theme-color="Warn">
+                <Bindings>
+                    <engine:DataBinding property="enabledSelf" data-source-path="ButtonsEnabled" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                </Bindings>
+            </Sim.Faciem.Controls.MatButton>
+            <Sim.Faciem.Controls.MatButton text="★" variant="Fab" theme-color="Primary">
+                <Bindings>
+                    <engine:DataBinding property="enabledSelf" data-source-path="ButtonsEnabled" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                </Bindings>
+            </Sim.Faciem.Controls.MatButton>
+            <Sim.Faciem.Controls.MatButton text="+" variant="MiniFab" theme-color="Accent">
+                <Bindings>
+                    <engine:DataBinding property="enabledSelf" data-source-path="ButtonsEnabled" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                </Bindings>
+            </Sim.Faciem.Controls.MatButton>
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>

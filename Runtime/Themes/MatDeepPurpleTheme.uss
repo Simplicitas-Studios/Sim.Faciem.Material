@@ -1,0 +1,36 @@
+﻿/*
+ * MatDeepPurpleTheme.uss
+ * Angular Material prebuilt theme: Deep Purple / Amber  (light)
+ *
+ * Primary   — Deep Purple 500  #673AB7
+ * Accent    — Amber A200       #FFD740
+ * Warn      — Red 500          #F44336
+ */
+
+:root {
+    /* ── Primary ─────────────────────────────────────────────────────────── */
+    --mat-button-primary-color:       #673AB7;
+    --mat-button-primary-ripple:      rgba(103, 58, 183, 0.15);
+    --mat-button-primary-text-color:  #FFFFFF;
+
+    /* ── Accent ──────────────────────────────────────────────────────────── */
+    --mat-button-accent-color:        #FFD740;
+    --mat-button-accent-ripple:       rgba(255, 215, 64, 0.15);
+    --mat-button-accent-text-color:   rgba(0, 0, 0, 0.87);
+
+    /* ── Warn ────────────────────────────────────────────────────────────── */
+    --mat-button-warn-color:          #F44336;
+    --mat-button-warn-ripple:         rgba(244, 67, 54, 0.15);
+    --mat-button-warn-text-color:     #FFFFFF;
+
+    /* ── Disabled ────────────────────────────────────────────────────────── */
+    --mat-button-disabled-color:      rgba(0, 0, 0, 0.38);
+    --mat-button-disabled-bg:         rgba(0, 0, 0, 0.12);
+
+    /* ── Surface (light) ─────────────────────────────────────────────────── */
+    --mat-button-surface-bg:          #FFFFFF;
+    --mat-button-on-surface:          rgba(0, 0, 0, 0.87);
+    --mat-button-hover-overlay:       rgba(0, 0, 0, 0.04);
+    --mat-button-active-overlay:      rgba(0, 0, 0, 0.12);
+}
+

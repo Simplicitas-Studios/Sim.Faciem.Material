@@ -1,0 +1,13 @@
+﻿/*
+ * MatIndigoTheme.tss
+ * Drop this file into PanelSettings.themeStyleSheet to apply the
+ * Indigo / Pink light theme to all MatButton controls on that panel.
+ *
+ * Load order:
+ *   1. MatButtonStyles.uss  (imports MatButtonColors.uss fallback defaults)
+ *   2. MatIndigoTheme.uss   (overrides palette variables with Indigo/Pink values)
+ */
+
+@import url("../Controls/Styles/MatButtonStyles.uss");
+@import url("MatIndigoTheme.uss");
+
