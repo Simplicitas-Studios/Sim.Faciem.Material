@@ -1,0 +1,83 @@
+﻿<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <engine:VisualElement name="Root" data-source-type="Sim.Faciem.Material.Samples.SelectDemoViewModel, Sim.Faciem.Material.Samples" class="mat-demo-content">
+        <engine:Label text="Select" class="mat-demo-page-title" />
+        <engine:Label text="MatSelect wraps an internal form-field chrome to provide fill and outline appearances, single and multiple selection, floating label, placeholder and hint text." class="mat-demo-page-subtitle" />
+
+        <!-- ── Single select — Fill (default) ────────────────────────────── -->
+        <engine:Label text="Single select  ·  Fill appearance" class="mat-demo-section-title" />
+        <engine:Label text="Pick a Sinnoh region route. The value is reflected in the label below once selected." class="mat-demo-body" />
+
+        <Sim.Faciem.Controls.MatSelect label="Route" placeholder="Select a route" hint-text="Choose the route you want to travel">
+            <Sim.Faciem.Controls.MatOption value="route201" label="Route 201 — Twinleaf Town" />
+            <Sim.Faciem.Controls.MatOption value="route202" label="Route 202 — Sandgem Town" />
+            <Sim.Faciem.Controls.MatOption value="route203" label="Route 203 — Jubilife City" />
+            <Sim.Faciem.Controls.MatOption value="route204" label="Route 204 — Floaroma Town" />
+            <Sim.Faciem.Controls.MatOption value="route205" label="Route 205 — Eterna City" />
+            <Bindings>
+                <engine:DataBinding property="Value" data-source-path="SelectedRegion" binding-mode="TwoWay" update-trigger="WhenDirty" />
+            </Bindings>
+        </Sim.Faciem.Controls.MatSelect>
+
+        <engine:Label class="mat-demo-body" style="margin-top: 8px;">
+            <Bindings>
+                <engine:DataBinding property="text" data-source-path="SelectedRegion" binding-mode="ToTarget" update-trigger="WhenDirty" />
+            </Bindings>
+        </engine:Label>
+
+        <!-- ── Outline appearance ────────────────────────────────────────── -->
+        <engine:Label text="Single select  ·  Outline appearance" class="mat-demo-section-title" />
+        <engine:Label text="The outline appearance draws a full border around the field. Select a starter Pokémon." class="mat-demo-body" />
+
+        <Sim.Faciem.Controls.MatSelect appearance="Outline" label="Starter Pokémon" placeholder="Choose your starter">
+            <Sim.Faciem.Controls.MatOption value="turtwig"   label="Turtwig  — Grass" />
+            <Sim.Faciem.Controls.MatOption value="chimchar"  label="Chimchar — Fire" />
+            <Sim.Faciem.Controls.MatOption value="piplup"    label="Piplup   — Water" />
+            <Bindings>
+                <engine:DataBinding property="Value" data-source-path="SelectedStarter" binding-mode="TwoWay" update-trigger="WhenDirty" />
+            </Bindings>
+        </Sim.Faciem.Controls.MatSelect>
+
+        <!-- ── Multiple select ───────────────────────────────────────────── -->
+        <engine:Label text="Multiple select" class="mat-demo-section-title" />
+        <engine:Label text="Enable the Multiple attribute to allow more than one selection. Selected values are joined with a comma in the trigger." class="mat-demo-body" />
+
+        <Sim.Faciem.Controls.MatSelect label="Pokémon Types" placeholder="Select types" multiple="true" hint-text="You can select more than one type">
+            <Sim.Faciem.Controls.MatOption value="fire"     label="Fire" />
+            <Sim.Faciem.Controls.MatOption value="water"    label="Water" />
+            <Sim.Faciem.Controls.MatOption value="grass"    label="Grass" />
+            <Sim.Faciem.Controls.MatOption value="electric" label="Electric" />
+            <Sim.Faciem.Controls.MatOption value="psychic"  label="Psychic" />
+            <Sim.Faciem.Controls.MatOption value="steel"    label="Steel" />
+            <Sim.Faciem.Controls.MatOption value="dragon"   label="Dragon" />
+            <Sim.Faciem.Controls.MatOption value="ghost"    label="Ghost" />
+            <Bindings>
+                <engine:DataBinding property="Values" data-source-path="SelectedTypes" binding-mode="TwoWay" update-trigger="WhenDirty" />
+            </Bindings>
+        </Sim.Faciem.Controls.MatSelect>
+
+        <!-- ── Disabled options ──────────────────────────────────────────── -->
+        <engine:Label text="Disabled options" class="mat-demo-section-title" />
+        <engine:Label text="Individual options can be marked as disabled. They are rendered as muted and cannot be clicked." class="mat-demo-body" />
+
+        <Sim.Faciem.Controls.MatSelect label="Legendary Pokémon" placeholder="Select a legendary">
+            <Sim.Faciem.Controls.MatOption value="dialga"    label="Dialga" />
+            <Sim.Faciem.Controls.MatOption value="palkia"    label="Palkia" />
+            <Sim.Faciem.Controls.MatOption value="giratina"  label="Giratina" />
+            <Sim.Faciem.Controls.MatOption value="arceus"    label="Arceus"   disabled="true" />
+            <Sim.Faciem.Controls.MatOption value="cresselia"  label="Cresselia" />
+            <Sim.Faciem.Controls.MatOption value="darkrai"   label="Darkrai"  disabled="true" />
+        </Sim.Faciem.Controls.MatSelect>
+
+        <!-- ── Disabled field ────────────────────────────────────────────── -->
+        <engine:Label text="Disabled field" class="mat-demo-section-title" />
+        <engine:Label text="The entire field can be disabled via the Disabled attribute, preventing any interaction." class="mat-demo-body" />
+
+        <Sim.Faciem.Controls.MatSelect label="Version" placeholder="Diamond or Pearl" disabled="true">
+            <Sim.Faciem.Controls.MatOption value="diamond" label="Pokémon Diamond" />
+            <Sim.Faciem.Controls.MatOption value="pearl"   label="Pokémon Pearl" />
+            <Sim.Faciem.Controls.MatOption value="platinum" label="Pokémon Platinum" />
+        </Sim.Faciem.Controls.MatSelect>
+
+    </engine:VisualElement>
+</engine:UXML>
+

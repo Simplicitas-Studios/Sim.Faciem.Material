@@ -1,6 +1,8 @@
-﻿using Sim.Faciem.Material.Editor;
+﻿using System;
+using Sim.Faciem.Material.Editor;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Sim.Faciem.Material.Samples.Editor
 {
@@ -20,6 +22,31 @@ namespace Sim.Faciem.Material.Samples.Editor
     /// </summary>
     public class MatDemoWindow : MatFaciemEditorWindow
     {
+        private EventCallback<AttachToPanelEvent> _onAttach;
+
+        private void OnEnable()
+        {
+            _onAttach ??= _ => ReapplyMaterialStylesOnce();
+            rootVisualElement.RegisterCallback(_onAttach);
+
+            if (rootVisualElement.panel != null)
+                ReapplyMaterialStylesOnce();
+        }
+
+        private void OnDisable()
+        {
+            if (_onAttach != null)
+                rootVisualElement.UnregisterCallback(_onAttach);
+        }
+
+        private void ReapplyMaterialStylesOnce()
+        {
+            // Apply once after attach so variables are resolved in panel context,
+            // then dispose to avoid creating a duplicate theme subscription.
+            var sub = MatEditorStyles.ApplyTo(rootVisualElement);
+            sub.Dispose();
+        }
+
         [MenuItem("Faciem/Material Demo")]
         public static void ShowMatDemoWindow()
         {

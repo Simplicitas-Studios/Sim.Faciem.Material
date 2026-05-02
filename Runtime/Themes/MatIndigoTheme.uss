@@ -5,9 +5,13 @@
  * Primary   — Indigo 500  #3F51B5
  * Accent    — Pink A200   #FF4081
  * Warn      — Red 500     #F44336
+ *
+ * Variables are declared on both :root (panel-wide via PanelSettings .tss) and
+ * .mat-theme--indigo (scoped subtree usage, e.g. the Theming demo preview cards).
  */
 
-:root {
+:root,
+.mat-theme--indigo {
     /* ── Primary ─────────────────────────────────────────────────────────── */
     --mat-button-primary-color:       #3F51B5;
     --mat-button-primary-ripple:      rgba(63, 81, 181, 0.15);
@@ -31,6 +35,50 @@
     --mat-button-surface-bg:          #FFFFFF;
     --mat-button-on-surface:          rgba(0, 0, 0, 0.87);
     --mat-button-hover-overlay:       rgba(0, 0, 0, 0.04);
+    --mat-button-focus-overlay:       rgba(0, 0, 0, 0.08);
     --mat-button-active-overlay:      rgba(0, 0, 0, 0.12);
-}
 
+    /* ── Stroked border (light surface) ─────────────────────────────────── */
+    --mat-button-stroked-border-color: rgba(0, 0, 0, 0.12);
+
+    /* ── Raised / Flat hover backgrounds (base + MDC state layer) ───────── */
+    --mat-button-surface-hover-bg:    #F5F5F5;  /* #FFFFFF + 4% black  */
+    --mat-button-surface-focus-bg:    #EBEBEB;  /* #FFFFFF + 8% black  */
+    --mat-button-primary-hover-bg:    #4E5FBB;  /* #3F51B5 + 8% white  */
+    --mat-button-primary-focus-bg:    #6D7BC7;  /* #3F51B5 + 24% white */
+    --mat-button-accent-hover-bg:     #FF4F8B;  /* #FF4081 + 8% white  */
+    --mat-button-accent-focus-bg:     #FF6E9F;  /* #FF4081 + 24% white */
+    --mat-button-warn-hover-bg:       #F55246;  /* #F44336 + 8% white  */
+    --mat-button-warn-focus-bg:       #F77066;  /* #F44336 + 24% white */
+
+    /* ── Form field (light) ──────────────────────────────────────────────── */
+    --mat-form-field-fill-background:           rgba(0, 0, 0, 0.06);
+    --mat-form-field-fill-disabled-background:  rgba(0, 0, 0, 0.02);
+    --mat-form-field-label-color:               rgba(0, 0, 0, 0.6);
+    --mat-form-field-disabled-label-color:      rgba(0, 0, 0, 0.38);
+    --mat-form-field-focus-color:               #3F51B5;
+    --mat-form-field-underline-color:           rgba(0, 0, 0, 0.42);
+    --mat-form-field-disabled-underline-color:  rgba(0, 0, 0, 0.38);
+    --mat-form-field-outline-color:             rgba(0, 0, 0, 0.38);
+    --mat-form-field-hover-outline-color:       rgba(0, 0, 0, 0.87);
+    --mat-form-field-disabled-outline-color:    rgba(0, 0, 0, 0.06);
+    --mat-form-field-hint-color:                rgba(0, 0, 0, 0.6);
+
+    /* ── Select / Option (light) ─────────────────────────────────────────── */
+    --mat-select-trigger-text-color:                   rgba(0, 0, 0, 0.87);
+    --mat-select-placeholder-text-color:               rgba(0, 0, 0, 0.42);
+    --mat-select-disabled-trigger-text-color:          rgba(0, 0, 0, 0.38);
+    --mat-select-arrow-color:                          rgba(0, 0, 0, 0.54);
+    --mat-select-disabled-arrow-color:                 rgba(0, 0, 0, 0.38);
+    --mat-select-panel-background:                     #FFFFFF;
+    --mat-select-panel-shadow:                         rgba(0, 0, 0, 0.2);
+    --mat-option-label-text-color:                     rgba(0, 0, 0, 0.87);
+    --mat-option-hover-state-layer-color:              rgba(0, 0, 0, 0.04);
+    --mat-option-focus-state-layer-color:              rgba(0, 0, 0, 0.12);
+    --mat-option-selected-state-label-text-color:      #3F51B5;
+    --mat-option-selected-state-layer-color:           rgba(63, 81, 181, 0.12);
+    --mat-option-disabled-state-label-text-color:      rgba(0, 0, 0, 0.38);
+    --mat-pseudo-checkbox-border-color:                rgba(0, 0, 0, 0.54);
+    --mat-pseudo-checkbox-selected-background:         #3F51B5;
+    --mat-pseudo-checkbox-selected-checkmark-color:    #FFFFFF;
+}

@@ -30,6 +30,22 @@
     --mat-button-surface-bg:          #FFFFFF;
     --mat-button-on-surface:          rgba(0, 0, 0, 0.87);
     --mat-button-hover-overlay:       rgba(0, 0, 0, 0.04);
+    --mat-button-focus-overlay:       rgba(0, 0, 0, 0.08);
     --mat-button-active-overlay:      rgba(0, 0, 0, 0.12);
-}
 
+    /* ── Stroked border (light surface) ───────────────────────────────── */
+    --mat-button-stroked-border-color: rgba(0, 0, 0, 0.12);
+
+    /* ── Raised / Flat hover backgrounds                                  */
+    /* Pre-mixed: base color + 8% state-layer (white on dark, black on    */
+    /* light) for hover; 24% for focus/active. Matches Angular Material   */
+    /* MDC state layer opacities. Text opacity is unaffected.             */
+    --mat-button-surface-hover-bg:    #F5F5F5;
+    --mat-button-surface-focus-bg:    #EBEBEB;
+    --mat-button-primary-hover-bg:    #4E5FBB;
+    --mat-button-primary-focus-bg:    #6D7BC7;
+    --mat-button-accent-hover-bg:     #FF4F8B;
+    --mat-button-accent-focus-bg:     #FF6E9F;
+    --mat-button-warn-hover-bg:       #F55246;
+    --mat-button-warn-focus-bg:       #F77066;
+}

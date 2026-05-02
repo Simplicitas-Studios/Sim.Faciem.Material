@@ -1,0 +1,34 @@
+﻿/*
+ * MatSelectColors.uss
+ * Default (fallback) CSS custom property definitions for MatSelect and MatOption.
+ * Uses the Indigo/Pink palette. A theme USS file on PanelSettings overrides these.
+ */
+
+:root {
+    /* ── Trigger text ─────────────────────────────────────────────────────── */
+    --mat-select-trigger-text-color:                   var(--mat-button-on-surface, rgba(0, 0, 0, 0.87));
+    --mat-select-placeholder-text-color:               var(--mat-form-field-label-color, rgba(0, 0, 0, 0.42));
+    --mat-select-disabled-trigger-text-color:          var(--mat-button-disabled-color, rgba(0, 0, 0, 0.38));
+
+    /* ── Arrow ────────────────────────────────────────────────────────────── */
+    --mat-select-arrow-color:                          var(--mat-form-field-label-color, rgba(0, 0, 0, 0.54));
+    --mat-select-disabled-arrow-color:                 var(--mat-button-disabled-color, rgba(0, 0, 0, 0.38));
+
+    /* ── Panel ────────────────────────────────────────────────────────────── */
+    --mat-select-panel-background:                     var(--mat-button-surface-bg, #FFFFFF);
+    --mat-select-panel-shadow:                         rgba(0, 0, 0, 0.2);
+
+    /* ── Options ──────────────────────────────────────────────────────────── */
+    --mat-option-label-text-color:                     var(--mat-button-on-surface, rgba(0, 0, 0, 0.87));
+    --mat-option-hover-state-layer-color:              var(--mat-button-hover-overlay, rgba(0, 0, 0, 0.04));
+    --mat-option-focus-state-layer-color:              var(--mat-button-focus-overlay, rgba(0, 0, 0, 0.12));
+    --mat-option-selected-state-label-text-color:      var(--mat-button-primary-color, #3F51B5);
+    --mat-option-selected-state-layer-color:           var(--mat-button-primary-ripple, rgba(63, 81, 181, 0.12));
+    --mat-option-disabled-state-label-text-color:      var(--mat-button-disabled-color, rgba(0, 0, 0, 0.38));
+
+    /* ── Pseudo checkbox (multiple mode) ──────────────────────────────────── */
+    --mat-pseudo-checkbox-border-color:                var(--mat-select-arrow-color, rgba(0, 0, 0, 0.54));
+    --mat-pseudo-checkbox-selected-background:         var(--mat-button-primary-color, #3F51B5);
+    --mat-pseudo-checkbox-selected-checkmark-color:    var(--mat-button-primary-text-color, #FFFFFF);
+}
+

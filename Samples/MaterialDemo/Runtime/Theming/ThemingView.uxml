@@ -1,46 +1,71 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Packages/com.sim.faciem-material/Runtime/Themes/MatIndigoTheme.uss" />
+    <Style src="project://database/Packages/com.sim.faciem-material/Runtime/Themes/MatDeepPurpleTheme.uss" />
+    <Style src="project://database/Packages/com.sim.faciem-material/Runtime/Themes/MatPinkBlueGreyTheme.uss" />
+    <Style src="project://database/Packages/com.sim.faciem-material/Runtime/Themes/MatPurpleGreenTheme.uss" />
     <engine:VisualElement name="Root" data-source-type="Sim.Faciem.Material.Samples.ThemingViewModel, Sim.Faciem.Material.Samples" class="mat-demo-content">
         <engine:Label text="Theming" class="mat-demo-page-title" />
-        <engine:Label text="Material themes define your palette — Primary, Accent and Warn — using CSS custom properties that cascade to every MatButton automatically." class="mat-demo-page-subtitle" />
+        <engine:Label text="Material themes define your palette — Primary, Accent and Warn — using CSS custom properties that cascade automatically to every MatButton, MatSelect and form field control." class="mat-demo-page-subtitle" />
+
         <engine:Label text="How It Works" class="mat-demo-section-title" />
-        <engine:Label text="Assign a .tss file (e.g. MatIndigoTheme.tss) to PanelSettings.themeStyleSheet. Each theme overrides the --mat-button-* custom properties on :root, changing every MatButton automatically — no code changes needed." class="mat-demo-body" />
+        <engine:Label text="Assign a .tss file to PanelSettings.themeStyleSheet for runtime panels, or call MatEditorStyles.ApplyTo(root) in editor windows. Each theme overrides the --mat-* custom properties on :root — no code changes needed." class="mat-demo-body" />
+        <engine:Label text="Each theme USS also exposes a scoped class (e.g. .mat-theme--indigo) so you can isolate any palette to a subtree — exactly how the preview cards below work." class="mat-demo-body" style="opacity: 0.7; margin-bottom: 4px;" />
+
         <engine:Label text="Built-in Themes" class="mat-demo-section-title" />
-        <engine:Label text="Indigo / Pink  ·  MatIndigoTheme.tss" class="mat-demo-body" style="-unity-font-style: bold;" />
-        <engine:Label text="Classic &amp; versatile. Indigo 500 primary, Pink A200 accent. Light surface." class="mat-demo-body" />
-        <engine:VisualElement class="mat-demo-type-chip-row">
-            <Sim.Faciem.Controls.MatButton text="Primary" variant="Raised" theme-color="Primary" />
-            <Sim.Faciem.Controls.MatButton text="Accent" variant="Flat" theme-color="Accent" />
-            <Sim.Faciem.Controls.MatButton text="Warn" variant="Stroked" theme-color="Warn" />
+
+        <!-- Indigo / Pink (light) -->
+        <engine:VisualElement class="mat-theme-preview-card mat-theme-preview-card--light mat-theme--indigo">
+            <engine:Label text="Indigo / Pink  ·  MatIndigoTheme.tss" class="mat-theme-preview__name" />
+            <engine:Label text="Classic and versatile. Indigo 500 primary, Pink A200 accent. Light surface." class="mat-theme-preview__desc" />
+            <engine:VisualElement class="mat-demo-btn-row">
+                <Sim.Faciem.Controls.MatButton text="Primary" variant="Raised"  theme-color="Primary" />
+                <Sim.Faciem.Controls.MatButton text="Accent"  variant="Flat"    theme-color="Accent" />
+                <Sim.Faciem.Controls.MatButton text="Warn"    variant="Stroked" theme-color="Warn" />
+                <Sim.Faciem.Controls.MatButton text="Basic"   variant="Basic" />
+            </engine:VisualElement>
         </engine:VisualElement>
-        <engine:Label text="Deep Purple / Amber  ·  MatDeepPurpleTheme.tss" class="mat-demo-body" style="-unity-font-style: bold; margin-top: 12px;" />
-        <engine:Label text="Bold &amp; energetic. Deep Purple 500 primary, Amber A200 accent. Light surface." class="mat-demo-body" />
-        <engine:VisualElement class="mat-demo-type-chip-row">
-            <Sim.Faciem.Controls.MatButton text="Primary" variant="Raised" theme-color="Primary" />
-            <Sim.Faciem.Controls.MatButton text="Accent" variant="Flat" theme-color="Accent" />
-            <Sim.Faciem.Controls.MatButton text="Warn" variant="Stroked" theme-color="Warn" />
+
+        <!-- Deep Purple / Amber (light) -->
+        <engine:VisualElement class="mat-theme-preview-card mat-theme-preview-card--light mat-theme--deep-purple">
+            <engine:Label text="Deep Purple / Amber  ·  MatDeepPurpleTheme.tss" class="mat-theme-preview__name" />
+            <engine:Label text="Bold and energetic. Deep Purple 500 primary, Amber A200 accent. Light surface." class="mat-theme-preview__desc" />
+            <engine:VisualElement class="mat-demo-btn-row">
+                <Sim.Faciem.Controls.MatButton text="Primary" variant="Raised"  theme-color="Primary" />
+                <Sim.Faciem.Controls.MatButton text="Accent"  variant="Flat"    theme-color="Accent" />
+                <Sim.Faciem.Controls.MatButton text="Warn"    variant="Stroked" theme-color="Warn" />
+                <Sim.Faciem.Controls.MatButton text="Basic"   variant="Basic" />
+            </engine:VisualElement>
         </engine:VisualElement>
-        <engine:Label text="Pink / Blue Grey  ·  MatPinkBlueGreyTheme.tss" class="mat-demo-body" style="-unity-font-style: bold; margin-top: 12px;" />
-        <engine:Label text="Dark &amp; elegant. Pink 500 primary, Blue Grey 300 accent, dark surface." class="mat-demo-body" />
-        <engine:VisualElement class="mat-demo-type-chip-row">
-            <Sim.Faciem.Controls.MatButton text="Primary" variant="Raised" theme-color="Primary" />
-            <Sim.Faciem.Controls.MatButton text="Accent" variant="Flat" theme-color="Accent" />
-            <Sim.Faciem.Controls.MatButton text="Warn" variant="Stroked" theme-color="Warn" />
+
+        <!-- Pink / Blue Grey (dark) -->
+        <engine:VisualElement class="mat-theme-preview-card mat-theme-preview-card--dark mat-theme--pink-blue-grey">
+            <engine:Label text="Pink / Blue Grey  ·  MatPinkBlueGreyTheme.tss" class="mat-theme-preview__name" />
+            <engine:Label text="Dark and elegant. Pink 500 primary, Blue Grey 300 accent. Dark surface." class="mat-theme-preview__desc" />
+            <engine:VisualElement class="mat-demo-btn-row">
+                <Sim.Faciem.Controls.MatButton text="Primary" variant="Raised"  theme-color="Primary" />
+                <Sim.Faciem.Controls.MatButton text="Accent"  variant="Flat"    theme-color="Accent" />
+                <Sim.Faciem.Controls.MatButton text="Warn"    variant="Stroked" theme-color="Warn" />
+                <Sim.Faciem.Controls.MatButton text="Basic"   variant="Basic" />
+            </engine:VisualElement>
         </engine:VisualElement>
-        <engine:Label text="Purple / Green  ·  MatPurpleGreenTheme.tss" class="mat-demo-body" style="-unity-font-style: bold; margin-top: 12px;" />
-        <engine:Label text="Vivid &amp; dark. Purple 500 primary, Green A200 accent, dark surface." class="mat-demo-body" />
-        <engine:VisualElement class="mat-demo-type-chip-row">
-            <Sim.Faciem.Controls.MatButton text="Primary" variant="Raised" theme-color="Primary" />
-            <Sim.Faciem.Controls.MatButton text="Accent" variant="Flat" theme-color="Accent" />
-            <Sim.Faciem.Controls.MatButton text="Warn" variant="Stroked" theme-color="Warn" />
+
+        <!-- Purple / Green (dark) -->
+        <engine:VisualElement class="mat-theme-preview-card mat-theme-preview-card--dark mat-theme--purple-green">
+            <engine:Label text="Purple / Green  ·  MatPurpleGreenTheme.tss" class="mat-theme-preview__name" />
+            <engine:Label text="Vivid and dark. Purple 500 primary, Green A200 accent. Dark surface." class="mat-theme-preview__desc" />
+            <engine:VisualElement class="mat-demo-btn-row">
+                <Sim.Faciem.Controls.MatButton text="Primary" variant="Raised"  theme-color="Primary" />
+                <Sim.Faciem.Controls.MatButton text="Accent"  variant="Flat"    theme-color="Accent" />
+                <Sim.Faciem.Controls.MatButton text="Warn"    variant="Stroked" theme-color="Warn" />
+                <Sim.Faciem.Controls.MatButton text="Basic"   variant="Basic" />
+            </engine:VisualElement>
         </engine:VisualElement>
+
         <engine:Label text="Editor Window Theming" class="mat-demo-section-title" />
-        <engine:Label text="MatFaciemEditorWindow calls MatEditorStyles.ApplyTo(rootVisualElement) after navigation. The correct Light or Dark USS is chosen automatically based on EditorGUIUtility.isProSkin." class="mat-demo-body" />
-        <engine:Label text="You are currently viewing the Editor Dark theme. Switch to Unity Personal skin and reopen to see the Light variant." class="mat-demo-body" style="opacity: 0.65;" />
+        <engine:Label text="MatFaciemEditorWindow calls MatEditorStyles.ApplyTo(rootVisualElement) after navigation. The active theme is tracked via a ReactiveProperty so all open windows re-style instantly when changed from the Faciem / Theme menu." class="mat-demo-body" />
+
         <engine:Label text="Custom Themes" class="mat-demo-section-title" />
-        <engine:Label text="Create a new .uss file and override any --mat-button-* variable on :root. Wrap it in a .tss with @import for MatButtonStyles.uss then your theme USS. Assign the .tss to PanelSettings." class="mat-demo-body" />
-        <engine:VisualElement class="mat-demo-btn-row">
-            <Sim.Faciem.Controls.MatButton text="Like naming your rival" variant="Raised" theme-color="Primary" />
-            <Sim.Faciem.Controls.MatButton text="Anything goes" variant="Stroked" theme-color="Accent" />
-        </engine:VisualElement>
+        <engine:Label text="Create a .uss file, override any --mat-* variable on :root (and optionally a scoped class), wrap it in a .tss with @import for the relevant Styles USS files then your theme USS. Assign the .tss to PanelSettings." class="mat-demo-body" />
+        <engine:Label text="Tip: use both :root and a scoped class in the same rule block so your theme works both as a panel theme and as an inline preview card — just like the built-in themes above." class="mat-demo-body" style="opacity: 0.7;" />
     </engine:VisualElement>
 </engine:UXML>

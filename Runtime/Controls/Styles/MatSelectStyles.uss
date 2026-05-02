@@ -1,0 +1,211 @@
+﻿/*
+ * MatSelectStyles.uss
+ * Structural and visual rules for MatSelect, MatOption and the dropdown panel.
+ * Color values are CSS custom properties defined in MatSelectColors.uss (imported below).
+ */
+
+@import url("./MatSelectColors.uss");
+
+/* ══════════════════════════════════════════════════════════════════════════
+   SELECT WRAPPER
+   ══════════════════════════════════════════════════════════════════════════ */
+.mat-select {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+}
+
+/* Ensure open-state visuals match MatFormField focused theme colors even when
+   editor focus events are delayed/missed. Label color stays governed by
+   MatFormField focus state to keep token behavior consistent. */
+
+.mat-select.mat-select--open .mat-form-field--fill .mat-form-field__underline {
+    height: 2px;
+}
+
+.mat-select.mat-select--open .mat-form-field--fill .mat-form-field__underline-ripple {
+    scale: 1 1;
+    background-color: var(--mat-form-field-focus-color);
+}
+
+.mat-select.mat-select--open .mat-form-field--outline .mat-form-field__flex {
+    border-width: 2px;
+    border-color: var(--mat-form-field-focus-color);
+}
+
+/* Full form-field surface is clickable for MatSelect, except subscript row. */
+.mat-select .mat-form-field,
+.mat-select .mat-form-field__wrapper,
+.mat-select .mat-form-field__flex,
+.mat-select .mat-form-field__label,
+.mat-select .mat-form-field__infix,
+.mat-select .mat-form-field__underline,
+.mat-select .mat-form-field__outline-container {
+    cursor: link;
+}
+
+.mat-select .mat-form-field__subscript {
+    cursor: arrow;
+}
+
+.mat-select.mat-select--disabled .mat-form-field,
+.mat-select.mat-select--disabled .mat-form-field__wrapper,
+.mat-select.mat-select--disabled .mat-form-field__flex,
+.mat-select.mat-select--disabled .mat-form-field__label,
+.mat-select.mat-select--disabled .mat-form-field__infix,
+.mat-select.mat-select--disabled .mat-form-field__underline,
+.mat-select.mat-select--disabled .mat-form-field__outline-container,
+.mat-select.mat-select--disabled .mat-form-field__subscript {
+    cursor: arrow;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   TRIGGER
+   ══════════════════════════════════════════════════════════════════════════ */
+.mat-select__trigger {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    min-height: 24px;
+    /* cursor: inherit; */
+    background-color: rgba(0, 0, 0, 0);
+    border-width: 0;
+    padding: 0;
+}
+
+.mat-select__trigger:hover {
+    opacity: 0.88;
+}
+
+/* ── Value text ─────────────────────────────────────────────────────────── */
+.mat-select__value-text {
+    flex-grow: 1;
+    font-size: 16px;
+    cursor: link;
+    color: var(--mat-select-trigger-text-color);
+    overflow: hidden;
+    -unity-text-align: middle-left;
+    white-space: nowrap;
+}
+
+.mat-select__value-text.mat-select__placeholder {
+    color: var(--mat-select-placeholder-text-color);
+}
+
+.mat-select--disabled .mat-select__value-text {
+    cursor: arrow;
+    color: var(--mat-select-disabled-trigger-text-color);
+}
+
+/* ── Arrow indicator ────────────────────────────────────────────────────── */
+.mat-select__arrow-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 4px;
+    width: 20px;
+}
+
+.mat-select__arrow {
+    font-size: 14px;
+    color: var(--mat-select-arrow-color);
+    -unity-text-align: middle-center;
+    transition-property: rotate;
+    transition-duration: 0.2s;
+    transition-timing-function: ease;
+    rotate: 0deg;
+    transform-origin: center center;
+}
+
+.mat-select--open .mat-select__arrow {
+    rotate: 180deg;
+}
+
+.mat-select--disabled .mat-select__arrow {
+    color: var(--mat-select-disabled-arrow-color);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   DROPDOWN PANEL
+   ══════════════════════════════════════════════════════════════════════════ */
+.mat-select__panel {
+    background-color: var(--mat-select-panel-background);
+    border-radius: 4px;
+    border-width: 1px;
+    border-color: var(--mat-select-panel-shadow);
+    max-height: 256px;
+    overflow: hidden;
+    /* Shadow approximated with border; UIElements does not support box-shadow */
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   OPTIONS
+   ══════════════════════════════════════════════════════════════════════════ */
+.mat-option {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 16px;
+    padding-right: 16px;
+    height: 48px;
+    cursor: link;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.mat-option__text {
+    flex-grow: 1;
+    font-size: 16px;
+    color: var(--mat-option-label-text-color);
+    -unity-text-align: middle-left;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+/* ── Hover / Active ─────────────────────────────────────────────────────── */
+.mat-option.mat-option--active {
+    background-color: var(--mat-option-hover-state-layer-color);
+}
+
+/* ── Selected ───────────────────────────────────────────────────────────── */
+.mat-option.mat-option--selected {
+    background-color: var(--mat-option-selected-state-layer-color);
+}
+
+.mat-option.mat-option--selected .mat-option__text {
+    color: var(--mat-option-selected-state-label-text-color);
+    -unity-font-style: bold;
+}
+
+/* ── Disabled ───────────────────────────────────────────────────────────── */
+.mat-option.mat-option--disabled {
+    cursor: arrow;
+    opacity: 0.38;
+}
+
+.mat-option.mat-option--disabled .mat-option__text {
+    color: var(--mat-option-disabled-state-label-text-color);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   PSEUDO CHECKBOX  (multiple mode)
+   ══════════════════════════════════════════════════════════════════════════ */
+.mat-pseudo-checkbox {
+    width: 16px;
+    height: 16px;
+    border-width: 2px;
+    border-color: var(--mat-pseudo-checkbox-border-color);
+    border-radius: 2px;
+    margin-right: 12px;
+    background-color: rgba(0, 0, 0, 0);
+    flex-shrink: 0;
+}
+
+.mat-pseudo-checkbox.mat-pseudo-checkbox--checked {
+    background-color: var(--mat-pseudo-checkbox-selected-background);
+    border-color: var(--mat-pseudo-checkbox-selected-background);
+}
+

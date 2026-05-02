@@ -1,0 +1,156 @@
+﻿/*
+ * MatFormFieldStyles.uss
+ * Structural and visual rules for the MatFormField internal chrome wrapper.
+ * Fill / Outline appearances, label, underline ripple and subscript.
+ * Color values are CSS custom properties defined in MatFormFieldColors.uss (imported below).
+ */
+
+@import url("./MatFormFieldColors.uss");
+
+/* ══════════════════════════════════════════════════════════════════════════
+   BASE
+   ══════════════════════════════════════════════════════════════════════════ */
+.mat-form-field {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+}
+
+.mat-form-field__wrapper {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+}
+
+.mat-form-field__flex {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+}
+
+/* ── Floating label ─────────────────────────────────────────────────────── */
+.mat-form-field__label {
+    font-size: 12px;
+    -unity-font-style: normal;
+    color: var(--mat-form-field-label-color);
+    padding-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.mat-form-field--focused .mat-form-field__label {
+    color: var(--mat-form-field-focus-color);
+}
+
+.mat-form-field--disabled .mat-form-field__label {
+    color: var(--mat-form-field-disabled-label-color);
+}
+
+/* ── Infix (slot for trigger / input) ──────────────────────────────────── */
+.mat-form-field__infix {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+    flex-grow: 1;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   FILL APPEARANCE
+   ══════════════════════════════════════════════════════════════════════════ */
+.mat-form-field--fill .mat-form-field__flex {
+    background-color: var(--mat-form-field-fill-background);
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.mat-form-field--fill .mat-form-field__underline {
+    height: 1px;
+    background-color: var(--mat-form-field-underline-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.mat-form-field--fill .mat-form-field__underline-ripple {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--mat-form-field-focus-color);
+    transform-origin: center;
+    scale: 0 1;
+    transition-property: scale;
+    transition-duration: 0.3s;
+    transition-timing-function: ease;
+}
+
+.mat-form-field--fill.mat-form-field--focused .mat-form-field__underline {
+    height: 2px;
+}
+
+.mat-form-field--fill.mat-form-field--focused .mat-form-field__underline-ripple {
+    scale: 1 1;
+}
+
+.mat-form-field--fill.mat-form-field--disabled .mat-form-field__flex {
+    background-color: var(--mat-form-field-fill-disabled-background);
+}
+
+.mat-form-field--fill.mat-form-field--disabled .mat-form-field__underline {
+    background-color: var(--mat-form-field-disabled-underline-color);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   OUTLINE APPEARANCE
+   ══════════════════════════════════════════════════════════════════════════ */
+.mat-form-field--outline .mat-form-field__flex {
+    border-width: 1px;
+    border-color: var(--mat-form-field-outline-color);
+    border-radius: 4px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 16px;
+    padding-right: 16px;
+    transition-property: border-color, border-width;
+    transition-duration: 0.15s;
+    transition-timing-function: ease;
+}
+
+.mat-form-field--outline:hover .mat-form-field__flex {
+    border-color: var(--mat-form-field-hover-outline-color);
+}
+
+.mat-form-field--outline.mat-form-field--focused .mat-form-field__flex {
+    border-width: 2px;
+    border-color: var(--mat-form-field-focus-color);
+}
+
+.mat-form-field--outline.mat-form-field--disabled .mat-form-field__flex {
+    border-color: var(--mat-form-field-disabled-outline-color);
+}
+
+/* ── Hide the fill underline in outline mode ────────────────────────────── */
+.mat-form-field--outline .mat-form-field__underline {
+    display: none;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   SUBSCRIPT  (hint / error)
+   ══════════════════════════════════════════════════════════════════════════ */
+.mat-form-field__subscript {
+    font-size: 11px;
+    color: var(--mat-form-field-hint-color);
+    padding-top: 4px;
+    padding-left: 16px;
+    padding-right: 16px;
+    white-space: normal;
+}
+

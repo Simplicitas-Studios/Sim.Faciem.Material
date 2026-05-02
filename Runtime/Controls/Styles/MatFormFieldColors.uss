@@ -1,0 +1,31 @@
+﻿/*
+ * MatFormFieldColors.uss
+ * Default (fallback) CSS custom property definitions for MatFormField.
+ * Uses the Indigo/Pink palette. A theme USS file on PanelSettings overrides these.
+ */
+
+:root {
+    /* ── Fill background ──────────────────────────────────────────────────── */
+    --mat-form-field-fill-background:           rgba(0, 0, 0, 0.06);
+    --mat-form-field-fill-disabled-background:  rgba(0, 0, 0, 0.02);
+
+    /* ── Label ────────────────────────────────────────────────────────────── */
+    --mat-form-field-label-color:               rgba(0, 0, 0, 0.6);
+    --mat-form-field-disabled-label-color:      rgba(0, 0, 0, 0.38);
+
+    /* ── Focus indicator ──────────────────────────────────────────────────── */
+    --mat-form-field-focus-color:               #3F51B5;
+
+    /* ── Underline (fill mode) ────────────────────────────────────────────── */
+    --mat-form-field-underline-color:           rgba(0, 0, 0, 0.42);
+    --mat-form-field-disabled-underline-color:  rgba(0, 0, 0, 0.38);
+
+    /* ── Outline border (outline mode) ───────────────────────────────────── */
+    --mat-form-field-outline-color:             rgba(0, 0, 0, 0.38);
+    --mat-form-field-hover-outline-color:       rgba(0, 0, 0, 0.87);
+    --mat-form-field-disabled-outline-color:    rgba(0, 0, 0, 0.06);
+
+    /* ── Subscript hint ───────────────────────────────────────────────────── */
+    --mat-form-field-hint-color:                rgba(0, 0, 0, 0.6);
+}
+

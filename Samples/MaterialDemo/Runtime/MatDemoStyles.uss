@@ -152,3 +152,29 @@
     margin-bottom: 8px;
 }
 
+/* ══ Theme preview cards (Theming page) ══════════════════════════════════════ */
+.mat-theme-preview-card {
+    border-radius: 6px;
+    border-width: 1px;
+    border-color: rgba(128, 128, 128, 0.2);
+    padding: 16px;
+    margin-bottom: 16px;
+    /* Inherit the theme's surface text colour so all child labels are legible */
+    color: var(--mat-button-on-surface);
+}
+
+.mat-theme-preview-card--dark  { background-color: #303030; }
+.mat-theme-preview-card--light { background-color: #FAFAFA; }
+
+.mat-theme-preview__name {
+    font-size: 13px;
+    -unity-font-style: bold;
+    margin-bottom: 2px;
+}
+
+.mat-theme-preview__desc {
+    font-size: 11px;
+    opacity: 0.65;
+    margin-bottom: 12px;
+    white-space: normal;
+}

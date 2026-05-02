@@ -21,8 +21,10 @@ namespace Sim.Faciem.Material.Editor
     public static class MatEditorStyles
     {
         // ── Asset paths ────────────────────────────────────────────────────────
-        private const string PackageRoot      = "Packages/com.sim.faciem-material";
-        private const string ButtonStylesPath = PackageRoot + "/Runtime/Controls/Styles/MatButtonStyles.uss";
+        private const string PackageRoot           = "Packages/com.sim.faciem-material";
+        private const string ButtonStylesPath      = PackageRoot + "/Runtime/Controls/Styles/MatButtonStyles.uss";
+        private const string FormFieldStylesPath   = PackageRoot + "/Runtime/Controls/Styles/MatFormFieldStyles.uss";
+        private const string SelectStylesPath      = PackageRoot + "/Runtime/Controls/Styles/MatSelectStyles.uss";
         private const string IndigoPath       = PackageRoot + "/Runtime/Themes/MatIndigoTheme.uss";
         private const string DeepPurplePath   = PackageRoot + "/Runtime/Themes/MatDeepPurpleTheme.uss";
         private const string PinkBlueGreyPath = PackageRoot + "/Runtime/Themes/MatPinkBlueGreyTheme.uss";
@@ -38,6 +40,8 @@ namespace Sim.Faciem.Material.Editor
 
         // ── Style sheet cache ──────────────────────────────────────────────────
         private static StyleSheet s_buttonStyles;
+        private static StyleSheet s_formFieldStyles;
+        private static StyleSheet s_selectStyles;
         private static StyleSheet s_indigoSheet;
         private static StyleSheet s_deepPurpleSheet;
         private static StyleSheet s_pinkBlueGreySheet;
@@ -95,6 +99,8 @@ namespace Sim.Faciem.Material.Editor
         {
             EnsureAllLoaded();
             TryRemove(root, s_buttonStyles);
+            TryRemove(root, s_formFieldStyles);
+            TryRemove(root, s_selectStyles);
             TryRemove(root, s_indigoSheet);
             TryRemove(root, s_deepPurpleSheet);
             TryRemove(root, s_pinkBlueGreySheet);
@@ -156,6 +162,12 @@ namespace Sim.Faciem.Material.Editor
             if (s_buttonStyles != null)
                 root.styleSheets.Add(s_buttonStyles);
 
+            if (s_formFieldStyles != null)
+                root.styleSheets.Add(s_formFieldStyles);
+
+            if (s_selectStyles != null)
+                root.styleSheets.Add(s_selectStyles);
+
             var themeSheet = GetThemeSheet(s_activeTheme.Value);
             if (themeSheet != null)
                 root.styleSheets.Add(themeSheet);
@@ -173,6 +185,8 @@ namespace Sim.Faciem.Material.Editor
         private static void EnsureAllLoaded()
         {
             s_buttonStyles      ??= AssetDatabase.LoadAssetAtPath<StyleSheet>(ButtonStylesPath);
+            s_formFieldStyles   ??= AssetDatabase.LoadAssetAtPath<StyleSheet>(FormFieldStylesPath);
+            s_selectStyles      ??= AssetDatabase.LoadAssetAtPath<StyleSheet>(SelectStylesPath);
             s_indigoSheet       ??= AssetDatabase.LoadAssetAtPath<StyleSheet>(IndigoPath);
             s_deepPurpleSheet   ??= AssetDatabase.LoadAssetAtPath<StyleSheet>(DeepPurplePath);
             s_pinkBlueGreySheet ??= AssetDatabase.LoadAssetAtPath<StyleSheet>(PinkBlueGreyPath);
@@ -188,6 +202,8 @@ namespace Sim.Faciem.Material.Editor
         private static void ClearCache()
         {
             s_buttonStyles      = null;
+            s_formFieldStyles   = null;
+            s_selectStyles      = null;
             s_indigoSheet       = null;
             s_deepPurpleSheet   = null;
             s_pinkBlueGreySheet = null;

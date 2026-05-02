@@ -34,6 +34,12 @@
     transition-timing-function: ease;
 }
 
+/* Suppress Unity's default blue focus ring on all variants */
+.mat-button-base:focus {
+    outline-width: 0;
+    border-color: rgba(0, 0, 0, 0);
+}
+
 /* ══════════════════════════════════════════════════════════════════════════
    BASIC  (mat-button)
    ══════════════════════════════════════════════════════════════════════════ */
@@ -41,28 +47,38 @@
     background-color: rgba(0, 0, 0, 0);
     color: var(--mat-button-on-surface);
 }
-.mat-button:hover { background-color: var(--mat-button-hover-overlay); }
-.mat-button:active { background-color: var(--mat-button-active-overlay); }
-.mat-button:disabled { color: var(--mat-button-disabled-color); }
+.mat-button:hover    { background-color: var(--mat-button-hover-overlay); }
+.mat-button:focus    { background-color: var(--mat-button-focus-overlay); }
+.mat-button:active   { background-color: var(--mat-button-active-overlay); }
+.mat-button:disabled { color: var(--mat-button-disabled-color); background-color: rgba(0, 0, 0, 0); }
 
 .mat-button.mat-primary { color: var(--mat-button-primary-color); }
-.mat-button.mat-primary:hover { background-color: var(--mat-button-primary-ripple); }
+.mat-button.mat-primary:hover  { background-color: var(--mat-button-primary-ripple); }
+.mat-button.mat-primary:focus  { background-color: var(--mat-button-primary-ripple); }
+.mat-button.mat-primary:active { background-color: var(--mat-button-primary-ripple); }
 
 .mat-button.mat-accent { color: var(--mat-button-accent-color); }
-.mat-button.mat-accent:hover { background-color: var(--mat-button-accent-ripple); }
+.mat-button.mat-accent:hover  { background-color: var(--mat-button-accent-ripple); }
+.mat-button.mat-accent:focus  { background-color: var(--mat-button-accent-ripple); }
+.mat-button.mat-accent:active { background-color: var(--mat-button-accent-ripple); }
 
 .mat-button.mat-warn { color: var(--mat-button-warn-color); }
-.mat-button.mat-warn:hover { background-color: var(--mat-button-warn-ripple); }
+.mat-button.mat-warn:hover  { background-color: var(--mat-button-warn-ripple); }
+.mat-button.mat-warn:focus  { background-color: var(--mat-button-warn-ripple); }
+.mat-button.mat-warn:active { background-color: var(--mat-button-warn-ripple); }
 
 /* ══════════════════════════════════════════════════════════════════════════
    RAISED  (mat-raised-button)
+   Background-color state-layer: 8% overlay on hover, 24% on focus/active.
+   Text opacity is unaffected (matches Angular Material MDC behaviour).
    ══════════════════════════════════════════════════════════════════════════ */
 .mat-raised-button {
     background-color: var(--mat-button-surface-bg);
     color: var(--mat-button-on-surface);
 }
-.mat-raised-button:hover { background-color: var(--mat-button-hover-overlay); }
-.mat-raised-button:active { background-color: var(--mat-button-active-overlay); }
+.mat-raised-button:hover  { background-color: var(--mat-button-surface-hover-bg); }
+.mat-raised-button:focus  { background-color: var(--mat-button-surface-focus-bg); }
+.mat-raised-button:active { background-color: var(--mat-button-surface-focus-bg); }
 .mat-raised-button:disabled {
     background-color: var(--mat-button-disabled-bg);
     color: var(--mat-button-disabled-color);
@@ -72,22 +88,25 @@
     background-color: var(--mat-button-primary-color);
     color: var(--mat-button-primary-text-color);
 }
-.mat-raised-button.mat-primary:hover { opacity: 0.88; }
-.mat-raised-button.mat-primary:active { opacity: 0.76; }
+.mat-raised-button.mat-primary:hover  { background-color: var(--mat-button-primary-hover-bg); }
+.mat-raised-button.mat-primary:focus  { background-color: var(--mat-button-primary-focus-bg); }
+.mat-raised-button.mat-primary:active { background-color: var(--mat-button-primary-focus-bg); }
 
 .mat-raised-button.mat-accent {
     background-color: var(--mat-button-accent-color);
     color: var(--mat-button-accent-text-color);
 }
-.mat-raised-button.mat-accent:hover { opacity: 0.88; }
-.mat-raised-button.mat-accent:active { opacity: 0.76; }
+.mat-raised-button.mat-accent:hover  { background-color: var(--mat-button-accent-hover-bg); }
+.mat-raised-button.mat-accent:focus  { background-color: var(--mat-button-accent-focus-bg); }
+.mat-raised-button.mat-accent:active { background-color: var(--mat-button-accent-focus-bg); }
 
 .mat-raised-button.mat-warn {
     background-color: var(--mat-button-warn-color);
     color: var(--mat-button-warn-text-color);
 }
-.mat-raised-button.mat-warn:hover { opacity: 0.88; }
-.mat-raised-button.mat-warn:active { opacity: 0.76; }
+.mat-raised-button.mat-warn:hover  { background-color: var(--mat-button-warn-hover-bg); }
+.mat-raised-button.mat-warn:focus  { background-color: var(--mat-button-warn-focus-bg); }
+.mat-raised-button.mat-warn:active { background-color: var(--mat-button-warn-focus-bg); }
 
 /* ══════════════════════════════════════════════════════════════════════════
    STROKED  (mat-stroked-button)
@@ -96,11 +115,18 @@
     background-color: rgba(0, 0, 0, 0);
     color: var(--mat-button-on-surface);
     border-width: 1px;
-    border-color: rgba(0, 0, 0, 0.12);
+    border-color: var(--mat-button-stroked-border-color);
 }
-.mat-stroked-button:hover { background-color: var(--mat-button-hover-overlay); }
+.mat-stroked-button:hover  { background-color: var(--mat-button-hover-overlay); }
+.mat-stroked-button:focus  {
+    outline-width: 0;
+    background-color: var(--mat-button-focus-overlay);
+    border-width: 1px;
+    border-color: var(--mat-button-stroked-border-color);
+}
 .mat-stroked-button:active { background-color: var(--mat-button-active-overlay); }
 .mat-stroked-button:disabled {
+    background-color: rgba(0, 0, 0, 0);
     color: var(--mat-button-disabled-color);
     border-color: var(--mat-button-disabled-color);
 }
@@ -109,29 +135,53 @@
     color: var(--mat-button-primary-color);
     border-color: var(--mat-button-primary-color);
 }
-.mat-stroked-button.mat-primary:hover { background-color: var(--mat-button-primary-ripple); }
+.mat-stroked-button.mat-primary:hover  { background-color: var(--mat-button-primary-ripple); }
+.mat-stroked-button.mat-primary:focus  {
+    outline-width: 0;
+    background-color: var(--mat-button-primary-ripple);
+    border-width: 1px;
+    border-color: var(--mat-button-primary-color);
+}
+.mat-stroked-button.mat-primary:active { background-color: var(--mat-button-primary-ripple); }
 
 .mat-stroked-button.mat-accent {
     color: var(--mat-button-accent-color);
     border-color: var(--mat-button-accent-color);
 }
-.mat-stroked-button.mat-accent:hover { background-color: var(--mat-button-accent-ripple); }
+.mat-stroked-button.mat-accent:hover  { background-color: var(--mat-button-accent-ripple); }
+.mat-stroked-button.mat-accent:focus  {
+    outline-width: 0;
+    background-color: var(--mat-button-accent-ripple);
+    border-width: 1px;
+    border-color: var(--mat-button-accent-color);
+}
+.mat-stroked-button.mat-accent:active { background-color: var(--mat-button-accent-ripple); }
 
 .mat-stroked-button.mat-warn {
     color: var(--mat-button-warn-color);
     border-color: var(--mat-button-warn-color);
 }
-.mat-stroked-button.mat-warn:hover { background-color: var(--mat-button-warn-ripple); }
+.mat-stroked-button.mat-warn:hover  { background-color: var(--mat-button-warn-ripple); }
+.mat-stroked-button.mat-warn:focus  {
+    outline-width: 0;
+    background-color: var(--mat-button-warn-ripple);
+    border-width: 1px;
+    border-color: var(--mat-button-warn-color);
+}
+.mat-stroked-button.mat-warn:active { background-color: var(--mat-button-warn-ripple); }
 
 /* ══════════════════════════════════════════════════════════════════════════
    FLAT  (mat-flat-button)
+   Background-color state-layer: 8% overlay on hover, 24% on focus/active.
+   Text opacity is unaffected (matches Angular Material MDC behaviour).
    ══════════════════════════════════════════════════════════════════════════ */
 .mat-flat-button {
     background-color: var(--mat-button-surface-bg);
     color: var(--mat-button-on-surface);
 }
-.mat-flat-button:hover { opacity: 0.88; }
-.mat-flat-button:active { opacity: 0.76; }
+.mat-flat-button:hover  { background-color: var(--mat-button-surface-hover-bg); }
+.mat-flat-button:focus  { background-color: var(--mat-button-surface-focus-bg); }
+.mat-flat-button:active { background-color: var(--mat-button-surface-focus-bg); }
 .mat-flat-button:disabled {
     background-color: var(--mat-button-disabled-bg);
     color: var(--mat-button-disabled-color);
@@ -141,14 +191,25 @@
     background-color: var(--mat-button-primary-color);
     color: var(--mat-button-primary-text-color);
 }
+.mat-flat-button.mat-primary:hover  { background-color: var(--mat-button-primary-hover-bg); }
+.mat-flat-button.mat-primary:focus  { background-color: var(--mat-button-primary-focus-bg); }
+.mat-flat-button.mat-primary:active { background-color: var(--mat-button-primary-focus-bg); }
+
 .mat-flat-button.mat-accent {
     background-color: var(--mat-button-accent-color);
     color: var(--mat-button-accent-text-color);
 }
+.mat-flat-button.mat-accent:hover  { background-color: var(--mat-button-accent-hover-bg); }
+.mat-flat-button.mat-accent:focus  { background-color: var(--mat-button-accent-focus-bg); }
+.mat-flat-button.mat-accent:active { background-color: var(--mat-button-accent-focus-bg); }
+
 .mat-flat-button.mat-warn {
     background-color: var(--mat-button-warn-color);
     color: var(--mat-button-warn-text-color);
 }
+.mat-flat-button.mat-warn:hover  { background-color: var(--mat-button-warn-hover-bg); }
+.mat-flat-button.mat-warn:focus  { background-color: var(--mat-button-warn-focus-bg); }
+.mat-flat-button.mat-warn:active { background-color: var(--mat-button-warn-focus-bg); }
 
 /* ══════════════════════════════════════════════════════════════════════════
    ICON  (mat-icon-button)  — 40×40 circular
@@ -163,18 +224,25 @@
     padding: 8px;
     -unity-text-align: middle-center;
 }
-.mat-icon-button:hover { background-color: var(--mat-button-hover-overlay); }
+.mat-icon-button:hover  { background-color: var(--mat-button-hover-overlay); }
+.mat-icon-button:focus  { background-color: var(--mat-button-focus-overlay); }
 .mat-icon-button:active { background-color: var(--mat-button-active-overlay); }
-.mat-icon-button:disabled { color: var(--mat-button-disabled-color); }
+.mat-icon-button:disabled { color: var(--mat-button-disabled-color); background-color: rgba(0, 0, 0, 0); }
 
 .mat-icon-button.mat-primary { color: var(--mat-button-primary-color); }
-.mat-icon-button.mat-primary:hover { background-color: var(--mat-button-primary-ripple); }
+.mat-icon-button.mat-primary:hover  { background-color: var(--mat-button-primary-ripple); }
+.mat-icon-button.mat-primary:focus  { background-color: var(--mat-button-primary-ripple); }
+.mat-icon-button.mat-primary:active { background-color: var(--mat-button-primary-ripple); }
 
 .mat-icon-button.mat-accent { color: var(--mat-button-accent-color); }
-.mat-icon-button.mat-accent:hover { background-color: var(--mat-button-accent-ripple); }
+.mat-icon-button.mat-accent:hover  { background-color: var(--mat-button-accent-ripple); }
+.mat-icon-button.mat-accent:focus  { background-color: var(--mat-button-accent-ripple); }
+.mat-icon-button.mat-accent:active { background-color: var(--mat-button-accent-ripple); }
 
 .mat-icon-button.mat-warn { color: var(--mat-button-warn-color); }
-.mat-icon-button.mat-warn:hover { background-color: var(--mat-button-warn-ripple); }
+.mat-icon-button.mat-warn:hover  { background-color: var(--mat-button-warn-ripple); }
+.mat-icon-button.mat-warn:focus  { background-color: var(--mat-button-warn-ripple); }
+.mat-icon-button.mat-warn:active { background-color: var(--mat-button-warn-ripple); }
 
 /* ══════════════════════════════════════════════════════════════════════════
    FAB  (mat-fab)  — 56×56 circular, accent-coloured by default
@@ -189,9 +257,11 @@
     padding: 0;
     -unity-text-align: middle-center;
 }
-.mat-fab:hover { opacity: 0.88; }
+.mat-fab:hover  { opacity: 0.88; }
+.mat-fab:focus  { opacity: 0.88; }
 .mat-fab:active { opacity: 0.76; }
 .mat-fab:disabled {
+    opacity: 1;
     background-color: var(--mat-button-disabled-bg);
     color: var(--mat-button-disabled-color);
 }
@@ -222,9 +292,11 @@
     padding: 0;
     -unity-text-align: middle-center;
 }
-.mat-mini-fab:hover { opacity: 0.88; }
+.mat-mini-fab:hover  { opacity: 0.88; }
+.mat-mini-fab:focus  { opacity: 0.88; }
 .mat-mini-fab:active { opacity: 0.76; }
 .mat-mini-fab:disabled {
+    opacity: 1;
     background-color: var(--mat-button-disabled-bg);
     color: var(--mat-button-disabled-color);
 }
