@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Plugins.Sim.Faciem.Shared;
 using R3;
+using Sim.Faciem.Shared;
 using Unity.Properties;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -36,7 +36,7 @@ namespace Sim.Faciem.Controls
 
         [UxmlAttribute]
         public string OverlayContainerId { get; set; }
-        
+
         [UxmlAttribute, CreateProperty]
         public List<MultiSelectionItem> Items
         {
@@ -57,13 +57,13 @@ namespace Sim.Faciem.Controls
             _disposables = this.RegisterDisposableBag();
             _disposables.Add(this.AttachToPanelAsObservable()
                 .Subscribe(SetupOverlayContainer));
-            
+
             _disposables.Add(this.PointerDownAsObservable()
                 .Subscribe(ToggleMenu));
-            
+
             _disposables.Add(this.BlurAsObservable()
                 .Subscribe(_ => CloseMenu()));
-            
+
             _disposables.Add(this.GeometryChangedAsObservable()
                 .Subscribe(_ => SetOverlayPosition()));
 
@@ -112,7 +112,7 @@ namespace Sim.Faciem.Controls
             _overlayContainer.Add(_itemScrollView);
             overlayContainer.Add(_overlayContainer);
             UpdateMenuItems();
-            
+
         }
 
         private void UpdateMenuItems()
@@ -121,7 +121,7 @@ namespace Sim.Faciem.Controls
             {
                 return;
             }
-            
+
             _itemScrollView.Clear();
             foreach (var item in Items)
             {
@@ -149,7 +149,7 @@ namespace Sim.Faciem.Controls
 
         private void ToggleMenu(PointerDownEvent _)
         {
-            _overlayContainer.style.display = _overlayContainer.style.display == DisplayStyle.Flex 
+            _overlayContainer.style.display = _overlayContainer.style.display == DisplayStyle.Flex
                 ? DisplayStyle.None
                 : DisplayStyle.Flex;
         }
@@ -165,7 +165,7 @@ namespace Sim.Faciem.Controls
             {
                 return;
             }
-            
+
             var localPos = this.ChangeCoordinatesTo(_overlayContainer.parent, Vector2.zero);
             _overlayContainer.style.position = Position.Absolute;
             _overlayContainer.style.left = localPos.x + layout.width - resolvedStyle.width; // top-right

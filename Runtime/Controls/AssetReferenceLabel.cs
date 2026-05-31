@@ -1,6 +1,5 @@
-﻿using Plugins.Sim.Faciem.Shared;
-using Sim.Faciem;
-using R3;
+﻿using R3;
+using Sim.Faciem.Shared;
 using Unity.Properties;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -14,17 +13,17 @@ namespace Sim.Faciem.Controls
     {
         private bool _didTryToResolve;
         private string _baseText;
-        
+
         [UxmlAttribute, CreateProperty]
         public UnityEngine.Object LinkedAsset { get; set; }
-        
+
         [UxmlAttribute, CreateProperty]
         public int InstanceId { get; set; }
 
         public AssetReferenceLabel()
         {
             var disposables = this.RegisterDisposableBag();
-            
+
             disposables.Add(this.MouseEnterAsObservable()
                 .Do(_ => CheckAsset())
                 .Where(_ => LinkedAsset != null)
@@ -33,14 +32,14 @@ namespace Sim.Faciem.Controls
                     _baseText = text;
                     text = $"<u>{text}</u>";
                 }));
-            
+
             disposables.Add(this.MouseLeaveAsObservable()
                 .Where(_ => LinkedAsset != null)
                 .Subscribe(_ =>
                 {
                     text = $"{_baseText}";
                 }));
-            
+
 #if UNITY_EDITOR
             disposables.Add(
                 this.MouseDownAsObservable()
@@ -51,7 +50,7 @@ namespace Sim.Faciem.Controls
                             _didTryToResolve = true;
                             LinkedAsset = EditorUtility.InstanceIDToObject(InstanceId);
                         }
-                        
+
                         if (LinkedAsset != null)
                         {
                             EditorGUIUtility.PingObject(LinkedAsset);

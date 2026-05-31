@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Plugins.Sim.Faciem.Shared;
 using R3;
+using Sim.Faciem.Shared;
 using Unity.Properties;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -22,7 +23,7 @@ namespace Sim.Faciem.Controls
     /// </code>
     ///
     /// USS styling is loaded exclusively via PanelSettings (.tss theme files) for
-    /// runtime panels, and via <see cref="Sim.Faciem.Material.Editor.MatEditorStyles"/>
+    /// runtime panels, and via <see cref="Editor.MatEditorStyles"/>
     /// for editor windows.
     /// </summary>
     [UxmlElement]
@@ -237,7 +238,7 @@ namespace Sim.Faciem.Controls
             // ── Build form field and slot the trigger inside ───────────────────
             _formField = new MatFormField();
             _formField.Infix.Add(_trigger);
-            
+
             Add(_formField);
 
             // ── Wire observable subscriptions ──────────────────────────────────
@@ -288,7 +289,7 @@ namespace Sim.Faciem.Controls
             _panel.style.position = Position.Absolute;
             _overlayRoot.Add(_panel);
 
-            
+
             RebuildPanelOptions();
         }
 
