@@ -1,5 +1,4 @@
-﻿using Sim.Faciem;
-using Sim.Faciem.Commands;
+﻿using Sim.Faciem.Commands;
 using Unity.Properties;
 
 namespace Sim.Faciem.Material.Samples

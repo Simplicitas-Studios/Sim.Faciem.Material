@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Sim.Faciem;
 
 namespace Sim.Faciem.Material.Samples
 {

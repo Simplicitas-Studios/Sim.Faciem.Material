@@ -1,5 +1,3 @@
-using Sim.Faciem;
-
 namespace Sim.Faciem.Material.Samples
 {
     /// <summary>

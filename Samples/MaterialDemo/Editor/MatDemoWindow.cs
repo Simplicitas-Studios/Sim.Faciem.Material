@@ -1,5 +1,4 @@
-﻿using System;
-using Sim.Faciem.Material.Editor;
+﻿using Sim.Faciem.Material.Editor;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;

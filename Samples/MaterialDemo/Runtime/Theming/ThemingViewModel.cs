@@ -1,6 +1,4 @@
-﻿using Sim.Faciem;
-
-namespace Sim.Faciem.Material.Samples
+﻿namespace Sim.Faciem.Material.Samples
 {
     /// <summary>
     /// ViewModel for the Theming demo page.
