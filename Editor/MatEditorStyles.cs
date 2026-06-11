@@ -33,10 +33,10 @@ namespace Sim.Faciem.Material.Editor
         private const string ThemePrefKey = "Sim.Faciem.Material.EditorTheme";
 
         // ── Menu path constants (must match [MenuItem] strings exactly) ────────
-        private const string MenuPurpleGreen  = "Faciem/Theme/Purple Green";
-        private const string MenuIndigo       = "Faciem/Theme/Indigo Pink";
-        private const string MenuDeepPurple   = "Faciem/Theme/Deep Purple Amber";
-        private const string MenuPinkBlueGrey = "Faciem/Theme/Pink Blue Grey";
+        private const string MenuPurpleGreen  = "Sim/Faciem/Theme/Purple Green";
+        private const string MenuIndigo       = "Sim/Faciem/Theme/Indigo Pink";
+        private const string MenuDeepPurple   = "Sim/Faciem/Theme/Deep Purple Amber";
+        private const string MenuPinkBlueGrey = "Sim/Faciem/Theme/Pink Blue Grey";
 
         // ── Style sheet cache ──────────────────────────────────────────────────
         private static StyleSheet s_buttonStyles;

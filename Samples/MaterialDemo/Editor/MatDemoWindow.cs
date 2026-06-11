@@ -46,7 +46,7 @@ namespace Sim.Faciem.Material.Samples.Editor
             sub.Dispose();
         }
 
-        [MenuItem("Faciem/Material Demo")]
+        [MenuItem("Sim/Faciem/Material Demo")]
         public static void ShowMatDemoWindow()
         {
             var wnd = GetWindow<MatDemoWindow>();
