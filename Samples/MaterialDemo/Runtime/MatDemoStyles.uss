@@ -144,6 +144,32 @@
     margin-bottom: 4px;
 }
 
+/* ══ Material list demo ══════════════════════════════════════════════════════ */
+.mat-demo-list-control {
+    height: 224px;
+    margin-bottom: 12px;
+}
+
+.mat-demo-list-template {
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.mat-demo-list-template__title {
+    font-size: 14px;
+    line-height: 20px;
+    -unity-font-style: bold;
+    margin-bottom: 2px;
+}
+
+.mat-demo-list-template__supporting-text {
+    font-size: 12px;
+    line-height: 16px;
+    color: var(--mat-list-item-supporting-text-color);
+    white-space: normal;
+}
+
 /* ══ Type chip (Theming page) ════════════════════════════════════════════════ */
 .mat-demo-type-chip-row {
     flex-direction: row;

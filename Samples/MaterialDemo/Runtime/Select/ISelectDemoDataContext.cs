@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace Sim.Faciem.Material.Samples
 {
@@ -15,4 +15,3 @@ namespace Sim.Faciem.Material.Samples
         string SelectedStarter { get; }
     }
 }
-

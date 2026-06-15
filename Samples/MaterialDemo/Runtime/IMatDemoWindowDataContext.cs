@@ -10,11 +10,13 @@ namespace Sim.Faciem.Material.Samples
         Command NavigateToTheming { get; }
         Command NavigateToButton { get; }
         Command NavigateToSelect { get; }
+        Command NavigateToList { get; }
 
         MatButtonColor GettingStartedNavColor { get; }
         MatButtonColor ThemingNavColor { get; }
         MatButtonColor ButtonNavColor { get; }
         MatButtonColor SelectNavColor { get; }
+        MatButtonColor ListNavColor { get; }
     }
 }
 

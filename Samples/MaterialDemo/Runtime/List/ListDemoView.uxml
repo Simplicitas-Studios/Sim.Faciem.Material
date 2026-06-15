@@ -1,0 +1,32 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <engine:VisualElement name="Root" data-source-type="Sim.Faciem.Material.Samples.ListDemoViewModel, Sim.Faciem.Material.Samples" class="mat-demo-content">
+        <engine:Label text="List" class="mat-demo-page-title" />
+        <engine:Label text="MatList and MatSelectionList reuse Unity ListView as a data-driven foundation while rendering each row from an assigned VisualTreeAsset template." class="mat-demo-page-subtitle" />
+
+        <engine:Label text="Material list" class="mat-demo-section-title" />
+        <engine:Label text="MatList renders each row from the assigned template and attaches the current item object as the row dataSource so normal UI Toolkit bindings inside the template can resolve." class="mat-demo-body" />
+
+        <Sim.Faciem.Controls.MatList class="mat-demo-list-control" item-template="project://database/Packages/com.sim.faciem-material/Samples/MaterialDemo/Runtime/List/MaterialListItemTemplate.uxml?fileID=9197481963319205126&amp;guid=7f7d4e6b6d0b4c86a8c1e53b6ce6cf22&amp;type=3#MaterialListItemTemplate">
+            <Bindings>
+                <engine:DataBinding property="ItemSource" data-source-path="RouteMilestones" binding-mode="ToTarget" update-trigger="WhenDirty" />
+            </Bindings>
+        </Sim.Faciem.Controls.MatList>
+
+        <engine:Label text="Material selection list" class="mat-demo-section-title" />
+        <engine:Label text="MatSelectionList enables multi-selection and exposes selected indices as the first public API. The same VisualTreeAsset template is reused for each row." class="mat-demo-body" />
+
+        <Sim.Faciem.Controls.MatSelectionList class="mat-demo-list-control" item-template="project://database/Packages/com.sim.faciem-material/Samples/MaterialDemo/Runtime/List/MaterialListItemTemplate.uxml?fileID=9197481963319205126&amp;guid=7f7d4e6b6d0b4c86a8c1e53b6ce6cf22&amp;type=3#MaterialListItemTemplate">
+            <Bindings>
+                <engine:DataBinding property="ItemSource" data-source-path="GymBattles" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                <engine:DataBinding property="SelectedIndices" data-source-path="SelectedGymBattleIndices" binding-mode="TwoWay" update-trigger="WhenDirty" />
+            </Bindings>
+        </Sim.Faciem.Controls.MatSelectionList>
+
+        <engine:Label text="Selected indices:" class="mat-demo-body" style="margin-bottom: 4px;" />
+        <engine:Label class="mat-demo-body">
+            <Bindings>
+                <engine:DataBinding property="text" data-source-path="SelectedGymBattleIndicesText" binding-mode="ToTarget" update-trigger="WhenDirty" />
+            </Bindings>
+        </engine:Label>
+    </engine:VisualElement>
+</engine:UXML>

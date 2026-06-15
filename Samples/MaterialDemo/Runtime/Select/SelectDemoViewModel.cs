@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Unity.Properties;
 
 namespace Sim.Faciem.Material.Samples
@@ -10,9 +10,9 @@ namespace Sim.Faciem.Material.Samples
     /// </summary>
     public class SelectDemoViewModel : ViewModel<SelectDemoViewModel>, ISelectDemoDataContext
     {
-        private string       _selectedRegion  = string.Empty;
-        private List<string> _selectedTypes   = new();
-        private string       _selectedStarter = string.Empty;
+        private string _selectedRegion = string.Empty;
+        private List<string> _selectedTypes = new();
+        private string _selectedStarter = string.Empty;
 
         [CreateProperty]
         public string SelectedRegion
@@ -34,6 +34,6 @@ namespace Sim.Faciem.Material.Samples
             get => _selectedStarter;
             set => SetProperty(ref _selectedStarter, value);
         }
+
     }
 }
-

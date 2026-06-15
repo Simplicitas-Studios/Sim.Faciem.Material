@@ -1,0 +1,25 @@
+/*
+ * MatListColors.uss
+ * Default fallback CSS custom property definitions for Material list controls.
+ * Theme USS files may override these through aliased shared tokens.
+ */
+
+:root {
+    --mat-list-background:                          var(--mat-button-surface-bg, #FFFFFF);
+    --mat-list-outline-color:                       rgba(0, 0, 0, 0);
+    --mat-list-divider-color:                       var(--mat-button-stroked-border-color, rgba(0, 0, 0, 0.12));
+    --mat-list-vertical-padding:                    8px;
+    --mat-list-item-min-height:                     56px;
+    --mat-list-item-padding-x:                      16px;
+    --mat-list-item-padding-y:                      8px;
+    --mat-list-item-label-text-color:               var(--mat-button-on-surface, rgba(0, 0, 0, 0.87));
+    --mat-list-item-supporting-text-color:          rgba(0, 0, 0, 0.6);
+    --mat-list-item-hover-state-layer-color:        var(--mat-button-hover-overlay, rgba(0, 0, 0, 0.04));
+    --mat-list-item-focus-state-layer-color:        var(--mat-button-focus-overlay, rgba(0, 0, 0, 0.08));
+    --mat-list-item-selected-state-layer-color:     var(--mat-button-primary-ripple, rgba(63, 81, 181, 0.12));
+    --mat-list-item-selected-hover-state-layer-color: rgba(63, 81, 181, 0.16);
+    --mat-list-item-selected-label-text-color:      var(--mat-button-primary-color, #3F51B5);
+    --mat-list-checkbox-border-color:               var(--mat-select-arrow-color, rgba(0, 0, 0, 0.54));
+    --mat-list-checkbox-selected-background:        var(--mat-button-primary-color, #3F51B5);
+    --mat-list-checkbox-selected-checkmark-color:   var(--mat-button-primary-text-color, #FFFFFF);
+}

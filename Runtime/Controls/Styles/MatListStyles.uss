@@ -1,0 +1,101 @@
+/*
+ * MatListStyles.uss
+ * Structural and visual rules for MatList and MatSelectionList.
+ */
+
+@import url("./MatListColors.uss");
+
+.mat-list {
+    background-color: var(--mat-list-background);
+    border-radius: 8px;
+    border-color: var(--mat-list-outline-color);
+    overflow: hidden;
+}
+
+.mat-list .unity-collection-view__content-container,
+.mat-list .unity-scroll-view__content-container {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.mat-list .unity-collection-view__item,
+.mat-list .unity-list-view__item,
+.mat-list .unity-collection-view__item--selected,
+.mat-list .unity-list-view__item--selected {
+    padding: 0;
+    padding-left: var(--mat-list-vertical-padding);
+    margin: 0;
+    border-bottom-width: 0;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.mat-list__item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    min-height: var(--mat-list-item-min-height);
+    padding-top: var(--mat-list-item-padding-y);
+    padding-bottom: var(--mat-list-item-padding-y);
+    padding-left: var(--mat-list-item-padding-x);
+    padding-right: var(--mat-list-item-padding-x);
+    border-bottom-width: 1px;
+    border-bottom-color: var(--mat-list-divider-color);
+    background-color: rgba(0, 0, 0, 0);
+    cursor: arrow;
+}
+
+.mat-list__item:hover {
+    background-color: var(--mat-list-item-hover-state-layer-color);
+}
+
+.mat-list__item:focus {
+    background-color: var(--mat-list-item-focus-state-layer-color);
+}
+
+.mat-selection-list .mat-list__item {
+    cursor: link;
+}
+
+.mat-list__item.mat-list__item--selected {
+    background-color: var(--mat-list-item-selected-state-layer-color);
+}
+
+.mat-list__item.mat-list__item--selected:hover,
+.mat-list__item.mat-list__item--selected:focus {
+    background-color: var(--mat-list-item-selected-hover-state-layer-color);
+}
+
+.mat-list__item-content {
+    flex-grow: 0;
+    color: var(--mat-list-item-label-text-color);
+}
+
+.mat-list__item-fallback-label {
+    flex-grow: 1;
+    font-size: 16px;
+    line-height: 20px;
+    color: var(--mat-list-item-label-text-color);
+    -unity-text-align: middle-left;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.mat-list__item.mat-list__item--selected .mat-list__item-fallback-label {
+    color: var(--mat-list-item-selected-label-text-color);
+    -unity-font-style: bold;
+}
+
+.mat-list__pseudo-checkbox {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    margin-right: 18px;
+    border-width: 2px;
+    border-color: var(--mat-list-checkbox-border-color);
+    border-radius: 2px;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.mat-list__pseudo-checkbox.mat-list__pseudo-checkbox--checked {
+    background-color: var(--mat-list-checkbox-selected-background);
+    border-color: var(--mat-list-checkbox-selected-background);
+}

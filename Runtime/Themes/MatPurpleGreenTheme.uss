@@ -81,4 +81,19 @@
     --mat-pseudo-checkbox-border-color:                rgba(255, 255, 255, 0.54);
     --mat-pseudo-checkbox-selected-background:         #9C27B0;
     --mat-pseudo-checkbox-selected-checkmark-color:    #FFFFFF;
+
+    /* ── List (dark) ────────────────────────────────────────────────────── */
+    --mat-list-background:                              #424242;
+    --mat-list-outline-color:                           rgba(255, 255, 255, 0.12);
+    --mat-list-divider-color:                           rgba(255, 255, 255, 0.08);
+    --mat-list-item-label-text-color:                   rgba(255, 255, 255, 0.87);
+    --mat-list-item-supporting-text-color:              rgba(255, 255, 255, 0.6);
+    --mat-list-item-hover-state-layer-color:            rgba(255, 255, 255, 0.08);
+    --mat-list-item-focus-state-layer-color:            rgba(255, 255, 255, 0.12);
+    --mat-list-item-selected-state-layer-color:         rgba(156, 39, 176, 0.2);
+    --mat-list-item-selected-hover-state-layer-color:   rgba(156, 39, 176, 0.28);
+    --mat-list-item-selected-label-text-color:          #C86CD7;
+    --mat-list-checkbox-border-color:                   rgba(255, 255, 255, 0.54);
+    --mat-list-checkbox-selected-background:            #9C27B0;
+    --mat-list-checkbox-selected-checkmark-color:       #FFFFFF;
 }

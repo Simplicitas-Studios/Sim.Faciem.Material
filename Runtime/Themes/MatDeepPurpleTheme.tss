@@ -5,5 +5,8 @@
  */
 
 @import url("../Controls/Styles/MatButtonStyles.uss");
+@import url("../Controls/Styles/MatFormFieldStyles.uss");
+@import url("../Controls/Styles/MatSelectStyles.uss");
+@import url("../Controls/Styles/MatListStyles.uss");
 @import url("MatDeepPurpleTheme.uss");
 
