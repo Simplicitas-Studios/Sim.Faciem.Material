@@ -1,0 +1,12 @@
+/*
+ * MatGridListColors.uss
+ * Default fallback CSS custom property definitions for Material grid-list controls.
+ */
+
+:root {
+    --mat-grid-list-background:            var(--mat-button-surface-bg, #FFFFFF);
+    --mat-grid-list-outline-color:         rgba(0, 0, 0, 0);
+    --mat-grid-list-tile-background:       rgba(0, 0, 0, 0.03);
+    --mat-grid-list-tile-border-color:     rgba(0, 0, 0, 0.06);
+    --mat-grid-list-tile-label-text-color: var(--mat-button-on-surface, rgba(0, 0, 0, 0.87));
+}

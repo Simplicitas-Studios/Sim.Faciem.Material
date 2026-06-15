@@ -96,4 +96,11 @@
     --mat-list-checkbox-border-color:                   rgba(0, 0, 0, 0.54);
     --mat-list-checkbox-selected-background:            #3F51B5;
     --mat-list-checkbox-selected-checkmark-color:       #FFFFFF;
+
+    /* ── Grid list (light) ─────────────────────────────────────────────── */
+    --mat-grid-list-background:                         #FFFFFF;
+    --mat-grid-list-outline-color:                      rgba(0, 0, 0, 0.08);
+    --mat-grid-list-tile-background:                    rgba(63, 81, 181, 0.04);
+    --mat-grid-list-tile-border-color:                  rgba(0, 0, 0, 0.08);
+    --mat-grid-list-tile-label-text-color:              rgba(0, 0, 0, 0.87);
 }

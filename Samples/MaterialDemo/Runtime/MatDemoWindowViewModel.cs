@@ -22,6 +22,7 @@ namespace Sim.Faciem.Material.Samples
         private MatButtonColor _buttonNavColor         = MatButtonColor.Default;
         private MatButtonColor _selectNavColor         = MatButtonColor.Default;
         private MatButtonColor _listNavColor           = MatButtonColor.Default;
+        private MatButtonColor _gridListNavColor       = MatButtonColor.Default;
 
         // ── Nav colour properties (Primary = active, Default = inactive) ───────
 
@@ -60,6 +61,13 @@ namespace Sim.Faciem.Material.Samples
             private set => SetProperty(ref _listNavColor, value);
         }
 
+        [CreateProperty]
+        public MatButtonColor GridListNavColor
+        {
+            get => _gridListNavColor;
+            private set => SetProperty(ref _gridListNavColor, value);
+        }
+
         // ── Navigation commands ────────────────────────────────────────────────
 
         [CreateProperty]
@@ -77,6 +85,9 @@ namespace Sim.Faciem.Material.Samples
         [CreateProperty]
         public Command NavigateToList { get; private set; }
 
+        [CreateProperty]
+        public Command NavigateToGridList { get; private set; }
+
         // ── Constructor ────────────────────────────────────────────────────────
 
         public MatDemoWindowViewModel()
@@ -86,6 +97,7 @@ namespace Sim.Faciem.Material.Samples
             NavigateToButton         = Command.ExecuteAsync(ct => NavigateToPage(2, ct));
             NavigateToSelect         = Command.ExecuteAsync(ct => NavigateToPage(3, ct));
             NavigateToList           = Command.ExecuteAsync(ct => NavigateToPage(4, ct));
+            NavigateToGridList       = Command.ExecuteAsync(ct => NavigateToPage(5, ct));
 
             Disposables.Add(_selectedNavIndex.Subscribe(UpdateNavColors));
         }
@@ -109,6 +121,7 @@ namespace Sim.Faciem.Material.Samples
                 2 => WellKnownMatDemoViewIds.Sim_Faciem_Material_ButtonDemo,
                 3 => WellKnownMatDemoViewIds.Sim_Faciem_Material_SelectDemo,
                 4 => WellKnownMatDemoViewIds.Sim_Faciem_Material_ListDemo,
+                5 => WellKnownMatDemoViewIds.Sim_Faciem_Material_GridListDemo,
                 _ => WellKnownMatDemoViewIds.Sim_Faciem_Material_GettingStarted,
             };
 
@@ -122,6 +135,7 @@ namespace Sim.Faciem.Material.Samples
             ButtonNavColor         = index == 2 ? MatButtonColor.Primary : MatButtonColor.Default;
             SelectNavColor         = index == 3 ? MatButtonColor.Primary : MatButtonColor.Default;
             ListNavColor           = index == 4 ? MatButtonColor.Primary : MatButtonColor.Default;
+            GridListNavColor       = index == 5 ? MatButtonColor.Primary : MatButtonColor.Default;
         }
     }
     

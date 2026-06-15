@@ -170,6 +170,50 @@
     white-space: normal;
 }
 
+/* ══ Material grid-list demo ═════════════════════════════════════════════════ */
+.mat-demo-grid-list-control {
+    height: 300px;
+    margin-bottom: 12px;
+}
+
+.mat-demo-grid-list-control--short {
+    height: 276px;
+}
+
+.mat-demo-grid-list-control--horizontal {
+    height: 220px;
+}
+
+.mat-demo-grid-list-control--horizontal-short {
+    height: 250px;
+}
+
+.mat-demo-grid-list-control--large {
+    height: 420px;
+}
+
+.mat-demo-grid-tile-template {
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 100%;
+    height: 100%;
+    padding: 12px;
+}
+
+.mat-demo-grid-tile-template__title {
+    font-size: 14px;
+    line-height: 20px;
+    -unity-font-style: bold;
+    margin-bottom: 2px;
+}
+
+.mat-demo-grid-tile-template__supporting-text {
+    font-size: 12px;
+    line-height: 16px;
+    white-space: normal;
+    opacity: 0.82;
+}
+
 /* ══ Type chip (Theming page) ════════════════════════════════════════════════ */
 .mat-demo-type-chip-row {
     flex-direction: row;

@@ -12,5 +12,6 @@
 @import url("../Controls/Styles/MatFormFieldStyles.uss");
 @import url("../Controls/Styles/MatSelectStyles.uss");
 @import url("../Controls/Styles/MatListStyles.uss");
+@import url("../Controls/Styles/MatGridListStyles.uss");
 @import url("MatIndigoTheme.uss");
 

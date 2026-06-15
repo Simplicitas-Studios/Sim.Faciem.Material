@@ -1,0 +1,38 @@
+/*
+ * MatGridListStyles.uss
+ * Structural and visual rules for MatGridList.
+ */
+
+@import url("./MatGridListColors.uss");
+
+.mat-grid-list {
+    background-color: var(--mat-grid-list-background);
+    border-radius: 8px;
+    border-width: 1px;
+    border-color: var(--mat-grid-list-outline-color);
+    overflow: hidden;
+}
+
+.mat-grid-list__content {
+    position: relative;
+    min-height: 0;
+}
+
+.mat-grid-list__tile {
+    background-color: var(--mat-grid-list-tile-background);
+    border-radius: 8px;
+    border-width: 1px;
+    border-color: var(--mat-grid-list-tile-border-color);
+    overflow: hidden;
+}
+
+.mat-grid-list__tile-content {
+    width: 100%;
+    height: 100%;
+    color: var(--mat-grid-list-tile-label-text-color);
+}
+
+.mat-grid-list__tile-fallback-label {
+    color: var(--mat-grid-list-tile-label-text-color);
+    -unity-text-align: middle-center;
+}

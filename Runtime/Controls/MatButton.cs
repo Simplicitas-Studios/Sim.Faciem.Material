@@ -1,4 +1,5 @@
-﻿using UnityEngine.UIElements;
+﻿using Unity.Properties;
+using UnityEngine.UIElements;
 
 namespace Sim.Faciem.Controls
 {
@@ -48,6 +49,7 @@ namespace Sim.Faciem.Controls
 
         /// <summary>Controls which Angular Material button appearance is applied.</summary>
         [UxmlAttribute]
+        [CreateProperty]
         public MatButtonVariant Variant
         {
             get => _variant;
@@ -62,6 +64,7 @@ namespace Sim.Faciem.Controls
 
         /// <summary>Applies a theme palette colour class to the button.</summary>
         [UxmlAttribute]
+        [CreateProperty]
         public MatButtonColor ThemeColor
         {
             get => _themeColor;
