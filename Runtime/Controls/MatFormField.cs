@@ -1,6 +1,7 @@
-﻿using UnityEngine.UIElements;
+﻿using Sim.Faciem.Controls;
+using UnityEngine.UIElements;
 
-namespace Sim.Faciem.Controls
+namespace Sim.Faciem.Material.Controls
 {
     /// <summary>
     /// Internal form-field chrome shared by MatSelect (and future MatInput / MatTextarea).

@@ -1,5 +1,6 @@
 ﻿using Sim.Faciem.Commands;
 using Sim.Faciem.Controls;
+using Sim.Faciem.Material.Controls;
 
 namespace Sim.Faciem.Material.Samples
 {
@@ -8,6 +9,7 @@ namespace Sim.Faciem.Material.Samples
     {
         Command NavigateToGettingStarted { get; }
         Command NavigateToTheming { get; }
+        Command NavigateToIcon { get; }
         Command NavigateToButton { get; }
         Command NavigateToSelect { get; }
         Command NavigateToList { get; }
@@ -15,6 +17,7 @@ namespace Sim.Faciem.Material.Samples
 
         MatButtonColor GettingStartedNavColor { get; }
         MatButtonColor ThemingNavColor { get; }
+        MatButtonColor IconNavColor { get; }
         MatButtonColor ButtonNavColor { get; }
         MatButtonColor SelectNavColor { get; }
         MatButtonColor ListNavColor { get; }

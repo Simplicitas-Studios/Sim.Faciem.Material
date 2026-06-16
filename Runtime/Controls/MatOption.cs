@@ -1,6 +1,7 @@
-﻿using UnityEngine.UIElements;
+﻿using Sim.Faciem.Controls;
+using UnityEngine.UIElements;
 
-namespace Sim.Faciem.Controls
+namespace Sim.Faciem.Material.Controls
 {
     /// <summary>
     /// Represents a single selectable option inside a <see cref="MatSelect"/>.

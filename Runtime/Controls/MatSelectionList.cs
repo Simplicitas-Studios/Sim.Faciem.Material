@@ -1,13 +1,13 @@
 using UnityEngine.UIElements;
 
-namespace Sim.Faciem.Controls
+namespace Sim.Faciem.Material.Controls
 {
     /// <summary>
-    /// Material-styled multi-selection list built on <see cref="MatList"/>.
-    /// The first version exposes selection through <see cref="MatList.SelectedIndices"/>.
+    /// Material-styled multi-selection list built on <see cref="Material.Controls.MatList"/>.
+    /// The first version exposes selection through <see cref="Material.Controls.MatList.SelectedIndices"/>.
     /// </summary>
     [UxmlElement]
-    public partial class MatSelectionList : MatList
+    public partial class MatSelectionList : Material.Controls.MatList
     {
         /// <summary>
         /// Initializes a new Material selection list with multi-selection enabled.

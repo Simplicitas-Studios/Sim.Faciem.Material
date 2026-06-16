@@ -1,0 +1,16 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <engine:VisualElement name="Root" data-source-type="Sim.Faciem.Material.Samples.Icon.IconDemoViewModel, Sim.Faciem.Material.Samples" class="mat-demo-content">
+        <engine:Label text="Icons" class="mat-demo-page-title" />
+        <engine:Label text="Browse Font Awesome SVG assets from both package folders and filter them by file name." class="mat-demo-page-subtitle" />
+        <engine:TextField name="IconSearchField" label="Search" class="mat-demo-icon-search-field">
+            <Bindings>
+                <engine:DataBinding property="value" data-source-path="SearchQuery" binding-mode="TwoWay" update-trigger="OnSourceChanged" />
+            </Bindings>
+        </engine:TextField>
+        <Sim.Faciem.Material.Controls.MatGridList direction="Vertical" track-count="8" gutter-size="12" tile-size="1:1" item-template="project://database/Packages/com.sim.faciem-material/Samples/MaterialDemo/Runtime/Icon/IconTileTemplate.uxml?fileID=9197481963319205126&amp;guid=e5fe71994da544198e49deea2fcb3092&amp;type=3#IconTileTemplate" class="mat-demo-grid-list-control mat-demo-icon-grid-list" style="flex-grow: 1; padding-top: 8px; padding-right: 8px; padding-bottom: 8px; padding-left: 8px;">
+            <Bindings>
+                <engine:DataBinding property="ItemSource" data-source-path="FilteredIcons" binding-mode="ToTarget" update-trigger="OnSourceChanged" />
+            </Bindings>
+        </Sim.Faciem.Material.Controls.MatGridList>
+    </engine:VisualElement>
+</engine:UXML>

@@ -1,0 +1,14 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <engine:VisualElement name="IconTemplate" data-source-type="Sim.Faciem.Material.Samples.Icon.IconDemoItem, Sim.Faciem.Material.Samples" style="flex-grow: 1; justify-content: flex-end; margin-top: 16px; margin-right: 16px; margin-bottom: 16px; margin-left: 16px;">
+        <engine:VisualElement name="Icon" style="flex-grow: 1; -unity-background-scale-mode: scale-to-fit;">
+            <Bindings>
+                <engine:DataBinding property="style.backgroundImage" data-source-path="IconSprite" binding-mode="ToTarget" />
+            </Bindings>
+        </engine:VisualElement>
+        <engine:Label text="Label" name="lbName" style="align-content: flex-end; font-size: 14px; -unity-text-align: upper-center; text-overflow: ellipsis; white-space: pre-wrap; margin-top: 8px;">
+            <Bindings>
+                <engine:DataBinding property="text" data-source-path="FileName" binding-mode="ToTarget" />
+            </Bindings>
+        </engine:Label>
+    </engine:VisualElement>
+</engine:UXML>

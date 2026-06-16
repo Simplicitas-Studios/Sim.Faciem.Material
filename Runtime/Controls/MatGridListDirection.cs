@@ -1,7 +1,9 @@
+using Sim.Faciem.Material.Controls;
+
 namespace Sim.Faciem.Controls
 {
     /// <summary>
-    /// Controls whether <see cref="MatGridList"/> flows vertically or horizontally.
+    /// Controls whether <see cref="Material.Controls.MatGridList"/> flows vertically or horizontally.
     /// </summary>
     public enum MatGridListDirection
     {

@@ -1,4 +1,4 @@
-﻿namespace Sim.Faciem.Controls
+﻿namespace Sim.Faciem.Material.Controls
 {
     /// <summary>
     /// Controls the visual chrome style of the internal MatFormField wrapper.

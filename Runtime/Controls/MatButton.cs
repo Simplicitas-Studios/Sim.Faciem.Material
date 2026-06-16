@@ -1,7 +1,8 @@
-﻿using Unity.Properties;
+﻿using Sim.Faciem.Controls;
+using Unity.Properties;
 using UnityEngine.UIElements;
 
-namespace Sim.Faciem.Controls
+namespace Sim.Faciem.Material.Controls
 {
     /// <summary>
     /// A button control that mirrors Angular Material's button system.

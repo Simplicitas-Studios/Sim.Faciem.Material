@@ -1,41 +1,43 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
-    <engine:VisualElement name="Root" data-source-type="Sim.Faciem.Material.Samples.GridListDemoViewModel, Sim.Faciem.Material.Samples" class="mat-demo-content">
-        <engine:Label text="Grid List" class="mat-demo-page-title" />
-        <engine:Label text="MatGridList supports vertical and horizontal flow while reusing one shared count field and one shared size field across both directions." class="mat-demo-page-subtitle" />
-        <engine:Label text="Vertical · ratio tiles" class="mat-demo-section-title" />
-        <engine:Label text="In vertical mode, TrackCount means columns and TileSize means row height. Ratio mode is useful for square or card-like tiles." class="mat-demo-body" />
-        <Sim.Faciem.Controls.MatGridList direction="Vertical" track-count="3" gutter-size="12" tile-size="1:1" item-template="project://database/Packages/com.sim.faciem-material/Samples/MaterialDemo/Runtime/GridList/MaterialGridTileTemplate.uxml?fileID=9197481963319205126&amp;guid=0f4f0fcfc3fc449aa5f44fd802fe0f7f&amp;type=3#MaterialGridTileTemplate" class="mat-demo-grid-list-control">
-            <Bindings>
-                <engine:DataBinding property="ItemSource" data-source-path="Regions" binding-mode="ToTarget" update-trigger="WhenDirty" />
-            </Bindings>
-        </Sim.Faciem.Controls.MatGridList>
-        <engine:Label text="Vertical · fixed tile size" class="mat-demo-section-title" />
-        <engine:Label text="A fixed TileSize value acts as row height in vertical mode." class="mat-demo-body" />
-        <Sim.Faciem.Controls.MatGridList direction="Vertical" track-count="2" gutter-size="12" tile-size="120" item-template="project://database/Packages/com.sim.faciem-material/Samples/MaterialDemo/Runtime/GridList/MaterialGridTileTemplate.uxml?fileID=9197481963319205126&amp;guid=0f4f0fcfc3fc449aa5f44fd802fe0f7f&amp;type=3#MaterialGridTileTemplate" class="mat-demo-grid-list-control mat-demo-grid-list-control--short">
-            <Bindings>
-                <engine:DataBinding property="ItemSource" data-source-path="Gyms" binding-mode="ToTarget" update-trigger="WhenDirty" />
-            </Bindings>
-        </Sim.Faciem.Controls.MatGridList>
-        <engine:Label text="Horizontal · ratio tiles" class="mat-demo-section-title" />
-        <engine:Label text="In horizontal mode, TrackCount means rows and TileSize means column width. Ratio mode still uses the same width:height expression." class="mat-demo-body" />
-        <Sim.Faciem.Controls.MatGridList direction="Horizontal" track-count="2" gutter-size="12" tile-size="5:1" item-template="project://database/Packages/com.sim.faciem-material/Samples/MaterialDemo/Runtime/GridList/MaterialGridTileTemplate.uxml?fileID=9197481963319205126&amp;guid=0f4f0fcfc3fc449aa5f44fd802fe0f7f&amp;type=3#MaterialGridTileTemplate" class="mat-demo-grid-list-control mat-demo-grid-list-control--horizontal">
-            <Bindings>
-                <engine:DataBinding property="ItemSource" data-source-path="Routes" binding-mode="ToTarget" update-trigger="WhenDirty" />
-            </Bindings>
-        </Sim.Faciem.Controls.MatGridList>
-        <engine:Label text="Horizontal · fixed tile size" class="mat-demo-section-title" />
-        <engine:Label text="A fixed TileSize value acts as column width in horizontal mode." class="mat-demo-body" />
-        <Sim.Faciem.Controls.MatGridList direction="Horizontal" track-count="2" gutter-size="12" tile-size="180" item-template="project://database/Packages/com.sim.faciem-material/Samples/MaterialDemo/Runtime/GridList/MaterialGridTileTemplate.uxml?fileID=9197481963319205126&amp;guid=0f4f0fcfc3fc449aa5f44fd802fe0f7f&amp;type=3#MaterialGridTileTemplate" class="mat-demo-grid-list-control mat-demo-grid-list-control--horizontal-short">
-            <Bindings>
-                <engine:DataBinding property="ItemSource" data-source-path="LeagueMembers" binding-mode="ToTarget" update-trigger="WhenDirty" />
-            </Bindings>
-        </Sim.Faciem.Controls.MatGridList>
-        <engine:Label text="Virtualization · large dataset" class="mat-demo-section-title" />
-        <engine:Label text="This example binds hundreds of entries while MatGridList only realizes the visible window plus a small overscan buffer." class="mat-demo-body" />
-        <Sim.Faciem.Controls.MatGridList direction="Vertical" track-count="4" gutter-size="12" tile-size="1:1" item-template="project://database/Packages/com.sim.faciem-material/Samples/MaterialDemo/Runtime/GridList/MaterialGridTileTemplate.uxml?fileID=9197481963319205126&amp;guid=0f4f0fcfc3fc449aa5f44fd802fe0f7f&amp;type=3#MaterialGridTileTemplate" class="mat-demo-grid-list-control mat-demo-grid-list-control--large">
-            <Bindings>
-                <engine:DataBinding property="ItemSource" data-source-path="LargeCatalog" binding-mode="ToTarget" update-trigger="WhenDirty" />
-            </Bindings>
-        </Sim.Faciem.Controls.MatGridList>
+    <engine:VisualElement name="Root" data-source-type="Sim.Faciem.Material.Samples.GridList.GridListDemoViewModel, Sim.Faciem.Material.Samples" class="mat-demo-content">
+        <engine:ScrollView>
+            <engine:Label text="Grid List" class="mat-demo-page-title" />
+            <engine:Label text="MatGridList supports vertical and horizontal flow while reusing one shared count field and one shared size field across both directions." class="mat-demo-page-subtitle" />
+            <engine:Label text="Vertical · ratio tiles" class="mat-demo-section-title" />
+            <engine:Label text="In vertical mode, TrackCount means columns and TileSize means row height. Ratio mode is useful for square or card-like tiles." class="mat-demo-body" />
+            <Sim.Faciem.Material.Controls.MatGridList direction="Vertical" track-count="3" gutter-size="12" tile-size="1:1" item-template="project://database/Packages/com.sim.faciem-material/Samples/MaterialDemo/Runtime/GridList/MaterialGridTileTemplate.uxml?fileID=9197481963319205126&amp;guid=0f4f0fcfc3fc449aa5f44fd802fe0f7f&amp;type=3#MaterialGridTileTemplate" class="mat-demo-grid-list-control">
+                <Bindings>
+                    <engine:DataBinding property="ItemSource" data-source-path="Regions" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                </Bindings>
+            </Sim.Faciem.Material.Controls.MatGridList>
+            <engine:Label text="Vertical · fixed tile size" class="mat-demo-section-title" />
+            <engine:Label text="A fixed TileSize value acts as row height in vertical mode." class="mat-demo-body" />
+            <Sim.Faciem.Material.Controls.MatGridList direction="Vertical" track-count="2" gutter-size="12" tile-size="120" item-template="project://database/Packages/com.sim.faciem-material/Samples/MaterialDemo/Runtime/GridList/MaterialGridTileTemplate.uxml?fileID=9197481963319205126&amp;guid=0f4f0fcfc3fc449aa5f44fd802fe0f7f&amp;type=3#MaterialGridTileTemplate" class="mat-demo-grid-list-control mat-demo-grid-list-control--short">
+                <Bindings>
+                    <engine:DataBinding property="ItemSource" data-source-path="Gyms" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                </Bindings>
+            </Sim.Faciem.Material.Controls.MatGridList>
+            <engine:Label text="Horizontal · ratio tiles" class="mat-demo-section-title" />
+            <engine:Label text="In horizontal mode, TrackCount means rows and TileSize means column width. Ratio mode still uses the same width:height expression." class="mat-demo-body" />
+            <Sim.Faciem.Material.Controls.MatGridList direction="Horizontal" track-count="2" gutter-size="12" tile-size="5:1" item-template="project://database/Packages/com.sim.faciem-material/Samples/MaterialDemo/Runtime/GridList/MaterialGridTileTemplate.uxml?fileID=9197481963319205126&amp;guid=0f4f0fcfc3fc449aa5f44fd802fe0f7f&amp;type=3#MaterialGridTileTemplate" class="mat-demo-grid-list-control mat-demo-grid-list-control--horizontal">
+                <Bindings>
+                    <engine:DataBinding property="ItemSource" data-source-path="Routes" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                </Bindings>
+            </Sim.Faciem.Material.Controls.MatGridList>
+            <engine:Label text="Horizontal · fixed tile size" class="mat-demo-section-title" />
+            <engine:Label text="A fixed TileSize value acts as column width in horizontal mode." class="mat-demo-body" />
+            <Sim.Faciem.Material.Controls.MatGridList direction="Horizontal" track-count="2" gutter-size="12" tile-size="180" item-template="project://database/Packages/com.sim.faciem-material/Samples/MaterialDemo/Runtime/GridList/MaterialGridTileTemplate.uxml?fileID=9197481963319205126&amp;guid=0f4f0fcfc3fc449aa5f44fd802fe0f7f&amp;type=3#MaterialGridTileTemplate" class="mat-demo-grid-list-control mat-demo-grid-list-control--horizontal-short">
+                <Bindings>
+                    <engine:DataBinding property="ItemSource" data-source-path="LeagueMembers" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                </Bindings>
+            </Sim.Faciem.Material.Controls.MatGridList>
+            <engine:Label text="Virtualization · large dataset" class="mat-demo-section-title" />
+            <engine:Label text="This example binds hundreds of entries while MatGridList only realizes the visible window plus a small overscan buffer." class="mat-demo-body" />
+            <Sim.Faciem.Material.Controls.MatGridList direction="Vertical" track-count="4" gutter-size="12" tile-size="1:1" item-template="project://database/Packages/com.sim.faciem-material/Samples/MaterialDemo/Runtime/GridList/MaterialGridTileTemplate.uxml?fileID=9197481963319205126&amp;guid=0f4f0fcfc3fc449aa5f44fd802fe0f7f&amp;type=3#MaterialGridTileTemplate" class="mat-demo-grid-list-control mat-demo-grid-list-control--large">
+                <Bindings>
+                    <engine:DataBinding property="ItemSource" data-source-path="LargeCatalog" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                </Bindings>
+            </Sim.Faciem.Material.Controls.MatGridList>
+        </engine:ScrollView>
     </engine:VisualElement>
 </engine:UXML>

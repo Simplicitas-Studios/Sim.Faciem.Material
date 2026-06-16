@@ -4,7 +4,7 @@ using System.Linq;
 using Unity.Properties;
 using UnityEngine.UIElements;
 
-namespace Sim.Faciem.Controls
+namespace Sim.Faciem.Material.Controls
 {
     /// <summary>
     /// Material-styled list control built on Unity's <see cref="ListView"/>.

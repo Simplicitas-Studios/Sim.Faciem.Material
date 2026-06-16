@@ -1,20 +1,21 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using R3;
+using Sim.Faciem.Controls;
 using Sim.Faciem.Shared;
 using Unity.Properties;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace Sim.Faciem.Controls
+namespace Sim.Faciem.Material.Controls
 {
     /// <summary>
     /// A select / dropdown control that mirrors Angular Material's <c>mat-select</c>.
     /// The form-field chrome (appearance, label, hint) is provided internally by
     /// <see cref="MatFormField"/>; users only interact with this single element.
     ///
-    /// Declare <see cref="MatOption"/> elements as UXML children to define options:
+    /// Declare <see cref="Faciem.Material.Controls.MatOption"/> elements as UXML children to define options:
     /// <code>
     /// &lt;Sim.Faciem.Controls.MatSelect label="Region" placeholder="Choose a region"&gt;
     ///     &lt;Sim.Faciem.Controls.MatOption value="sinnoh"  label="Sinnoh"  /&gt;
@@ -319,11 +320,11 @@ namespace Sim.Faciem.Controls
             if (_panel == null) return;
             _panel.contentContainer.Clear();
 
-            foreach (var opt in this.Query<MatOption>().ToList())
+            foreach (var opt in this.Query<Material.Controls.MatOption>().ToList())
                 _panel.contentContainer.Add(BuildOptionRow(opt));
         }
 
-        private VisualElement BuildOptionRow(MatOption opt)
+        private VisualElement BuildOptionRow(Material.Controls.MatOption opt)
         {
             var row = new VisualElement();
             row.AddToClassList(OptionClassName);
@@ -360,7 +361,7 @@ namespace Sim.Faciem.Controls
             return row;
         }
 
-        private void SelectOption(MatOption opt)
+        private void SelectOption(Material.Controls.MatOption opt)
         {
             if (_multiple)
             {
@@ -382,14 +383,14 @@ namespace Sim.Faciem.Controls
         {
             if (_panel == null) return;
 
-            var options = this.Query<MatOption>().ToList();
+            var options = this.Query<Material.Controls.MatOption>().ToList();
             var rows    = _panel.contentContainer.Query<VisualElement>(className: OptionClassName).ToList();
 
             for (var i = 0; i < Mathf.Min(options.Count, rows.Count); i++)
                 ApplyOptionSelectedState(rows[i], options[i]);
         }
 
-        private void ApplyOptionSelectedState(VisualElement row, MatOption opt)
+        private void ApplyOptionSelectedState(VisualElement row, Material.Controls.MatOption opt)
         {
             var selected = _multiple
                 ? _values.Contains(opt.Value)
@@ -451,7 +452,7 @@ namespace Sim.Faciem.Controls
             var overlayWorld = _overlayRoot.worldBound;
 
             var panelWidth  = fieldWorld.width;
-            var optionCount = this.Query<MatOption>().ToList().Count;
+            var optionCount = this.Query<Material.Controls.MatOption>().ToList().Count;
             var contentHeight = optionCount * OptionRowHeight;
             var panelHeight   = Mathf.Min(PanelMaxHeight, contentHeight);
             var requiresScroll = contentHeight > panelHeight;
@@ -507,7 +508,7 @@ namespace Sim.Faciem.Controls
 
         private string GetDisplayLabel(string val)
         {
-            var opt = this.Query<MatOption>().ToList()
+            var opt = this.Query<Material.Controls.MatOption>().ToList()
                 .FirstOrDefault(o => o.Value == val);
             return opt != null && !string.IsNullOrEmpty(opt.Label)
                 ? opt.Label

@@ -1,4 +1,4 @@
-﻿namespace Sim.Faciem.Controls
+﻿namespace Sim.Faciem.Material.Controls
 {
     /// <summary>
     /// Mirrors Angular Material's button appearance variants.

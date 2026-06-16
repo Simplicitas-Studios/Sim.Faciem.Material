@@ -1,11 +1,12 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
+using Sim.Faciem.Controls;
+using Sim.Faciem.ListBinding;
 using Unity.Properties;
 using UnityEngine.UIElements;
 
-namespace Sim.Faciem.Controls
+namespace Sim.Faciem.Material.Controls
 {
     /// <summary>
     /// Material-styled grid list inspired by Angular Material's <c>mat-grid-list</c>.
@@ -35,7 +36,7 @@ namespace Sim.Faciem.Controls
         private readonly VisualElement _gridContent;
         private readonly List<TileHandle> _tilePool = new();
 
-        private IList _itemSource;
+        private SerializedListReference _itemSource;
         private VisualTreeAsset _itemTemplate;
         private MatGridListDirection _direction = MatGridListDirection.Vertical;
         private int _trackCount = 4;
@@ -44,7 +45,8 @@ namespace Sim.Faciem.Controls
 
         /// <summary>Data source rendered into the grid tiles.</summary>
         [CreateProperty]
-        public IList ItemSource
+        [UxmlAttribute]
+        public SerializedListReference ItemSource
         {
             get => _itemSource;
             set
@@ -164,7 +166,7 @@ namespace Sim.Faciem.Controls
 
         private void RefreshTileLayout()
         {
-            var itemCount = _itemSource?.Count ?? 0;
+            var itemCount = _itemSource?.ItemSource?.Count ?? 0;
             var crossAxisExtent = Direction == MatGridListDirection.Vertical
                 ? GetViewportWidth()
                 : GetViewportHeight();
@@ -289,7 +291,7 @@ namespace Sim.Faciem.Controls
 
         private void BindTile(TileHandle tile, int itemIndex)
         {
-            var item = _itemSource?[itemIndex];
+            var item = _itemSource?.ItemSource?[itemIndex];
             tile.Root.dataSource = item;
 
             if (tile.Content != null)

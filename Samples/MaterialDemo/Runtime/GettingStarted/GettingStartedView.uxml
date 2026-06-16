@@ -27,10 +27,10 @@
         <engine:Label text="Quick Actions" class="mat-demo-section-title" />
         <engine:Label text="MatButton mirrors Angular Material&apos;s button system. Assign a Variant and ThemeColor in UXML or via binding." class="mat-demo-body" />
         <engine:VisualElement class="mat-demo-btn-row">
-            <Sim.Faciem.Controls.MatButton text="Raised · Primary" variant="Raised" theme-color="Primary" />
-            <Sim.Faciem.Controls.MatButton text="Flat · Accent" variant="Flat" theme-color="Accent" />
-            <Sim.Faciem.Controls.MatButton text="Stroked · Warn" variant="Stroked" theme-color="Warn" />
-            <Sim.Faciem.Controls.MatButton text="Basic" variant="Basic" />
+            <Sim.Faciem.Material.Controls.MatButton text="Raised · Primary" variant="Raised" theme-color="Primary" />
+            <Sim.Faciem.Material.Controls.MatButton text="Flat · Accent" variant="Flat" theme-color="Accent" />
+            <Sim.Faciem.Material.Controls.MatButton text="Stroked · Warn" variant="Stroked" theme-color="Warn" />
+            <Sim.Faciem.Material.Controls.MatButton text="Basic" variant="Basic" />
         </engine:VisualElement>
         <engine:Label text="Installation" class="mat-demo-section-title" />
         <engine:Label text="1. Open a PanelSettings asset and assign one of the MatXxxTheme.tss files as the Theme Style Sheet." class="mat-demo-body" />

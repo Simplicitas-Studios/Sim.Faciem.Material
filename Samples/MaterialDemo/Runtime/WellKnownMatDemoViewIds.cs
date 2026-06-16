@@ -20,6 +20,9 @@ namespace Sim.Faciem.Material.Samples
         // Generated Property for MatThemingDemoViewId.asset with asset id c0c9403a12cc3174ca4873dca5d7f7d3
         public static ViewId Sim_Faciem_Material_ThemingDemo { get; } = ViewId.From("Sim.Faciem/Material/ThemingDemo");
 
+        // Generated Property for MatIconDemoViewId.asset with asset id 4f66ff72217b4021b87dca8bbf8c247d
+        public static ViewId Sim_Faciem_Material_IconDemo { get; } = ViewId.From("Sim.Faciem/Material/IconDemo");
+
         // Generated Property for MatListDemoViewId.asset with asset id 9b26c18bf4214db3a1ef6f1d62e6c0f1
         public static ViewId Sim_Faciem_Material_ListDemo { get; } = ViewId.From("Sim.Faciem/Material/ListDemo");
 

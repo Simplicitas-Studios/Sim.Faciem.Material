@@ -248,3 +248,42 @@
     margin-bottom: 12px;
     white-space: normal;
 }
+
+/* ══ Icon demo ═══════════════════════════════════════════════════════════════ */
+.mat-demo-icon-search-field {
+    margin-bottom: 16px;
+}
+
+.mat-demo-icon-grid-list {
+    height: 520px;
+}
+
+.mat-demo-icon-tile {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    border-width: 1px;
+    border-color: rgba(128, 128, 128, 0.18);
+    padding: 12px;
+    justify-content: space-between;
+    background-color: rgba(128, 128, 128, 0.04);
+}
+
+.mat-demo-icon-tile__preview-frame {
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+}
+
+.mat-demo-icon-tile__preview-image {
+    width: 48px;
+    height: 48px;
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.mat-demo-icon-tile__file-name {
+    font-size: 11px;
+    -unity-text-align: middle-center;
+    white-space: normal;
+}

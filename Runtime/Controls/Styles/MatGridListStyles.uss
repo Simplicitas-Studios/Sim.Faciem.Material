@@ -19,7 +19,7 @@
 }
 
 .mat-grid-list__tile {
-    background-color: var(--mat-grid-list-tile-background);
+    /*background-color: var(--mat-grid-list-tile-background);*/
     border-radius: 8px;
     border-width: 1px;
     border-color: var(--mat-grid-list-tile-border-color);
