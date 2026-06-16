@@ -1,6 +1,6 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
-using Plugins.Sim.Faciem.Editor;
+using Sim.Faciem.Editor;
 
 namespace Sim.Faciem.Material.Editor
 {

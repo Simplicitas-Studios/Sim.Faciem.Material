@@ -129,7 +129,7 @@ namespace Sim.Faciem.Material.Samples
 
         // ── Lifecycle ──────────────────────────────────────────────────────────
 
-        protected override async UniTask NavigateTo()
+        protected override async UniTask NavigateTo(NavigationParameters navigationParameters)
         {
             await NavigateToPage(0);
         }

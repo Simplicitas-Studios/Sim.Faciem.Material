@@ -44,7 +44,7 @@ namespace Sim.Faciem.Material.Samples.Icon
                     .Subscribe(query => ApplyFilter(query)));
         }
         
-        protected override async UniTask NavigateTo()
+        protected override async UniTask NavigateTo(NavigationParameters navigationParameters)
         {
             await LoadIcons();
             ApplyFilter(SearchQuery.ToLowerInvariant());
