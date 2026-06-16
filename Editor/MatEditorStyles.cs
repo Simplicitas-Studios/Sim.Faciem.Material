@@ -25,6 +25,7 @@ namespace Sim.Faciem.Material.Editor
         private const string ButtonStylesPath      = PackageRoot + "/Runtime/Controls/Styles/MatButtonStyles.uss";
         private const string FormFieldStylesPath   = PackageRoot + "/Runtime/Controls/Styles/MatFormFieldStyles.uss";
         private const string SelectStylesPath      = PackageRoot + "/Runtime/Controls/Styles/MatSelectStyles.uss";
+        private const string MenuStylesPath        = PackageRoot + "/Runtime/Controls/Styles/MatMenuStyles.uss";
         private const string ListStylesPath        = PackageRoot + "/Runtime/Controls/Styles/MatListStyles.uss";
         private const string GridListStylesPath    = PackageRoot + "/Runtime/Controls/Styles/MatGridListStyles.uss";
         private const string IndigoPath       = PackageRoot + "/Runtime/Themes/MatIndigoTheme.uss";
@@ -44,6 +45,7 @@ namespace Sim.Faciem.Material.Editor
         private static StyleSheet s_buttonStyles;
         private static StyleSheet s_formFieldStyles;
         private static StyleSheet s_selectStyles;
+        private static StyleSheet s_menuStyles;
         private static StyleSheet s_listStyles;
         private static StyleSheet s_gridListStyles;
         private static StyleSheet s_indigoSheet;
@@ -105,6 +107,7 @@ namespace Sim.Faciem.Material.Editor
             TryRemove(root, s_buttonStyles);
             TryRemove(root, s_formFieldStyles);
             TryRemove(root, s_selectStyles);
+            TryRemove(root, s_menuStyles);
             TryRemove(root, s_listStyles);
             TryRemove(root, s_gridListStyles);
             TryRemove(root, s_indigoSheet);
@@ -174,6 +177,9 @@ namespace Sim.Faciem.Material.Editor
             if (s_selectStyles != null)
                 root.styleSheets.Add(s_selectStyles);
 
+            if (s_menuStyles != null)
+                root.styleSheets.Add(s_menuStyles);
+
             if (s_listStyles != null)
                 root.styleSheets.Add(s_listStyles);
 
@@ -199,6 +205,7 @@ namespace Sim.Faciem.Material.Editor
             s_buttonStyles      ??= AssetDatabase.LoadAssetAtPath<StyleSheet>(ButtonStylesPath);
             s_formFieldStyles   ??= AssetDatabase.LoadAssetAtPath<StyleSheet>(FormFieldStylesPath);
             s_selectStyles      ??= AssetDatabase.LoadAssetAtPath<StyleSheet>(SelectStylesPath);
+            s_menuStyles        ??= AssetDatabase.LoadAssetAtPath<StyleSheet>(MenuStylesPath);
             s_listStyles        ??= AssetDatabase.LoadAssetAtPath<StyleSheet>(ListStylesPath);
             s_gridListStyles    ??= AssetDatabase.LoadAssetAtPath<StyleSheet>(GridListStylesPath);
             s_indigoSheet       ??= AssetDatabase.LoadAssetAtPath<StyleSheet>(IndigoPath);
@@ -218,6 +225,7 @@ namespace Sim.Faciem.Material.Editor
             s_buttonStyles      = null;
             s_formFieldStyles   = null;
             s_selectStyles      = null;
+            s_menuStyles        = null;
             s_listStyles        = null;
             s_gridListStyles    = null;
             s_indigoSheet       = null;

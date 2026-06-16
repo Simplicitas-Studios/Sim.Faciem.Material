@@ -1,0 +1,86 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <engine:VisualElement name="Root" data-source-type="Sim.Faciem.Material.Samples.MenuDemoViewModel, Sim.Faciem.Material.Samples" class="mat-demo-content">
+        <engine:Label text="Menu" class="mat-demo-page-title" />
+        <engine:Label text="MatMenu reuses the overlay-driven popup pattern from MatSelect, and now supports both icon triggers and leading item icons for command-oriented menus." class="mat-demo-page-subtitle" />
+
+        <engine:Label text="Basic action menu" class="mat-demo-section-title" />
+        <engine:Label text="Open the menu and choose a command. Enabled items execute immediately and close the popup, while both the trigger and rows can display icons." class="mat-demo-body" />
+        <Sim.Faciem.Material.Controls.MatMenu text="Trainer actions" trigger-icon-collection="Fontawesome-Free-Solid" trigger-icon-name="bars">
+            <Sim.Faciem.Material.Controls.MatMenuItem label="Catch Pokémon" icon-collection="Fontawesome-Free-Solid" icon-name="bolt">
+                <Bindings>
+                    <engine:DataBinding property="Command" data-source-path="CatchPokemon" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                </Bindings>
+            </Sim.Faciem.Material.Controls.MatMenuItem>
+            <Sim.Faciem.Material.Controls.MatMenuItem label="Open Bag" icon-collection="Fontawesome-Free-Solid" icon-name="bag-shopping">
+                <Bindings>
+                    <engine:DataBinding property="Command" data-source-path="OpenBag" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                </Bindings>
+            </Sim.Faciem.Material.Controls.MatMenuItem>
+            <Sim.Faciem.Material.Controls.MatMenuItem label="Save Game" icon-collection="Fontawesome-Free-Solid" icon-name="floppy-disk">
+                <Bindings>
+                    <engine:DataBinding property="Command" data-source-path="SaveGame" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                </Bindings>
+            </Sim.Faciem.Material.Controls.MatMenuItem>
+        </Sim.Faciem.Material.Controls.MatMenu>
+
+        <engine:Label text="Icon-only trigger" class="mat-demo-section-title" />
+        <engine:Label text="If the menu has a trigger icon but no text, the trigger collapses into a compact icon button while still opening the same popup panel." class="mat-demo-body" />
+        <Sim.Faciem.Material.Controls.MatMenu trigger-icon-collection="Fontawesome-Free-Solid" trigger-icon-name="ellipsis-vertical">
+            <Sim.Faciem.Material.Controls.MatMenuItem label="Catch Pokémon" icon-collection="Fontawesome-Free-Solid" icon-name="bolt">
+                <Bindings>
+                    <engine:DataBinding property="Command" data-source-path="CatchPokemon" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                </Bindings>
+            </Sim.Faciem.Material.Controls.MatMenuItem>
+            <Sim.Faciem.Material.Controls.MatMenuItem label="Open Bag" icon-collection="Fontawesome-Free-Solid" icon-name="bag-shopping">
+                <Bindings>
+                    <engine:DataBinding property="Command" data-source-path="OpenBag" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                </Bindings>
+            </Sim.Faciem.Material.Controls.MatMenuItem>
+        </Sim.Faciem.Material.Controls.MatMenu>
+
+        <engine:Label text="Disabled items" class="mat-demo-section-title" />
+        <engine:Label text="Disabled entries remain visible but do not execute and keep the muted Material styling, including their icons." class="mat-demo-body" />
+        <Sim.Faciem.Material.Controls.MatMenu text="Pokédex actions" trigger-icon-collection="Fontawesome-Free-Solid" trigger-icon-name="book-open">
+            <Sim.Faciem.Material.Controls.MatMenuItem label="View Seen Pokémon" icon-collection="Fontawesome-Free-Solid" icon-name="eye">
+                <Bindings>
+                    <engine:DataBinding property="Command" data-source-path="OpenBag" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                </Bindings>
+            </Sim.Faciem.Material.Controls.MatMenuItem>
+            <Sim.Faciem.Material.Controls.MatMenuItem label="Release Legendary" icon-collection="Fontawesome-Free-Solid" icon-name="triangle-exclamation" disabled="true" />
+            <Sim.Faciem.Material.Controls.MatMenuItem label="Trade with Professor" icon-collection="Fontawesome-Free-Solid" icon-name="user-slash" disabled="true" />
+        </Sim.Faciem.Material.Controls.MatMenu>
+
+        <engine:Label text="Navigation menu" class="mat-demo-section-title" />
+        <engine:Label text="This menu drives the same sample navigation flow used by the demo shell, which makes it easy to verify popup behavior in runtime-style panels and editor windows." class="mat-demo-body" />
+        <Sim.Faciem.Material.Controls.MatMenu text="Open demo page" trigger-icon-collection="Fontawesome-Free-Solid" trigger-icon-name="square-caret-right">
+            <Sim.Faciem.Material.Controls.MatMenuItem label="Buttons demo" icon-collection="Fontawesome-Free-Solid" icon-name="hand-pointer">
+                <Bindings>
+                    <engine:DataBinding property="Command" data-source-path="NavigateToButtons" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                </Bindings>
+            </Sim.Faciem.Material.Controls.MatMenuItem>
+            <Sim.Faciem.Material.Controls.MatMenuItem label="Select demo" icon-collection="Fontawesome-Free-Solid" icon-name="square-caret-down">
+                <Bindings>
+                    <engine:DataBinding property="Command" data-source-path="NavigateToSelect" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                </Bindings>
+            </Sim.Faciem.Material.Controls.MatMenuItem>
+            <Sim.Faciem.Material.Controls.MatMenuItem label="List demo" icon-collection="Fontawesome-Free-Solid" icon-name="list">
+                <Bindings>
+                    <engine:DataBinding property="Command" data-source-path="NavigateToList" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                </Bindings>
+            </Sim.Faciem.Material.Controls.MatMenuItem>
+        </Sim.Faciem.Material.Controls.MatMenu>
+
+        <engine:Label text="Last action" class="mat-demo-section-title" />
+        <engine:Label class="mat-demo-body">
+            <Bindings>
+                <engine:DataBinding property="text" data-source-path="LastAction" binding-mode="ToTarget" update-trigger="WhenDirty" />
+            </Bindings>
+        </engine:Label>
+
+        <engine:Label text="Disabled trigger" class="mat-demo-section-title" />
+        <engine:Label text="The whole menu host can also be disabled, preventing the popup from opening at all." class="mat-demo-body" />
+        <Sim.Faciem.Material.Controls.MatMenu text="Unavailable actions" trigger-icon-collection="Fontawesome-Free-Solid" trigger-icon-name="lock" disabled="true">
+            <Sim.Faciem.Material.Controls.MatMenuItem label="This item never opens" icon-collection="Fontawesome-Free-Solid" icon-name="ban" />
+        </Sim.Faciem.Material.Controls.MatMenu>
+    </engine:VisualElement>
+</engine:UXML>

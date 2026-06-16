@@ -82,6 +82,21 @@
     --mat-pseudo-checkbox-selected-background:         #3F51B5;
     --mat-pseudo-checkbox-selected-checkmark-color:    #FFFFFF;
 
+    /* ── Menu (light) ───────────────────────────────────────────────────── */
+    --mat-menu-trigger-text-color:                     rgba(0, 0, 0, 0.87);
+    --mat-menu-trigger-background:                     rgba(0, 0, 0, 0);
+    --mat-menu-trigger-border-color:                   rgba(0, 0, 0, 0.12);
+    --mat-menu-trigger-hover-background:               rgba(0, 0, 0, 0.04);
+    --mat-menu-trigger-disabled-text-color:            rgba(0, 0, 0, 0.38);
+    --mat-menu-trigger-disabled-border-color:          rgba(0, 0, 0, 0.08);
+    --mat-menu-trigger-arrow-color:                    rgba(0, 0, 0, 0.54);
+    --mat-menu-panel-background:                       #FFFFFF;
+    --mat-menu-panel-shadow:                           rgba(0, 0, 0, 0.2);
+    --mat-menu-item-label-text-color:                  rgba(0, 0, 0, 0.87);
+    --mat-menu-item-hover-state-layer-color:           rgba(0, 0, 0, 0.04);
+    --mat-menu-item-active-state-layer-color:          rgba(0, 0, 0, 0.08);
+    --mat-menu-item-disabled-label-text-color:         rgba(0, 0, 0, 0.38);
+
     /* ── List (light) ───────────────────────────────────────────────────── */
     --mat-list-background:                              #FFFFFF;
     --mat-list-outline-color:                           rgba(0, 0, 0, 0.08);

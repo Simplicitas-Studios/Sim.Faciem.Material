@@ -8,6 +8,9 @@ namespace Sim.Faciem.Material.Samples
     public static class WellKnownMatDemoViewIds
     {
         // BEGIN: Auto-generated code for View Id Assets
+        // Generated Property for MatMenuDemoViewId.asset with asset id a00110080011008a00110080011008a
+        public static ViewId Sim_Faciem_Material_MenuDemo { get; } = ViewId.From("Sim.Faciem/Material/MenuDemo");
+
         // Generated Property for MatSelectDemoViewId.asset with asset id 78d31f6e57332e4479c2711c21e2b191
         public static ViewId Sim_Faciem_Material_SelectDemo { get; } = ViewId.From("Sim.Faciem/Material/SelectDemo");
 

@@ -28,6 +28,12 @@
                     <engine:DataBinding property="ThemeColor" data-source-path="ButtonNavColor" binding-mode="ToTarget" update-trigger="WhenDirty" />
                 </Bindings>
             </Sim.Faciem.Material.Controls.MatButton>
+            <Sim.Faciem.Material.Controls.MatButton name="btnMenu" text="Menu" variant="Basic" class="mat-demo-nav-btn">
+                <Bindings>
+                    <engine:DataBinding property="Command" data-source-path="NavigateToMenu" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                    <engine:DataBinding property="ThemeColor" data-source-path="MenuNavColor" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                </Bindings>
+            </Sim.Faciem.Material.Controls.MatButton>
             <Sim.Faciem.Material.Controls.MatButton name="btnSelect" text="Select" variant="Basic" class="mat-demo-nav-btn">
                 <Bindings>
                     <engine:DataBinding property="Command" data-source-path="NavigateToSelect" binding-mode="ToTarget" update-trigger="WhenDirty" />
