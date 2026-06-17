@@ -12,6 +12,8 @@
 
 :root,
 .mat-theme--purple-green {
+    -unity-font-definition: url("../../Fonts/Roboto-VariableFont_wdth,wght.ttf");
+
     /* ── Primary ─────────────────────────────────────────────────────────── */
     --mat-button-primary-color:       #9C27B0;
     --mat-button-primary-ripple:      rgba(156, 39, 176, 0.2);
