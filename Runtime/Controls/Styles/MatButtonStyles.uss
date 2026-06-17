@@ -76,7 +76,6 @@
 .mat-raised-button {
     background-color: var(--mat-button-surface-bg);
     color: var(--mat-button-on-surface);
-    overflow: visible;
 }
 .mat-raised-button:hover  { background-color: var(--mat-button-surface-hover-bg); }
 .mat-raised-button:focus  { background-color: var(--mat-button-surface-focus-bg); }
