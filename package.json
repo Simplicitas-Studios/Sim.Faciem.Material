@@ -5,7 +5,7 @@
   "description": "Material Design Package for Sim Faciem UI Tookit extensions.",
   "unity": "6000.0",
   "dependencies": {
-    "com.sim.faciem": "1.0.0-alpha.1",
+    "com.sim.faciem": "https://github.com/Simplicitas-Studios/Sim.Faciem.git",
     "com.unity.vectorgraphics": "2.0.0-preview.25"
   },
   "keywords": [
