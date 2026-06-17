@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Sim.Faciem.Material.Icons;
-using Unity.Properties;
+using Sim.Faciem.Shared;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -46,7 +46,7 @@ namespace Sim.Faciem.Material.Controls
         private bool _isOpen;
         private string _text = "Open menu";
         private bool _disabled;
-        private string _triggerIconCollection = string.Empty;
+        private IconCollection _triggerIconCollection;
         private string _triggerIconName = string.Empty;
 
         public override VisualElement contentContainer => _itemsContainer;
@@ -72,17 +72,19 @@ namespace Sim.Faciem.Material.Controls
                 EnableInClassList(DisabledClassName, value);
                 _trigger.SetEnabled(!value);
                 if (value)
+                {
                     ClosePanel();
+                }
             }
         }
 
         [UxmlAttribute]
-        public string TriggerIconCollection
+        public IconCollection TriggerIconCollection
         {
             get => _triggerIconCollection;
             set
             {
-                _triggerIconCollection = value ?? string.Empty;
+                _triggerIconCollection = value;
                 UpdateTriggerVisualState();
             }
         }
@@ -135,14 +137,35 @@ namespace Sim.Faciem.Material.Controls
             RegisterCallback<GeometryChangedEvent>(_ => UpdatePanelPosition());
         }
 
-        private void SetupOverlayPanel(AttachToPanelEvent _)
+        private void SetupOverlayPanel(AttachToPanelEvent evt)
         {
+            #if UNITY_6000_3_OR_NEWER
+
+            bool isWorldSpace = evt.destinationPanel is IRuntimePanel runtimePanel
+                && runtimePanel.panelSettings.renderMode == PanelRenderMode.WorldSpace;
+
+            if (isWorldSpace)
+            {
+                _overlayRoot = this.FindPanelRootChild();
+            }
+            else
+            {
+                _overlayRoot = string.IsNullOrEmpty(OverlayContainerId)
+                    ? FindThemedOverlayRoot()
+                    : panel?.visualTree.Q(OverlayContainerId);
+            }
+
+            #else
+
             _overlayRoot = string.IsNullOrEmpty(OverlayContainerId)
                 ? FindThemedOverlayRoot()
                 : panel?.visualTree.Q(OverlayContainerId);
+            #endif
 
             if (_overlayRoot == null)
+            {
                 return;
+            }
 
             if (_panel == null)
             {
@@ -155,7 +178,9 @@ namespace Sim.Faciem.Material.Controls
             }
 
             if (_panel.parent != _overlayRoot)
+            {
                 _overlayRoot.Add(_panel);
+            }
 
             panel?.visualTree.RegisterCallback<PointerDownEvent>(OnGlobalPointerDown);
             RebuildPanelItems();
@@ -165,12 +190,16 @@ namespace Sim.Faciem.Material.Controls
         private void CleanupOverlayPanel(DetachFromPanelEvent evt)
         {
             if (evt.originPanel?.visualTree != null)
+            {
                 evt.originPanel.visualTree.UnregisterCallback<PointerDownEvent>(OnGlobalPointerDown);
+            }
 
             UnsubscribeItemChanges();
 
             if (_panel?.parent != null)
+            {
                 _panel.RemoveFromHierarchy();
+            }
 
             _overlayRoot = null;
             _panel = null;
@@ -182,14 +211,18 @@ namespace Sim.Faciem.Material.Controls
         {
             var vt = panel?.visualTree;
             if (vt == null)
+            {
                 return null;
+            }
 
             var themedRoot = vt.Query<VisualElement>()
                 .ToList()
                 .FirstOrDefault(e => e.styleSheets.count > 0);
 
             if (themedRoot != null)
+            {
                 return themedRoot;
+            }
 
             return vt.childCount > 0 ? vt[0] : vt;
         }
@@ -197,21 +230,29 @@ namespace Sim.Faciem.Material.Controls
         private void OnTriggerPointerDown(PointerDownEvent evt)
         {
             if (_disabled)
+            {
                 return;
+            }
 
             evt.StopPropagation();
             _trigger.Focus();
 
             if (_isOpen)
+            {
                 ClosePanel();
+            }
             else
+            {
                 OpenPanel();
+            }
         }
 
         private void OnGlobalPointerDown(PointerDownEvent evt)
         {
             if (!_isOpen)
+            {
                 return;
+            }
 
             var target = evt.target as VisualElement;
             if (target == null)
@@ -221,7 +262,9 @@ namespace Sim.Faciem.Material.Controls
             }
 
             if (IsSelfOrDescendant(target, this) || IsSelfOrDescendant(target, _panel))
+            {
                 return;
+            }
 
             ClosePanel();
         }
@@ -229,7 +272,9 @@ namespace Sim.Faciem.Material.Controls
         private void OpenPanel()
         {
             if (_panel == null)
+            {
                 return;
+            }
 
             _isOpen = true;
             AddToClassList(OpenClassName);
@@ -241,7 +286,9 @@ namespace Sim.Faciem.Material.Controls
         private void ClosePanel()
         {
             if (_panel == null || !_isOpen)
+            {
                 return;
+            }
 
             _isOpen = false;
             RemoveFromClassList(OpenClassName);
@@ -251,7 +298,9 @@ namespace Sim.Faciem.Material.Controls
         private void RebuildPanelItems()
         {
             if (_panel == null)
+            {
                 return;
+            }
 
             UnsubscribeItemChanges();
             _panel.contentContainer.Clear();
@@ -260,7 +309,9 @@ namespace Sim.Faciem.Material.Controls
             {
                 SubscribeItemChanges(item);
                 if (!item.IsVisible)
+                {
                     continue;
+                }
 
                 _panel.contentContainer.Add(BuildItemRow(item));
             }
@@ -272,7 +323,9 @@ namespace Sim.Faciem.Material.Controls
             row.AddToClassList(ItemClassName);
 
             if (item.IsEffectivelyDisabled)
+            {
                 row.AddToClassList(ItemDisabledClassName);
+            }
 
             var icon = new VisualElement();
             icon.AddToClassList(ItemIconClassName);
@@ -301,7 +354,9 @@ namespace Sim.Faciem.Material.Controls
         private void UpdatePanelPosition()
         {
             if (_panel == null || !_isOpen || _overlayRoot == null)
+            {
                 return;
+            }
 
             var triggerWorld = _trigger.worldBound;
             var overlayWorld = _overlayRoot.worldBound;
@@ -329,9 +384,14 @@ namespace Sim.Faciem.Material.Controls
             _panel.style.top = localTopLeft.y;
             _panel.style.width = panelWidth;
             if (panelHeight <= 0f)
+            {
                 _panel.style.height = StyleKeyword.Auto;
+            }
             else
+            {
                 _panel.style.height = panelHeight;
+            }
+
             _panel.verticalScrollerVisibility = requiresScroll ? ScrollerVisibility.Auto : ScrollerVisibility.Hidden;
         }
 
@@ -373,7 +433,9 @@ namespace Sim.Faciem.Material.Controls
         private static void SetIconVisual(VisualElement element, VectorImage icon)
         {
             if (element == null)
+            {
                 return;
+            }
 
             if (icon == null)
             {
@@ -386,12 +448,27 @@ namespace Sim.Faciem.Material.Controls
             element.style.backgroundImage = new StyleBackground(icon);
         }
 
-        private static VectorImage ResolveIcon(string collectionName, string iconName)
+        private static VectorImage ResolveIcon(IconCollection collection, string iconName)
         {
-            if (string.IsNullOrWhiteSpace(iconName))
+            if (collection?.Icons == null)
+            {
                 return null;
+            }
 
-            return IconCollectionRegistry.GetIcon(collectionName, iconName);
+            foreach (var icon in collection.Icons)
+            {
+                if (icon == null)
+                {
+                    continue;
+                }
+
+                if (string.Equals(icon.name, iconName, StringComparison.OrdinalIgnoreCase))
+                {
+                    return icon;
+                }
+            }
+
+            return null;
         }
 
         private async void DiscoverIconsAsync()
@@ -406,7 +483,9 @@ namespace Sim.Faciem.Material.Controls
             }
 
             if (panel == null)
+            {
                 return;
+            }
 
             UpdateTriggerVisualState();
             RebuildPanelItems();
@@ -416,12 +495,16 @@ namespace Sim.Faciem.Material.Controls
         private static bool IsSelfOrDescendant(VisualElement target, VisualElement ancestor)
         {
             if (target == null || ancestor == null)
+            {
                 return false;
+            }
 
             for (var current = target; current != null; current = current.parent)
             {
                 if (current == ancestor)
+                {
                     return true;
+                }
             }
 
             return false;

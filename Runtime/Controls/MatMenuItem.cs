@@ -1,6 +1,7 @@
 using System;
 using R3;
 using Sim.Faciem.CommandBinding;
+using Sim.Faciem.Material.Icons;
 using Unity.Properties;
 using UnityEngine.UIElements;
 
@@ -16,7 +17,7 @@ namespace Sim.Faciem.Material.Controls
     {
         private string _label = string.Empty;
         private bool _disabled;
-        private string _iconCollection = string.Empty;
+        private IconCollection _iconCollection;
         private string _iconName = string.Empty;
         private SerializedCommand _command;
         private DisposableBag _commandSubscriptions = new();
@@ -51,14 +52,13 @@ namespace Sim.Faciem.Material.Controls
         }
 
         [UxmlAttribute, CreateProperty]
-        public string IconCollection
+        public IconCollection IconCollection
         {
             get => _iconCollection;
             set
             {
-                var next = value ?? string.Empty;
-                if (_iconCollection == next) return;
-                _iconCollection = next;
+                if (_iconCollection == value) return;
+                _iconCollection = value;
                 NotifyChanged();
             }
         }
