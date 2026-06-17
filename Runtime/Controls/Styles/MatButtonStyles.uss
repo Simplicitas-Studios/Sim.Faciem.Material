@@ -34,6 +34,7 @@
     transition-timing-function: ease;
 }
 
+
 /* Suppress Unity's default blue focus ring on all variants */
 .mat-button-base:focus {
     outline-width: 0;
@@ -75,6 +76,7 @@
 .mat-raised-button {
     background-color: var(--mat-button-surface-bg);
     color: var(--mat-button-on-surface);
+    overflow: visible;
 }
 .mat-raised-button:hover  { background-color: var(--mat-button-surface-hover-bg); }
 .mat-raised-button:focus  { background-color: var(--mat-button-surface-focus-bg); }

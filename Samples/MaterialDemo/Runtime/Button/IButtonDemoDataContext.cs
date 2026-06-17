@@ -8,7 +8,11 @@ namespace Sim.Faciem.Material.Samples
         /// <summary>Toggles whether the demo buttons are enabled or disabled.</summary>
         Command ToggleEnabled { get; }
 
+        /// <summary>Toggles whether the demo buttons emit animated ripples.</summary>
+        Command ToggleRipple { get; }
+
         bool ButtonsEnabled { get; }
+        bool DisableRipple { get; }
     }
 }
 

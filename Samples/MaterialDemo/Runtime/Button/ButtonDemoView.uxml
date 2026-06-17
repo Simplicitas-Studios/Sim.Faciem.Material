@@ -1,11 +1,16 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
     <engine:VisualElement name="Root" data-source-type="Sim.Faciem.Material.Samples.ButtonDemoViewModel, Sim.Faciem.Material.Samples" class="mat-demo-content">
         <engine:Label text="Buttons" class="mat-demo-page-title" />
-        <engine:Label text="All seven MatButton variants — from subtle text buttons to eye-catching FABs. Toggle the disabled state to see the :disabled pseudo-class rules in action." class="mat-demo-page-subtitle" />
+        <engine:Label text="All seven MatButton variants — from subtle text buttons to eye-catching FABs. Toggle disabled state and ripple animation to compare the cross-version fallback with the Unity 6.3+ enhanced path." class="mat-demo-page-subtitle" />
         <engine:VisualElement class="mat-demo-btn-row">
             <Sim.Faciem.Material.Controls.MatButton name="btnToggleEnabled" text="Toggle Disabled State" variant="Stroked" theme-color="Warn">
                 <Bindings>
                     <engine:DataBinding property="Command" data-source-path="ToggleEnabled" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                </Bindings>
+            </Sim.Faciem.Material.Controls.MatButton>
+            <Sim.Faciem.Material.Controls.MatButton name="btnToggleRipple" text="Toggle Ripple" variant="Stroked" theme-color="Primary">
+                <Bindings>
+                    <engine:DataBinding property="Command" data-source-path="ToggleRipple" binding-mode="ToTarget" update-trigger="WhenDirty" />
                 </Bindings>
             </Sim.Faciem.Material.Controls.MatButton>
         </engine:VisualElement>
@@ -15,21 +20,25 @@
             <Sim.Faciem.Material.Controls.MatButton text="Swords Dance" variant="Basic">
                 <Bindings>
                     <engine:DataBinding property="enabledSelf" data-source-path="ButtonsEnabled" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                    <engine:DataBinding property="DisableRipple" data-source-path="DisableRipple" binding-mode="ToTarget" update-trigger="WhenDirty" />
                 </Bindings>
             </Sim.Faciem.Material.Controls.MatButton>
             <Sim.Faciem.Material.Controls.MatButton text="Stealth Rock" variant="Basic" theme-color="Primary">
                 <Bindings>
                     <engine:DataBinding property="enabledSelf" data-source-path="ButtonsEnabled" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                    <engine:DataBinding property="DisableRipple" data-source-path="DisableRipple" binding-mode="ToTarget" update-trigger="WhenDirty" />
                 </Bindings>
             </Sim.Faciem.Material.Controls.MatButton>
             <Sim.Faciem.Material.Controls.MatButton text="Will-O-Wisp" variant="Basic" theme-color="Warn">
                 <Bindings>
                     <engine:DataBinding property="enabledSelf" data-source-path="ButtonsEnabled" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                    <engine:DataBinding property="DisableRipple" data-source-path="DisableRipple" binding-mode="ToTarget" update-trigger="WhenDirty" />
                 </Bindings>
             </Sim.Faciem.Material.Controls.MatButton>
             <Sim.Faciem.Material.Controls.MatButton text="Nasty Plot" variant="Basic" theme-color="Accent">
                 <Bindings>
                     <engine:DataBinding property="enabledSelf" data-source-path="ButtonsEnabled" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                    <engine:DataBinding property="DisableRipple" data-source-path="DisableRipple" binding-mode="ToTarget" update-trigger="WhenDirty" />
                 </Bindings>
             </Sim.Faciem.Material.Controls.MatButton>
         </engine:VisualElement>
@@ -39,21 +48,25 @@
             <Sim.Faciem.Material.Controls.MatButton text="Close Combat" variant="Raised">
                 <Bindings>
                     <engine:DataBinding property="enabledSelf" data-source-path="ButtonsEnabled" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                    <engine:DataBinding property="DisableRipple" data-source-path="DisableRipple" binding-mode="ToTarget" update-trigger="WhenDirty" />
                 </Bindings>
             </Sim.Faciem.Material.Controls.MatButton>
             <Sim.Faciem.Material.Controls.MatButton text="Earthquake" variant="Raised" theme-color="Primary">
                 <Bindings>
                     <engine:DataBinding property="enabledSelf" data-source-path="ButtonsEnabled" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                    <engine:DataBinding property="DisableRipple" data-source-path="DisableRipple" binding-mode="ToTarget" update-trigger="WhenDirty" />
                 </Bindings>
             </Sim.Faciem.Material.Controls.MatButton>
             <Sim.Faciem.Material.Controls.MatButton text="Iron Head" variant="Raised" theme-color="Accent">
                 <Bindings>
                     <engine:DataBinding property="enabledSelf" data-source-path="ButtonsEnabled" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                    <engine:DataBinding property="DisableRipple" data-source-path="DisableRipple" binding-mode="ToTarget" update-trigger="WhenDirty" />
                 </Bindings>
             </Sim.Faciem.Material.Controls.MatButton>
             <Sim.Faciem.Material.Controls.MatButton text="Outrage" variant="Raised" theme-color="Warn">
                 <Bindings>
                     <engine:DataBinding property="enabledSelf" data-source-path="ButtonsEnabled" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                    <engine:DataBinding property="DisableRipple" data-source-path="DisableRipple" binding-mode="ToTarget" update-trigger="WhenDirty" />
                 </Bindings>
             </Sim.Faciem.Material.Controls.MatButton>
         </engine:VisualElement>
@@ -63,21 +76,25 @@
             <Sim.Faciem.Material.Controls.MatButton text="Flamethrower" variant="Stroked">
                 <Bindings>
                     <engine:DataBinding property="enabledSelf" data-source-path="ButtonsEnabled" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                    <engine:DataBinding property="DisableRipple" data-source-path="DisableRipple" binding-mode="ToTarget" update-trigger="WhenDirty" />
                 </Bindings>
             </Sim.Faciem.Material.Controls.MatButton>
             <Sim.Faciem.Material.Controls.MatButton text="Surf" variant="Stroked" theme-color="Primary">
                 <Bindings>
                     <engine:DataBinding property="enabledSelf" data-source-path="ButtonsEnabled" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                    <engine:DataBinding property="DisableRipple" data-source-path="DisableRipple" binding-mode="ToTarget" update-trigger="WhenDirty" />
                 </Bindings>
             </Sim.Faciem.Material.Controls.MatButton>
             <Sim.Faciem.Material.Controls.MatButton text="Thunderbolt" variant="Stroked" theme-color="Accent">
                 <Bindings>
                     <engine:DataBinding property="enabledSelf" data-source-path="ButtonsEnabled" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                    <engine:DataBinding property="DisableRipple" data-source-path="DisableRipple" binding-mode="ToTarget" update-trigger="WhenDirty" />
                 </Bindings>
             </Sim.Faciem.Material.Controls.MatButton>
             <Sim.Faciem.Material.Controls.MatButton text="Psychic" variant="Stroked" theme-color="Warn">
                 <Bindings>
                     <engine:DataBinding property="enabledSelf" data-source-path="ButtonsEnabled" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                    <engine:DataBinding property="DisableRipple" data-source-path="DisableRipple" binding-mode="ToTarget" update-trigger="WhenDirty" />
                 </Bindings>
             </Sim.Faciem.Material.Controls.MatButton>
         </engine:VisualElement>
@@ -87,21 +104,25 @@
             <Sim.Faciem.Material.Controls.MatButton text="Roar of Time" variant="Flat">
                 <Bindings>
                     <engine:DataBinding property="enabledSelf" data-source-path="ButtonsEnabled" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                    <engine:DataBinding property="DisableRipple" data-source-path="DisableRipple" binding-mode="ToTarget" update-trigger="WhenDirty" />
                 </Bindings>
             </Sim.Faciem.Material.Controls.MatButton>
             <Sim.Faciem.Material.Controls.MatButton text="Spacial Rend" variant="Flat" theme-color="Primary">
                 <Bindings>
                     <engine:DataBinding property="enabledSelf" data-source-path="ButtonsEnabled" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                    <engine:DataBinding property="DisableRipple" data-source-path="DisableRipple" binding-mode="ToTarget" update-trigger="WhenDirty" />
                 </Bindings>
             </Sim.Faciem.Material.Controls.MatButton>
             <Sim.Faciem.Material.Controls.MatButton text="Shadow Force" variant="Flat" theme-color="Accent">
                 <Bindings>
                     <engine:DataBinding property="enabledSelf" data-source-path="ButtonsEnabled" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                    <engine:DataBinding property="DisableRipple" data-source-path="DisableRipple" binding-mode="ToTarget" update-trigger="WhenDirty" />
                 </Bindings>
             </Sim.Faciem.Material.Controls.MatButton>
             <Sim.Faciem.Material.Controls.MatButton text="Judgment" variant="Flat" theme-color="Warn">
                 <Bindings>
                     <engine:DataBinding property="enabledSelf" data-source-path="ButtonsEnabled" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                    <engine:DataBinding property="DisableRipple" data-source-path="DisableRipple" binding-mode="ToTarget" update-trigger="WhenDirty" />
                 </Bindings>
             </Sim.Faciem.Material.Controls.MatButton>
         </engine:VisualElement>
@@ -111,26 +132,31 @@
             <Sim.Faciem.Material.Controls.MatButton text="⚡" variant="Icon" theme-color="Primary">
                 <Bindings>
                     <engine:DataBinding property="enabledSelf" data-source-path="ButtonsEnabled" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                    <engine:DataBinding property="DisableRipple" data-source-path="DisableRipple" binding-mode="ToTarget" update-trigger="WhenDirty" />
                 </Bindings>
             </Sim.Faciem.Material.Controls.MatButton>
             <Sim.Faciem.Material.Controls.MatButton text="🌊" variant="Icon" theme-color="Accent">
                 <Bindings>
                     <engine:DataBinding property="enabledSelf" data-source-path="ButtonsEnabled" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                    <engine:DataBinding property="DisableRipple" data-source-path="DisableRipple" binding-mode="ToTarget" update-trigger="WhenDirty" />
                 </Bindings>
             </Sim.Faciem.Material.Controls.MatButton>
             <Sim.Faciem.Material.Controls.MatButton text="🔥" variant="Icon" theme-color="Warn">
                 <Bindings>
                     <engine:DataBinding property="enabledSelf" data-source-path="ButtonsEnabled" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                    <engine:DataBinding property="DisableRipple" data-source-path="DisableRipple" binding-mode="ToTarget" update-trigger="WhenDirty" />
                 </Bindings>
             </Sim.Faciem.Material.Controls.MatButton>
             <Sim.Faciem.Material.Controls.MatButton text="★" variant="Fab" theme-color="Primary">
                 <Bindings>
                     <engine:DataBinding property="enabledSelf" data-source-path="ButtonsEnabled" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                    <engine:DataBinding property="DisableRipple" data-source-path="DisableRipple" binding-mode="ToTarget" update-trigger="WhenDirty" />
                 </Bindings>
             </Sim.Faciem.Material.Controls.MatButton>
             <Sim.Faciem.Material.Controls.MatButton text="+" variant="MiniFab" theme-color="Accent">
                 <Bindings>
                     <engine:DataBinding property="enabledSelf" data-source-path="ButtonsEnabled" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                    <engine:DataBinding property="DisableRipple" data-source-path="DisableRipple" binding-mode="ToTarget" update-trigger="WhenDirty" />
                 </Bindings>
             </Sim.Faciem.Material.Controls.MatButton>
         </engine:VisualElement>
