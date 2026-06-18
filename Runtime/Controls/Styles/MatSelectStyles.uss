@@ -29,7 +29,10 @@
     background-color: var(--mat-form-field-focus-color);
 }
 
+
+.mat-form-field--outline.mat-form-field--focused .mat-form-field__flex,
 .mat-select.mat-select--open .mat-form-field--outline .mat-form-field__flex {
+    padding: 7px 15px;
     border-width: 2px;
     border-color: var(--mat-form-field-focus-color);
 }
@@ -145,15 +148,25 @@
    ══════════════════════════════════════════════════════════════════════════ */
 .mat-option {
     display: flex;
+    position: relative;
+    overflow: hidden;
     flex-direction: row;
     align-items: center;
-    padding-top: 0;
-    padding-bottom: 0;
-    padding-left: 16px;
-    padding-right: 16px;
+    padding: 0 16px;
     height: 48px;
+    color: var(--mat-option-label-text-color);
+    --mat-ripple-alpha: 0.18;
+    --mat-ripple-duration: 0.45;
     cursor: link;
     background-color: rgba(0, 0, 0, 0);
+}
+
+.mat-option__ripple {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
 }
 
 .mat-option__text {
@@ -170,9 +183,16 @@
     background-color: var(--mat-option-hover-state-layer-color);
 }
 
+.mat-option.mat-option--pressed {
+    background-color: var(--mat-option-active-state-layer-color);
+}
+
 /* ── Selected ───────────────────────────────────────────────────────────── */
 .mat-option.mat-option--selected {
-    background-color: var(--mat-option-selected-state-layer-color);
+}
+
+.mat-select--multiple .mat-option.mat-option--selected {
+    background-color: rgba(0, 0, 0, 0);
 }
 
 .mat-option.mat-option--selected .mat-option__text {
@@ -182,6 +202,7 @@
 
 /* ── Disabled ───────────────────────────────────────────────────────────── */
 .mat-option.mat-option--disabled {
+    color: var(--mat-option-disabled-state-label-text-color);
     cursor: arrow;
     opacity: 0.38;
 }
@@ -201,11 +222,17 @@
     border-radius: 2px;
     margin-right: 12px;
     background-color: rgba(0, 0, 0, 0);
+    background-repeat: no-repeat;
+    background-position: center;
+    -unity-background-scale-mode: scale-to-fit;
     flex-shrink: 0;
 }
 
 .mat-pseudo-checkbox.mat-pseudo-checkbox--checked {
     background-color: var(--mat-pseudo-checkbox-selected-background);
+    background-image: url("../../../Icons/fontawesome-free-7.2.0/svgs/solid/check.svg");
+    -unity-background-image-tint-color: var(--mat-pseudo-checkbox-selected-checkmark-color);
+    background-size: 65%;
     border-color: var(--mat-pseudo-checkbox-selected-background);
 }
 

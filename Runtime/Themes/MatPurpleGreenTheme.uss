@@ -82,7 +82,7 @@
     --mat-option-disabled-state-label-text-color:      rgba(255, 255, 255, 0.3);
     --mat-pseudo-checkbox-border-color:                rgba(255, 255, 255, 0.54);
     --mat-pseudo-checkbox-selected-background:         #9C27B0;
-    --mat-pseudo-checkbox-selected-checkmark-color:    #FFFFFF;
+    --mat-pseudo-checkbox-selected-checkmark-color:    #303030;
 
     /* ── Menu (dark) ────────────────────────────────────────────────────── */
     --mat-menu-trigger-text-color:                     rgba(255, 255, 255, 0.87);

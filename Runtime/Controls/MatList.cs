@@ -26,6 +26,9 @@ namespace Sim.Faciem.Material.Controls
         /// <summary>CSS class for selected rows.</summary>
         public const string ItemSelectedClassName = "mat-list__item--selected";
 
+        /// <summary>CSS class for the ripple layer shown on selection-list rows.</summary>
+        public const string ItemRippleClassName = "mat-list__item-ripple";
+
         /// <summary>CSS class for the row content host.</summary>
         public const string ItemContentClassName = "mat-list__item-content";
 
@@ -97,7 +100,7 @@ namespace Sim.Faciem.Material.Controls
                 _selectedIndices = normalized;
                 ApplySelectionFromProperty();
                 NotifyPropertyChanged(s_selectedIndicesId);
-                RefreshItems();
+                UpdateVisibleSelectionStates();
             }
         }
 
@@ -150,9 +153,13 @@ namespace Sim.Faciem.Material.Controls
 
             if (_selectionListMode)
             {
-                references.PseudoCheckbox = new VisualElement();
-                references.PseudoCheckbox.AddToClassList(PseudoCheckboxClassName);
-                row.Add(references.PseudoCheckbox);
+                var ripple = new MatRippleHost(row)
+                {
+                    CornerRadiusProvider = rect => 0f,
+                    TintColorProvider = () => new UnityEngine.Color(0f, 0f, 0f, 1f),
+                };
+                ripple.AddToClassList(ItemRippleClassName);
+                row.Add(ripple);
             }
 
             if (ItemTemplate != null)
@@ -166,6 +173,13 @@ namespace Sim.Faciem.Material.Controls
                 references.FallbackLabel = new Label();
                 references.FallbackLabel.AddToClassList(ItemFallbackLabelClassName);
                 row.Add(references.FallbackLabel);
+            }
+
+            if (_selectionListMode)
+            {
+                references.PseudoCheckbox = new VisualElement();
+                references.PseudoCheckbox.AddToClassList(PseudoCheckboxClassName);
+                row.Add(references.PseudoCheckbox);
             }
 
             row.userData = references;
@@ -195,6 +209,7 @@ namespace Sim.Faciem.Material.Controls
                 references.FallbackLabel.text = item?.ToString() ?? string.Empty;
             }
 
+            references.Index = index;
             UpdateRowSelectionState(element, index, references);
         }
 
@@ -217,13 +232,14 @@ namespace Sim.Faciem.Material.Controls
 
             _selectedIndices = NormalizeIndices(indices?.ToList());
             NotifyPropertyChanged(s_selectedIndicesId);
-            RefreshItems();
+            UpdateVisibleSelectionStates();
         }
 
         private void UpdateRowSelectionState(VisualElement element, int index, RowReferences references)
         {
             var isSelected = _selectionListMode && _selectedIndices.Contains(index);
             element.EnableInClassList(ItemSelectedClassName, isSelected);
+            element.EnableInClassList("unity-collection-view__item--selected", false);
 
             if (references.PseudoCheckbox != null)
             {
@@ -249,6 +265,19 @@ namespace Sim.Faciem.Material.Controls
             _suppressSelectionSync = false;
         }
 
+        private void UpdateVisibleSelectionStates()
+        {
+            foreach (var row in this.Query<VisualElement>(className: ItemClassName).ToList())
+            {
+                if (row.userData is not RowReferences references || references.Index < 0)
+                {
+                    continue;
+                }
+
+                UpdateRowSelectionState(row, references.Index, references);
+            }
+        }
+
         private void ClampSelectedIndices()
         {
             _selectedIndices = NormalizeIndices(_selectedIndices);
@@ -270,6 +299,7 @@ namespace Sim.Faciem.Material.Controls
 
         private sealed class RowReferences
         {
+            public int Index { get; set; } = -1;
             public VisualElement Content { get; set; }
             public Label FallbackLabel { get; set; }
             public VisualElement PseudoCheckbox { get; set; }

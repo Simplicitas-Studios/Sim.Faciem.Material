@@ -125,13 +125,26 @@
 
 .mat-menu-item {
     display: flex;
+    position: relative;
+    overflow: hidden;
     flex-direction: row;
     align-items: center;
     height: 48px;
     padding-left: 16px;
     padding-right: 16px;
     background-color: rgba(0, 0, 0, 0);
+    color: var(--mat-menu-item-label-text-color);
+    --mat-ripple-alpha: 0.18;
+    --mat-ripple-duration: 0.45;
     cursor: link;
+}
+
+.mat-menu-item__ripple {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
 }
 
 .mat-menu-item__icon {
@@ -151,11 +164,12 @@
     background-color: var(--mat-menu-item-hover-state-layer-color);
 }
 
-.mat-menu-item:active {
+.mat-menu-item.mat-menu-item--pressed {
     background-color: var(--mat-menu-item-active-state-layer-color);
 }
 
 .mat-menu-item.mat-menu-item--disabled {
+    color: var(--mat-menu-item-disabled-label-text-color);
     cursor: arrow;
 }
 

@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System;
+using R3;
+using Sim.Faciem.CommandBinding;
+using Sim.Faciem.Shared;
 using Unity.Properties;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -7,13 +9,11 @@ using UnityEngine.UIElements;
 namespace Sim.Faciem.Material.Controls
 {
     /// <summary>
-    /// A button control that mirrors Angular Material's button system.
-    /// Inherits all binding and command capabilities from <see cref="BindableButton"/>.
-    /// Variant and colour are applied exclusively through USS classes; no stylesheet
-    /// is loaded programmatically — add a MatButton theme TSS to your PanelSettings.
+    /// A Material-styled button implemented as a custom VisualElement so it can
+    /// own its shadow, surface, ripple, and content layers explicitly.
     /// </summary>
     [UxmlElement]
-    public partial class MatButton : BindableButton
+    public partial class MatButton : VisualElement
     {
         public const string BaseClassName = "mat-button-base";
 
@@ -29,6 +29,13 @@ namespace Sim.Faciem.Material.Controls
         public const string AccentClassName = "mat-accent";
         public const string WarnClassName = "mat-warn";
 
+        public const string ShadowClassName = "mat-button__shadow";
+        public const string SurfaceClassName = "mat-button__surface";
+        public const string RippleClassName = "mat-button__ripple";
+        public const string ContentClassName = "mat-button__content";
+        public const string LabelClassName = "mat-button__label";
+        public const string FocusVisibleClassName = "mat-focus-visible";
+
         private static readonly string[] AllVariantClasses =
         {
             BasicClassName, RaisedClassName, StrokedClassName, FlatClassName,
@@ -40,11 +47,78 @@ namespace Sim.Faciem.Material.Controls
             PrimaryClassName, AccentClassName, WarnClassName,
         };
 
-        private readonly MatRippleController _rippleController;
+        private static readonly CustomStyleProperty<float> ShadowOuterOffsetXProperty = new("--mat-button-shadow-outer-offset-x");
+        private static readonly CustomStyleProperty<float> ShadowOuterOffsetYProperty = new("--mat-button-shadow-outer-offset-y");
+        private static readonly CustomStyleProperty<float> ShadowOuterWidthDeltaProperty = new("--mat-button-shadow-outer-width-delta");
+        private static readonly CustomStyleProperty<float> ShadowOuterHeightDeltaProperty = new("--mat-button-shadow-outer-height-delta");
+        private static readonly CustomStyleProperty<float> ShadowOuterRadiusProperty = new("--mat-button-shadow-outer-radius");
+        private static readonly CustomStyleProperty<Color> ShadowOuterColorProperty = new("--mat-button-shadow-outer-color");
+        private static readonly CustomStyleProperty<float> ShadowInnerOffsetXProperty = new("--mat-button-shadow-inner-offset-x");
+        private static readonly CustomStyleProperty<float> ShadowInnerOffsetYProperty = new("--mat-button-shadow-inner-offset-y");
+        private static readonly CustomStyleProperty<float> ShadowInnerWidthDeltaProperty = new("--mat-button-shadow-inner-width-delta");
+        private static readonly CustomStyleProperty<float> ShadowInnerHeightDeltaProperty = new("--mat-button-shadow-inner-height-delta");
+        private static readonly CustomStyleProperty<float> ShadowInnerRadiusProperty = new("--mat-button-shadow-inner-radius");
+        private static readonly CustomStyleProperty<Color> ShadowInnerColorProperty = new("--mat-button-shadow-inner-color");
 
+        private readonly MatButtonShadowLayer _shadowLayer;
+        private readonly VisualElement _surfaceLayer;
+        private readonly MatRippleHost _rippleLayer;
+        private readonly VisualElement _contentLayer;
+        private readonly Label _label;
+        private readonly Clickable _clickable;
+
+        private SerializedCommand _command;
+        private DisposableBag _commandSubscriptions;
+        private string _text = string.Empty;
         private MatButtonVariant _variant = MatButtonVariant.Basic;
         private MatButtonColor _themeColor = MatButtonColor.Default;
         private bool _disableRipple;
+        private bool _suppressFocusVisibleOnce;
+
+        private float _shadowOuterOffsetX;
+        private float _shadowOuterOffsetY;
+        private float _shadowOuterWidthDelta;
+        private float _shadowOuterHeightDelta;
+        private float _shadowOuterRadius;
+        private Color _shadowOuterColor = new(0f, 0f, 0f, 0f);
+        private float _shadowInnerOffsetX;
+        private float _shadowInnerOffsetY;
+        private float _shadowInnerWidthDelta;
+        private float _shadowInnerHeightDelta;
+        private float _shadowInnerRadius;
+        private Color _shadowInnerColor = new(0f, 0f, 0f, 0f);
+        private bool _hasShadowStyle;
+
+        public override VisualElement contentContainer => _contentLayer;
+
+        /// <summary>Text shown by the internal label, mirroring Button.text.</summary>
+        [UxmlAttribute]
+        [CreateProperty]
+        public string text
+        {
+            get => _text;
+            set
+            {
+                _text = value ?? string.Empty;
+                _label.text = _text;
+                _label.style.display = string.IsNullOrEmpty(_text)
+                    ? DisplayStyle.None
+                    : DisplayStyle.Flex;
+            }
+        }
+
+        /// <summary>Bindable command mirroring BindableButton.Command behavior.</summary>
+        [UxmlAttribute]
+        [CreateProperty]
+        public SerializedCommand Command
+        {
+            get => _command;
+            set
+            {
+                _command = value;
+                RegisterCommandCallbacks();
+            }
+        }
 
         [UxmlAttribute]
         [CreateProperty]
@@ -57,7 +131,8 @@ namespace Sim.Faciem.Material.Controls
                 foreach (var cls in AllVariantClasses)
                     RemoveFromClassList(cls);
                 AddToClassList(GetVariantClassName(value));
-                MarkDirtyRepaint();
+                _rippleLayer.MarkDirtyRepaint();
+                _shadowLayer.MarkDirtyRepaint();
             }
         }
 
@@ -84,18 +159,203 @@ namespace Sim.Faciem.Material.Controls
             set
             {
                 _disableRipple = value;
-                _rippleController.DisableRipple = value;
             }
         }
 
+        public float ShadowOuterOffsetX => _shadowOuterOffsetX;
+        public float ShadowOuterOffsetY => _shadowOuterOffsetY;
+        public float ShadowOuterWidthDelta => _shadowOuterWidthDelta;
+        public float ShadowOuterHeightDelta => _shadowOuterHeightDelta;
+        public float ShadowOuterRadius => _shadowOuterRadius;
+        public Color ShadowOuterColor => _shadowOuterColor;
+        public float ShadowInnerOffsetX => _shadowInnerOffsetX;
+        public float ShadowInnerOffsetY => _shadowInnerOffsetY;
+        public float ShadowInnerWidthDelta => _shadowInnerWidthDelta;
+        public float ShadowInnerHeightDelta => _shadowInnerHeightDelta;
+        public float ShadowInnerRadius => _shadowInnerRadius;
+        public Color ShadowInnerColor => _shadowInnerColor;
+        public bool HasShadowStyle => _hasShadowStyle;
+
+        public event Action Clicked;
+
         public MatButton()
         {
-            _rippleController = new MatRippleController(this);
+            _commandSubscriptions = new DisposableBag();
+            RegisterCallback<DetachFromPanelEvent>(_ => _commandSubscriptions.Dispose());
+
+            focusable = true;
+            tabIndex = 0;
 
             AddToClassList(BaseClassName);
+
+            _shadowLayer = new MatButtonShadowLayer(this);
+            _shadowLayer.AddToClassList(ShadowClassName);
+            _shadowLayer.pickingMode = PickingMode.Ignore;
+            hierarchy.Add(_shadowLayer);
+
+            _surfaceLayer = new VisualElement();
+            _surfaceLayer.AddToClassList(SurfaceClassName);
+            hierarchy.Add(_surfaceLayer);
+
+            _rippleLayer = new MatRippleHost(this)
+            {
+                DisableRippleEvaluator = () => DisableRipple,
+                CornerRadiusProvider = rect => Variant switch
+                {
+                    MatButtonVariant.Icon => Mathf.Min(rect.width, rect.height) * 0.5f,
+                    MatButtonVariant.Fab => Mathf.Min(rect.width, rect.height) * 0.5f,
+                    MatButtonVariant.MiniFab => Mathf.Min(rect.width, rect.height) * 0.5f,
+                    _ => 4f,
+                },
+            };
+            _rippleLayer.AddToClassList(RippleClassName);
+            _surfaceLayer.Add(_rippleLayer);
+
+            _contentLayer = new VisualElement();
+            _contentLayer.AddToClassList(ContentClassName);
+            _surfaceLayer.Add(_contentLayer);
+
+            _label = new Label();
+            _label.AddToClassList(LabelClassName);
+            _contentLayer.Add(_label);
+
+            _clickable = new Clickable(Invoke);
+            this.AddManipulator(_clickable);
+
+            RegisterCallback<KeyDownEvent>(OnKeyDown);
+            RegisterCallback<PointerDownEvent>(OnPointerDownForFocusVisible, TrickleDown.TrickleDown);
+            RegisterCallback<FocusInEvent>(OnFocusIn);
+            RegisterCallback<FocusOutEvent>(OnFocusOut);
+            RegisterCallback<CustomStyleResolvedEvent>(OnCustomStyleResolved);
+
+            text = string.Empty;
             Variant = MatButtonVariant.Basic;
             ThemeColor = MatButtonColor.Default;
             DisableRipple = false;
+        }
+
+        private void OnKeyDown(KeyDownEvent evt)
+        {
+            if (!enabledInHierarchy)
+            {
+                return;
+            }
+
+            _suppressFocusVisibleOnce = false;
+            AddToClassList(FocusVisibleClassName);
+
+            if (evt.keyCode != KeyCode.Return
+                && evt.keyCode != KeyCode.KeypadEnter
+                && evt.keyCode != KeyCode.Space)
+            {
+                return;
+            }
+
+            evt.StopPropagation();
+            Invoke();
+        }
+
+        private void OnPointerDownForFocusVisible(PointerDownEvent evt)
+        {
+            if (evt.button != 0)
+            {
+                return;
+            }
+
+            _suppressFocusVisibleOnce = true;
+            RemoveFromClassList(FocusVisibleClassName);
+        }
+
+        private void OnFocusIn(FocusInEvent evt)
+        {
+            if (_suppressFocusVisibleOnce)
+            {
+                _suppressFocusVisibleOnce = false;
+                RemoveFromClassList(FocusVisibleClassName);
+                return;
+            }
+
+            AddToClassList(FocusVisibleClassName);
+        }
+
+        private void OnFocusOut(FocusOutEvent evt)
+        {
+            _suppressFocusVisibleOnce = false;
+            RemoveFromClassList(FocusVisibleClassName);
+        }
+
+        private void Invoke()
+        {
+            if (!enabledInHierarchy)
+            {
+                return;
+            }
+
+            Clicked?.Invoke();
+            _command?.Command?.Execute(Unit.Default);
+        }
+
+        private void OnCustomStyleResolved(CustomStyleResolvedEvent evt)
+        {
+            _hasShadowStyle = false;
+
+            TryAssignShadow(evt, ShadowOuterOffsetXProperty, ref _shadowOuterOffsetX, ref _hasShadowStyle);
+            TryAssignShadow(evt, ShadowOuterOffsetYProperty, ref _shadowOuterOffsetY, ref _hasShadowStyle);
+            TryAssignShadow(evt, ShadowOuterWidthDeltaProperty, ref _shadowOuterWidthDelta, ref _hasShadowStyle);
+            TryAssignShadow(evt, ShadowOuterHeightDeltaProperty, ref _shadowOuterHeightDelta, ref _hasShadowStyle);
+            TryAssignShadow(evt, ShadowOuterRadiusProperty, ref _shadowOuterRadius, ref _hasShadowStyle);
+            TryAssignShadow(evt, ShadowOuterColorProperty, ref _shadowOuterColor, ref _hasShadowStyle);
+            TryAssignShadow(evt, ShadowInnerOffsetXProperty, ref _shadowInnerOffsetX, ref _hasShadowStyle);
+            TryAssignShadow(evt, ShadowInnerOffsetYProperty, ref _shadowInnerOffsetY, ref _hasShadowStyle);
+            TryAssignShadow(evt, ShadowInnerWidthDeltaProperty, ref _shadowInnerWidthDelta, ref _hasShadowStyle);
+            TryAssignShadow(evt, ShadowInnerHeightDeltaProperty, ref _shadowInnerHeightDelta, ref _hasShadowStyle);
+            TryAssignShadow(evt, ShadowInnerRadiusProperty, ref _shadowInnerRadius, ref _hasShadowStyle);
+            TryAssignShadow(evt, ShadowInnerColorProperty, ref _shadowInnerColor, ref _hasShadowStyle);
+
+            _shadowLayer.MarkDirtyRepaint();
+        }
+
+        private static void TryAssignShadow(CustomStyleResolvedEvent evt, CustomStyleProperty<float> property, ref float field, ref bool hasShadowStyle)
+        {
+            if (evt.customStyle.TryGetValue(property, out var value))
+            {
+                field = value;
+                hasShadowStyle = true;
+            }
+        }
+
+        private static void TryAssignShadow(CustomStyleResolvedEvent evt, CustomStyleProperty<Color> property, ref Color field, ref bool hasShadowStyle)
+        {
+            if (evt.customStyle.TryGetValue(property, out var value))
+            {
+                field = value;
+                hasShadowStyle = true;
+            }
+        }
+
+        private void RegisterCommandCallbacks()
+        {
+            _commandSubscriptions.Dispose();
+            _commandSubscriptions = new DisposableBag();
+
+            if (_command?.Command == null)
+            {
+                return;
+            }
+
+            _commandSubscriptions.Add(
+                _command.Command.CanExecuteObs
+                    .Prepend(_command.Command.CanExecute)
+                    .Subscribe(SetEnabled));
+
+            _commandSubscriptions.Add(
+                _command.Command.IsVisibleObs
+                    .Subscribe(isVisible =>
+                    {
+                        style.display = isVisible
+                            ? DisplayStyle.Flex
+                            : DisplayStyle.None;
+                    }));
         }
 
         private static string GetVariantClassName(MatButtonVariant variant) => variant switch
@@ -119,176 +379,19 @@ namespace Sim.Faciem.Material.Controls
         };
     }
 
-    internal sealed class MatRippleController
+    internal sealed class MatButtonShadowLayer : VisualElement
     {
-        private readonly VisualElement _host;
+        private readonly MatButton _owner;
 
-        private const float DurationSeconds = 0.45f;
-        private const float BaseAlpha = 0.18f;
-
-        private readonly List<RippleState> _ripples = new();
-        private bool _animationScheduled;
-
-        public bool DisableRipple { get; set; }
-
-        public MatRippleController(VisualElement host)
+        public MatButtonShadowLayer(MatButton owner)
         {
-            _host = host;
-
-            _host.generateVisualContent += OnGenerateVisualContent;
-            _host.RegisterCallback<PointerDownEvent>(OnPointerDown, TrickleDown.TrickleDown);
-            _host.RegisterCallback<DetachFromPanelEvent>(_ => CancelAllRipples());
-        }
-
-        private void OnPointerDown(PointerDownEvent evt)
-        {
-            if (DisableRipple || evt.button != 0 || !_host.enabledInHierarchy)
-            {
-                return;
-            }
-
-            var size = _host.contentRect.size;
-            if (size.x <= 0f || size.y <= 0f)
-            {
-                return;
-            }
-
-            var center = _host.WorldToLocal(evt.position);
-            var maxRadius = CalculateMaxRadius(center, size);
-            if (maxRadius <= 0f)
-            {
-                return;
-            }
-
-            _ripples.Add(new RippleState(center, maxRadius, GetCurrentTimeSeconds()));
-            _host.MarkDirtyRepaint();
-            EnsureAnimationLoop();
+            _owner = owner;
+            generateVisualContent += OnGenerateVisualContent;
+            RegisterCallback<GeometryChangedEvent>(_ => MarkDirtyRepaint());
         }
 
         private void OnGenerateVisualContent(MeshGenerationContext context)
         {
-            if (DisableRipple || _ripples.Count == 0)
-            {
-                return;
-            }
-
-            var now = GetCurrentTimeSeconds();
-            var painter = context.painter2D;
-            var tint = ResolveRippleColor();
-
-            for (var i = 0; i < _ripples.Count; i++)
-            {
-                var ripple = _ripples[i];
-                var progress = Mathf.Clamp01((float)((now - ripple.StartTimeSeconds) / DurationSeconds));
-                var easedProgress = EaseOutCubic(progress);
-                var radius = Mathf.LerpUnclamped(0f, ripple.MaxRadius, easedProgress);
-                var alpha = BaseAlpha * (1f - progress) * (1f - progress);
-                if (alpha <= 0f || radius <= 0f)
-                {
-                    continue;
-                }
-
-                painter.fillColor = new Color(tint.r, tint.g, tint.b, tint.a * alpha);
-                painter.BeginPath();
-                painter.Arc(ripple.Center, radius, new Angle(0f), new Angle(360f), ArcDirection.Clockwise);
-                painter.Fill(FillRule.NonZero);
-            }
-        }
-
-        private void EnsureAnimationLoop()
-        {
-            if (_animationScheduled)
-            {
-                return;
-            }
-
-            _animationScheduled = true;
-            _host.schedule.Execute(() =>
-            {
-                _animationScheduled = false;
-                TickRipples();
-
-                if (_ripples.Count > 0 && _host.panel != null && !DisableRipple)
-                {
-                    EnsureAnimationLoop();
-                }
-            });
-        }
-
-        private void TickRipples()
-        {
-            if (_ripples.Count == 0)
-            {
-                return;
-            }
-
-            var now = GetCurrentTimeSeconds();
-            for (var i = _ripples.Count - 1; i >= 0; i--)
-            {
-                if (now - _ripples[i].StartTimeSeconds >= DurationSeconds)
-                {
-                    _ripples.RemoveAt(i);
-                }
-            }
-
-            _host.MarkDirtyRepaint();
-        }
-
-        private void CancelAllRipples()
-        {
-            if (_ripples.Count == 0)
-            {
-                return;
-            }
-
-            _ripples.Clear();
-            _host.MarkDirtyRepaint();
-        }
-
-        private float CalculateMaxRadius(Vector2 center, Vector2 size)
-        {
-            var topLeft = center.magnitude;
-            var topRight = Vector2.Distance(center, new Vector2(size.x, 0f));
-            var bottomLeft = Vector2.Distance(center, new Vector2(0f, size.y));
-            var bottomRight = Vector2.Distance(center, size);
-            return Mathf.Max(topLeft, topRight, bottomLeft, bottomRight);
-        }
-
-        private Color ResolveRippleColor()
-        {
-            var tint = _host.resolvedStyle.color;
-            if (tint.a <= 0f)
-            {
-                tint = Color.white;
-            }
-
-            tint.a = 1f;
-            return tint;
-        }
-
-        private static float EaseOutCubic(float value)
-        {
-            var inv = 1f - value;
-            return 1f - inv * inv * inv;
-        }
-
-        private static double GetCurrentTimeSeconds()
-        {
-            return (double)Stopwatch.GetTimestamp() / Stopwatch.Frequency;
-        }
-
-        private readonly struct RippleState
-        {
-            public RippleState(Vector2 center, float maxRadius, double startTimeSeconds)
-            {
-                Center = center;
-                MaxRadius = maxRadius;
-                StartTimeSeconds = startTimeSeconds;
-            }
-
-            public Vector2 Center { get; }
-            public float MaxRadius { get; }
-            public double StartTimeSeconds { get; }
         }
     }
 }

@@ -27,7 +27,9 @@ namespace Sim.Faciem.Material.Controls
         public const string PanelClassName = "mat-menu__panel";
         public const string ItemClassName = "mat-menu-item";
         public const string ItemActiveClassName = "mat-menu-item--active";
+        public const string ItemPressedClassName = "mat-menu-item--pressed";
         public const string ItemDisabledClassName = "mat-menu-item--disabled";
+        public const string ItemRippleClassName = "mat-menu-item__ripple";
         public const string ItemIconClassName = "mat-menu-item__icon";
         public const string ItemTextClassName = "mat-menu-item__text";
 
@@ -326,6 +328,13 @@ namespace Sim.Faciem.Material.Controls
             {
                 row.AddToClassList(ItemDisabledClassName);
             }
+            else
+            {
+                var ripple = new MatRippleHost(row);
+                ripple.AddToClassList(ItemRippleClassName);
+                ripple.CornerRadiusProvider = rect => 0f;
+                row.Add(ripple);
+            }
 
             var icon = new VisualElement();
             icon.AddToClassList(ItemIconClassName);
@@ -339,10 +348,16 @@ namespace Sim.Faciem.Material.Controls
             if (!item.IsEffectivelyDisabled)
             {
                 row.RegisterCallback<PointerEnterEvent>(_ => row.AddToClassList(ItemActiveClassName));
-                row.RegisterCallback<PointerLeaveEvent>(_ => row.RemoveFromClassList(ItemActiveClassName));
-                row.RegisterCallback<PointerDownEvent>(evt =>
+                row.RegisterCallback<PointerLeaveEvent>(_ =>
+                {
+                    row.RemoveFromClassList(ItemActiveClassName);
+                    row.RemoveFromClassList(ItemPressedClassName);
+                });
+                row.RegisterCallback<PointerDownEvent>(_ => row.AddToClassList(ItemPressedClassName));
+                row.RegisterCallback<PointerUpEvent>(evt =>
                 {
                     evt.StopPropagation();
+                    row.RemoveFromClassList(ItemPressedClassName);
                     item.Execute();
                     ClosePanel();
                 });

@@ -21,5 +21,5 @@
     --mat-list-item-selected-label-text-color:      var(--mat-button-primary-color, #3F51B5);
     --mat-list-checkbox-border-color:               var(--mat-select-arrow-color, rgba(0, 0, 0, 0.54));
     --mat-list-checkbox-selected-background:        var(--mat-button-primary-color, #3F51B5);
-    --mat-list-checkbox-selected-checkmark-color:   var(--mat-button-primary-text-color, #FFFFFF);
+    --mat-list-checkbox-selected-checkmark-color:   rgb(48, 48, 48);
 }

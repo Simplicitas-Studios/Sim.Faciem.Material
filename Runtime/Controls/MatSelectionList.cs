@@ -7,7 +7,7 @@ namespace Sim.Faciem.Material.Controls
     /// The first version exposes selection through <see cref="Material.Controls.MatList.SelectedIndices"/>.
     /// </summary>
     [UxmlElement]
-    public partial class MatSelectionList : Material.Controls.MatList
+    public partial class MatSelectionList : MatList
     {
         /// <summary>
         /// Initializes a new Material selection list with multi-selection enabled.

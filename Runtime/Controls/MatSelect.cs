@@ -45,6 +45,8 @@ namespace Sim.Faciem.Material.Controls
         public const string OptionSelectedClassName   = "mat-option--selected";
         public const string OptionDisabledClassName   = "mat-option--disabled";
         public const string OptionActiveClassName     = "mat-option--active";
+        public const string OptionPressedClassName    = "mat-option--pressed";
+        public const string OptionRippleClassName     = "mat-option__ripple";
         public const string OptionTextClassName       = "mat-option__text";
         public const string PseudoCheckboxClassName       = "mat-pseudo-checkbox";
         public const string PseudoCheckboxCheckedClassName = "mat-pseudo-checkbox--checked";
@@ -256,7 +258,6 @@ namespace Sim.Faciem.Material.Controls
                 .Subscribe(_ =>
                 {
                     _formField.SetFocused(false);
-                    ClosePanel();
                 }));
 
             _disposables.Add(this.GeometryChangedAsObservable()
@@ -290,7 +291,7 @@ namespace Sim.Faciem.Material.Controls
             _panel.style.position = Position.Absolute;
             _overlayRoot.Add(_panel);
 
-
+            panel?.visualTree.RegisterCallback<PointerDownEvent>(OnGlobalPointerDown);
             RebuildPanelOptions();
         }
 
@@ -331,6 +332,16 @@ namespace Sim.Faciem.Material.Controls
 
             if (opt.Disabled)
                 row.AddToClassList(OptionDisabledClassName);
+            else
+            {
+                var ripple = new MatRippleHost(row)
+                {
+                    DisableRippleEvaluator = () => DisableRipple,
+                    CornerRadiusProvider = _ => 0f,
+                };
+                ripple.AddToClassList(OptionRippleClassName);
+                row.Add(ripple);
+            }
 
             // Pseudo-checkbox visible in multiple mode
             if (_multiple)
@@ -346,15 +357,20 @@ namespace Sim.Faciem.Material.Controls
 
             if (!opt.Disabled)
             {
-                row.RegisterCallback<PointerDownEvent>(evt =>
+                row.RegisterCallback<PointerDownEvent>(_ => row.AddToClassList(OptionPressedClassName));
+                row.RegisterCallback<PointerUpEvent>(evt =>
                 {
                     evt.StopPropagation();
+                    row.RemoveFromClassList(OptionPressedClassName);
                     SelectOption(opt);
                 });
                 row.RegisterCallback<PointerEnterEvent>(_ =>
                     row.AddToClassList(OptionActiveClassName));
                 row.RegisterCallback<PointerLeaveEvent>(_ =>
-                    row.RemoveFromClassList(OptionActiveClassName));
+                {
+                    row.RemoveFromClassList(OptionActiveClassName);
+                    row.RemoveFromClassList(OptionPressedClassName);
+                });
             }
 
             ApplyOptionSelectedState(row, opt);
@@ -426,6 +442,28 @@ namespace Sim.Faciem.Material.Controls
             if (_isOpen) ClosePanel(); else OpenPanel();
         }
 
+        private void OnGlobalPointerDown(PointerDownEvent evt)
+        {
+            if (!_isOpen)
+            {
+                return;
+            }
+
+            var target = evt.target as VisualElement;
+            if (target == null)
+            {
+                ClosePanel();
+                return;
+            }
+
+            if (IsSelfOrDescendant(target, this) || IsSelfOrDescendant(target, _panel))
+            {
+                return;
+            }
+
+            ClosePanel();
+        }
+
         private void OpenPanel()
         {
             if (_panel == null) return;
@@ -441,6 +479,24 @@ namespace Sim.Faciem.Material.Controls
             _isOpen = false;
             RemoveFromClassList(OpenClassName);
             _panel.style.display = DisplayStyle.None;
+        }
+
+        private static bool IsSelfOrDescendant(VisualElement target, VisualElement root)
+        {
+            if (target == null || root == null)
+            {
+                return false;
+            }
+
+            for (var current = target; current != null; current = current.parent)
+            {
+                if (current == root)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         private void UpdatePanelPosition()
