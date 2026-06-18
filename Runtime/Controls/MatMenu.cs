@@ -45,7 +45,9 @@ namespace Sim.Faciem.Material.Controls
 
         private VisualElement _overlayRoot;
         private ScrollView _panel;
+        private IDisposable _globalPointerSubscription;
         private bool _isOpen;
+        private int _lastLocalPointerDownFrame = -1;
         private string _text = "Open menu";
         private bool _disabled;
         private IconCollection _triggerIconCollection;
@@ -102,9 +104,6 @@ namespace Sim.Faciem.Material.Controls
             }
         }
 
-        [UxmlAttribute]
-        public string OverlayContainerId { get; set; }
-
         public MatMenu()
         {
             AddToClassList(BaseClassName);
@@ -141,28 +140,9 @@ namespace Sim.Faciem.Material.Controls
 
         private void SetupOverlayPanel(AttachToPanelEvent evt)
         {
-            #if UNITY_6000_3_OR_NEWER
-
-            bool isWorldSpace = evt.destinationPanel is IRuntimePanel runtimePanel
-                && runtimePanel.panelSettings.renderMode == PanelRenderMode.WorldSpace;
-
-            if (isWorldSpace)
-            {
-                _overlayRoot = this.FindPanelRootChild();
-            }
-            else
-            {
-                _overlayRoot = string.IsNullOrEmpty(OverlayContainerId)
-                    ? FindThemedOverlayRoot()
-                    : panel?.visualTree.Q(OverlayContainerId);
-            }
-
-            #else
-
-            _overlayRoot = string.IsNullOrEmpty(OverlayContainerId)
-                ? FindThemedOverlayRoot()
-                : panel?.visualTree.Q(OverlayContainerId);
-            #endif
+            _overlayRoot = evt.destinationPanel.IsWorldSpaceRuntimePanel()
+                ? this.FindPanelRootChild()
+                : FindThemedOverlayRoot();
 
             if (_overlayRoot == null)
             {
@@ -184,7 +164,10 @@ namespace Sim.Faciem.Material.Controls
                 _overlayRoot.Add(_panel);
             }
 
-            panel?.visualTree.RegisterCallback<PointerDownEvent>(OnGlobalPointerDown);
+            panel?.visualTree.RegisterCallback<PointerDownEvent>(OnPanelPointerDownTrickle, TrickleDown.TrickleDown);
+            panel?.visualTree.RegisterCallback<PointerDownEvent>(OnPanelPointerDown);
+            _globalPointerSubscription?.Dispose();
+            _globalPointerSubscription = GlobalPointerInputWatcher.Subscribe(OnGlobalPointerDown);
             RebuildPanelItems();
             DiscoverIconsAsync();
         }
@@ -193,9 +176,12 @@ namespace Sim.Faciem.Material.Controls
         {
             if (evt.originPanel?.visualTree != null)
             {
-                evt.originPanel.visualTree.UnregisterCallback<PointerDownEvent>(OnGlobalPointerDown);
+                evt.originPanel.visualTree.UnregisterCallback<PointerDownEvent>(OnPanelPointerDownTrickle, TrickleDown.TrickleDown);
+                evt.originPanel.visualTree.UnregisterCallback<PointerDownEvent>(OnPanelPointerDown);
             }
 
+            _globalPointerSubscription?.Dispose();
+            _globalPointerSubscription = null;
             UnsubscribeItemChanges();
 
             if (_panel?.parent != null)
@@ -249,7 +235,21 @@ namespace Sim.Faciem.Material.Controls
             }
         }
 
-        private void OnGlobalPointerDown(PointerDownEvent evt)
+        private void OnPanelPointerDownTrickle(PointerDownEvent evt)
+        {
+            if (!_isOpen)
+            {
+                return;
+            }
+
+            if (evt.target is VisualElement target
+                && (IsSelfOrDescendant(target, this) || IsSelfOrDescendant(target, _panel)))
+            {
+                _lastLocalPointerDownFrame = Time.frameCount;
+            }
+        }
+
+        private void OnPanelPointerDown(PointerDownEvent evt)
         {
             if (!_isOpen)
             {
@@ -271,6 +271,16 @@ namespace Sim.Faciem.Material.Controls
             ClosePanel();
         }
 
+        private void OnGlobalPointerDown(int frameCount)
+        {
+            if (!_isOpen || _lastLocalPointerDownFrame == frameCount)
+            {
+                return;
+            }
+
+            ClosePanel();
+        }
+
         private void OpenPanel()
         {
             if (_panel == null)
@@ -283,6 +293,7 @@ namespace Sim.Faciem.Material.Controls
             RebuildPanelItems();
             _panel.style.display = DisplayStyle.Flex;
             UpdatePanelPosition();
+            _lastLocalPointerDownFrame = Time.frameCount;
         }
 
         private void ClosePanel()
@@ -373,30 +384,30 @@ namespace Sim.Faciem.Material.Controls
                 return;
             }
 
-            var triggerWorld = _trigger.worldBound;
-            var overlayWorld = _overlayRoot.worldBound;
+            var triggerRect = _trigger.GetLocalRectIn(_overlayRoot);
+            var overlayRect = new Rect(Vector2.zero, _overlayRoot.layout.size);
             var visibleItemCount = this.Query<MatMenuItem>().ToList().Count(item => item.IsVisible);
             var contentHeight = visibleItemCount * ItemRowHeight;
             var panelHeight = Mathf.Min(PanelMaxHeight, contentHeight);
-            var panelWidth = Mathf.Max(triggerWorld.width, _trigger.resolvedStyle.width);
+            var panelWidth = Mathf.Max(triggerRect.width, _trigger.layout.width, _trigger.resolvedStyle.width);
             var requiresScroll = contentHeight > panelHeight;
 
-            var availableBelow = overlayWorld.yMax - triggerWorld.yMax;
-            var opensUpward = panelHeight > availableBelow && triggerWorld.yMin - overlayWorld.yMin >= availableBelow;
-            var topWorld = opensUpward ? triggerWorld.yMin - panelHeight : triggerWorld.yMax;
-            var leftWorld = triggerWorld.xMin;
+            var availableBelow = overlayRect.yMax - triggerRect.yMax;
+            var availableAbove = triggerRect.yMin - overlayRect.yMin;
+            var opensUpward = panelHeight > availableBelow && availableAbove >= availableBelow;
+            var top = opensUpward ? triggerRect.yMin - panelHeight : triggerRect.yMax;
+            var left = triggerRect.xMin;
 
-            var minLeft = overlayWorld.xMin;
-            var maxLeft = Mathf.Max(minLeft, overlayWorld.xMax - panelWidth);
-            var minTop = overlayWorld.yMin;
-            var maxTop = Mathf.Max(minTop, overlayWorld.yMax - panelHeight);
+            var minLeft = overlayRect.xMin;
+            var maxLeft = Mathf.Max(minLeft, overlayRect.xMax - panelWidth);
+            var minTop = overlayRect.yMin;
+            var maxTop = Mathf.Max(minTop, overlayRect.yMax - panelHeight);
 
-            leftWorld = Mathf.Clamp(leftWorld, minLeft, maxLeft);
-            topWorld = Mathf.Clamp(topWorld, minTop, maxTop);
+            left = Mathf.Clamp(left, minLeft, maxLeft);
+            top = Mathf.Clamp(top, minTop, maxTop);
 
-            var localTopLeft = _overlayRoot.WorldToLocal(new Vector2(leftWorld, topWorld));
-            _panel.style.left = localTopLeft.x;
-            _panel.style.top = localTopLeft.y;
+            _panel.style.left = left;
+            _panel.style.top = top;
             _panel.style.width = panelWidth;
             if (panelHeight <= 0f)
             {

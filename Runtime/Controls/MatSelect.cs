@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using R3;
 using Sim.Faciem.Controls;
@@ -63,6 +64,8 @@ namespace Sim.Faciem.Material.Controls
 
         private VisualElement _overlayRoot;
         private ScrollView    _panel;
+        private IDisposable   _globalPointerSubscription;
+        private int           _lastLocalPointerDownFrame = -1;
 
         // ── Backing fields ─────────────────────────────────────────────────────
         private MatFormFieldAppearance _appearance   = MatFormFieldAppearance.Fill;
@@ -173,15 +176,6 @@ namespace Sim.Faciem.Material.Controls
             set => _disableRipple = value;
         }
 
-        /// <summary>
-        /// Optional name of an overlay container element in the panel hierarchy.
-        /// The dropdown panel is appended to this element so it escapes z-ordering
-        /// constraints. When left empty the panel is appended to the panel's
-        /// visual-tree root.
-        /// </summary>
-        [UxmlAttribute]
-        public string OverlayContainerId { get; set; }
-
         // ── Data-bindable properties ───────────────────────────────────────────
 
         /// <summary>Selected value in single-select mode.</summary>
@@ -263,23 +257,18 @@ namespace Sim.Faciem.Material.Controls
             _disposables.Add(this.GeometryChangedAsObservable()
                 .Subscribe(_ => UpdatePanelPosition()));
 
+            RegisterCallback<DetachFromPanelEvent>(CleanupOverlayPanel);
+
             UpdateValueDisplay();
         }
 
         // ── Overlay setup ──────────────────────────────────────────────────────
 
-        private void SetupOverlayPanel(AttachToPanelEvent _)
+        private void SetupOverlayPanel(AttachToPanelEvent evt)
         {
-            _overlayRoot = null;
-
-            if (string.IsNullOrEmpty(OverlayContainerId))
-            {
-                _overlayRoot = FindThemedOverlayRoot();
-            }
-            else
-            {
-                _overlayRoot = panel?.visualTree.Q(OverlayContainerId);
-            }
+            _overlayRoot = evt.destinationPanel.IsWorldSpaceRuntimePanel()
+                ? this.FindPanelRootChild()
+                : FindThemedOverlayRoot();
 
             if (_overlayRoot == null) return;
 
@@ -291,8 +280,33 @@ namespace Sim.Faciem.Material.Controls
             _panel.style.position = Position.Absolute;
             _overlayRoot.Add(_panel);
 
-            panel?.visualTree.RegisterCallback<PointerDownEvent>(OnGlobalPointerDown);
+            panel?.visualTree.RegisterCallback<PointerDownEvent>(OnPanelPointerDownTrickle, TrickleDown.TrickleDown);
+            panel?.visualTree.RegisterCallback<PointerDownEvent>(OnPanelPointerDown);
+            _globalPointerSubscription?.Dispose();
+            _globalPointerSubscription = GlobalPointerInputWatcher.Subscribe(OnGlobalPointerDown);
             RebuildPanelOptions();
+        }
+
+        private void CleanupOverlayPanel(DetachFromPanelEvent evt)
+        {
+            if (evt.originPanel?.visualTree != null)
+            {
+                evt.originPanel.visualTree.UnregisterCallback<PointerDownEvent>(OnPanelPointerDownTrickle, TrickleDown.TrickleDown);
+                evt.originPanel.visualTree.UnregisterCallback<PointerDownEvent>(OnPanelPointerDown);
+            }
+
+            _globalPointerSubscription?.Dispose();
+            _globalPointerSubscription = null;
+
+            if (_panel?.parent != null)
+            {
+                _panel.RemoveFromHierarchy();
+            }
+
+            _overlayRoot = null;
+            _panel = null;
+            _isOpen = false;
+            RemoveFromClassList(OpenClassName);
         }
 
         private VisualElement FindThemedOverlayRoot()
@@ -442,7 +456,21 @@ namespace Sim.Faciem.Material.Controls
             if (_isOpen) ClosePanel(); else OpenPanel();
         }
 
-        private void OnGlobalPointerDown(PointerDownEvent evt)
+        private void OnPanelPointerDownTrickle(PointerDownEvent evt)
+        {
+            if (!_isOpen)
+            {
+                return;
+            }
+
+            if (evt.target is VisualElement target
+                && (IsSelfOrDescendant(target, this) || IsSelfOrDescendant(target, _panel)))
+            {
+                _lastLocalPointerDownFrame = Time.frameCount;
+            }
+        }
+
+        private void OnPanelPointerDown(PointerDownEvent evt)
         {
             if (!_isOpen)
             {
@@ -464,11 +492,22 @@ namespace Sim.Faciem.Material.Controls
             ClosePanel();
         }
 
+        private void OnGlobalPointerDown(int frameCount)
+        {
+            if (!_isOpen || _lastLocalPointerDownFrame == frameCount)
+            {
+                return;
+            }
+
+            ClosePanel();
+        }
+
         private void OpenPanel()
         {
             if (_panel == null) return;
             _isOpen = true;
             AddToClassList(OpenClassName);
+            RebuildPanelOptions();
             _panel.style.display = DisplayStyle.Flex;
             UpdatePanelPosition();
         }
@@ -501,38 +540,34 @@ namespace Sim.Faciem.Material.Controls
 
         private void UpdatePanelPosition()
         {
-            if (_panel == null || !_isOpen) return;
+            if (_panel == null || !_isOpen || _overlayRoot == null) return;
 
-            var triggerWorld = _trigger.worldBound;
-            var fieldWorld   = _formField.worldBound;
-            var overlayWorld = _overlayRoot.worldBound;
+            var fieldRect = _formField.GetLocalRectIn(_overlayRoot);
+            var overlayRect = new Rect(Vector2.zero, _overlayRoot.layout.size);
 
-            var panelWidth  = fieldWorld.width;
+            var panelWidth  = Mathf.Max(fieldRect.width, _formField.layout.width, _formField.resolvedStyle.width);
             var optionCount = this.Query<Material.Controls.MatOption>().ToList().Count;
             var contentHeight = optionCount * OptionRowHeight;
             var panelHeight   = Mathf.Min(PanelMaxHeight, contentHeight);
             var requiresScroll = contentHeight > panelHeight;
 
-            var availableBelow = overlayWorld.yMax - fieldWorld.yMax;
-            var opensUpward = panelHeight > availableBelow;
-            var topWorld = opensUpward
-                ? fieldWorld.yMin - panelHeight
-                : fieldWorld.yMax;
+            var availableBelow = overlayRect.yMax - fieldRect.yMax;
+            var top = panelHeight > availableBelow
+                ? fieldRect.yMin - panelHeight
+                : fieldRect.yMax;
 
-            var leftWorld = fieldWorld.xMin;
+            var left = fieldRect.xMin;
 
-            var minLeft = overlayWorld.xMin;
-            var maxLeft = Mathf.Max(minLeft, overlayWorld.xMax - panelWidth);
-            var minTop  = overlayWorld.yMin;
-            var maxTop  = Mathf.Max(minTop, overlayWorld.yMax - panelHeight);
+            var minLeft = overlayRect.xMin;
+            var maxLeft = Mathf.Max(minLeft, overlayRect.xMax - panelWidth);
+            var minTop  = overlayRect.yMin;
+            var maxTop  = Mathf.Max(minTop, overlayRect.yMax - panelHeight);
 
-            leftWorld = Mathf.Clamp(leftWorld, minLeft, maxLeft);
-            topWorld  = Mathf.Clamp(topWorld, minTop, maxTop);
+            left = Mathf.Clamp(left, minLeft, maxLeft);
+            top  = Mathf.Clamp(top, minTop, maxTop);
 
-            var localTopLeft = _overlayRoot.WorldToLocal(new Vector2(leftWorld, topWorld));
-
-            _panel.style.left  = localTopLeft.x;
-            _panel.style.top   = localTopLeft.y;
+            _panel.style.left  = left;
+            _panel.style.top   = top;
             _panel.style.width = panelWidth;
             _panel.style.height = panelHeight;
             _panel.verticalScrollerVisibility = requiresScroll
