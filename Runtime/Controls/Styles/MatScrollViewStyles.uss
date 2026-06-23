@@ -1,0 +1,252 @@
+/*
+ * MatScrollViewStyles.uss
+ * Structural and visual rules for themed Unity ScrollView controls.
+ */
+
+@import url("./MatScrollViewColors.uss");
+
+/* BEGIN ---- Copied Unity base Styles */
+
+.unity-scroll-view__content_viewport {
+    flex: auto;
+    overflow: hidden;
+}
+
+.unity-scroll-view--vertical > .unity-scroll-view__content-and-vertical-scroll-container > .unity-scroll-view__content-viewport {
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.unity-scroll-view__content-container {
+    flex-shrink: 0;
+}
+
+.unity-scroll-view--vertical .unity-scroll-view--scroll > .unity-scroll-view__content-and-vertical-scroll-container > .unity-scroll-view__content-viewport > .unity-scroll-view__content-container
+{
+    overflow: scroll;
+}
+
+.unity-base-slider--vertical .unity-base-slider__tracker {
+    top: 0px;
+    bottom: 0px;
+    left: 4px;
+    margin: 2px 1px 2px 0px;
+    width: 2px;
+    position: absolute;
+}
+
+.unity-scroller--vertical .unity-base-slider__tracker {
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    width: 13px;
+    position: absolute;
+    background-color: transparent;
+}
+
+.unity-base-slider__drag-container {
+    flex-grow: 1;
+    min-height: 20px;
+}
+
+.unity-base-slider__input {
+    flex-shrink: 0;
+    flex-grow: 1;
+    overflow: visible;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-right: 0;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    width: 100%;
+}
+
+.unity-base-slider--vertical {
+    width: 12px;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-shrink: 0;
+    margin: 16px 0 16px 0;
+    overflow: hidden;
+    padding: 0;
+}
+
+.unity-scroller--vertical > .unity-scroller__low-button {
+    top: 0;
+    width: 12px;
+    height: 16px;
+    position: absolute;
+}
+
+.unity-base-slider__dragger-border {
+    background-color: rgba(0.063, 0.435, 0.804, 0.5);
+    width: 0;
+    height: 0;
+    padding: 0;
+    border-radius: 8px;
+    border-width: 0;
+    margin: 0;
+    position: absolute;
+}
+
+.unity-base-slider--vertical .unity-base-slider__dragger-border {
+    margin: -4px 0 0 -4px;
+}
+
+.unity-scroller--vertical > .unity-scroller__high-button {
+    bottom: 0;
+    width: 12px;
+    height: 16px;
+    position: absolute;
+}
+
+.unity-scroller--vertical .unity-base-slider__dragger {
+    border-width: 1px;
+    border-color: rgba(0.196, 0.196, 0.196, 1);
+    border-radius: 6px;
+    width: 12px;
+    min-height: 20px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    margin: 0px;
+}
+
+.unity-scroll-view__content-and-vertical-scroll-container {
+    flex-direction: row;
+    flex-grow: 1;
+}
+
+/* END ---- Copied Unity base Styles */
+
+.unity-scroll-view {
+    border-radius: 0;
+}
+
+.unity-scroll-view__vertical-scroller,
+.unity-scroll-view__horizontal-scroller {
+    background-color: rgba(0, 0, 0, 0);
+    /*padding: var(--mat-scroll-view-scroller-padding);*/
+    border-left-width: 0px;
+}
+
+.unity-scroll-view__vertical-scroller {
+    width: var(--mat-scroll-view-scroller-size);
+    min-width: var(--mat-scroll-view-scroller-size);
+    flex-shrink: 0;
+}
+
+.unity-scroll-view__horizontal-scroller {
+    height: var(--mat-scroll-view-scroller-size);
+}
+
+.unity-scroll-view__vertical-scroller .unity-base-slider__tracker,
+.unity-scroll-view__horizontal-scroller .unity-base-slider__tracker {
+    background-color: var(--mat-scroll-view-track-color);
+    border-radius: var(--mat-scroll-view-track-radius);
+    width: 12px;
+    margin: 0;
+}
+
+.unity-scroll-view__vertical-scroller:hover .unity-base-slider__tracker,
+.unity-scroll-view__horizontal-scroller:hover .unity-base-slider__tracker {
+    background-color: var(--mat-scroll-view-track-hover-color);
+}
+
+.unity-scroll-view__vertical-scroller .unity-base-slider__dragger,
+.unity-scroll-view__horizontal-scroller .unity-base-slider__dragger {
+    background-color: var(--mat-scroll-view-thumb-color);
+    border-radius: var(--mat-scroll-view-thumb-radius);
+    min-width: 6px;
+    width: 10px;
+    margin-left: 1px;
+    min-height: 6px;
+}
+
+.unity-scroll-view__vertical-scroller .unity-base-slider__dragger-border,
+.unity-scroll-view__horizontal-scroller .unity-base-slider__dragger-border
+{
+
+}
+
+.unity-scroll-view__vertical-scroller .unity-base-slider__dragger:hover,
+.unity-scroll-view__horizontal-scroller .unity-base-slider__dragger:hover,
+.unity-scroll-view__vertical-scroller .unity-base-slider__dragger-border:hover,
+.unity-scroll-view__horizontal-scroller .unity-base-slider__dragger-border:hover,
+.unity-scroll-view__vertical-scroller:hover .unity-base-slider__dragger,
+.unity-scroll-view__horizontal-scroller:hover .unity-base-slider__dragger,
+.unity-scroll-view__vertical-scroller:hover .unity-base-slider__dragger-border,
+.unity-scroll-view__horizontal-scroller:hover .unity-base-slider__dragger-border {
+    background-color: var(--mat-scroll-view-thumb-hover-color);
+}
+
+.unity-scroll-view__vertical-scroller .unity-base-slider__dragger:active,
+.unity-scroll-view__horizontal-scroller .unity-base-slider__dragger:active,
+.unity-scroll-view__vertical-scroller .unity-base-slider__dragger:focus,
+.unity-scroll-view__horizontal-scroller .unity-base-slider__dragger:focus,
+.unity-scroll-view__vertical-scroller .unity-base-slider__dragger-border:active,
+.unity-scroll-view__horizontal-scroller .unity-base-slider__dragger-border:active,
+.unity-scroll-view__vertical-scroller .unity-base-slider__dragger-border:focus,
+.unity-scroll-view__horizontal-scroller .unity-base-slider__dragger-border:focus {
+    background-color: var(--mat-scroll-view-thumb-active-color);
+}
+
+.unity-scroll-view__vertical-scroller:disabled .unity-base-slider__dragger,
+.unity-scroll-view__horizontal-scroller:disabled .unity-base-slider__dragger,
+.unity-scroll-view__vertical-scroller:disabled .unity-base-slider__dragger-border,
+.unity-scroll-view__horizontal-scroller:disabled .unity-base-slider__dragger-border {
+    background-color: var(--mat-scroll-view-thumb-disabled-color);
+}
+
+.unity-scroll-view__vertical-scroller .unity-scroller__low-button,
+.unity-scroll-view__vertical-scroller .unity-scroller__high-button,
+.unity-scroll-view__horizontal-scroller .unity-scroller__low-button,
+.unity-scroll-view__horizontal-scroller .unity-scroller__high-button {
+    background-color: var(--mat-scroll-view-track-color);
+    border-width: 0;
+    border-radius: var(--mat-scroll-view-button-radius);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 8px 8px;
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.unity-scroll-view__vertical-scroller .unity-scroller__low-button,
+.unity-scroll-view__horizontal-scroller .unity-scroller__low-button {
+    background-image: url("../../../Icons/fontawesome-free-7.2.0/svgs/solid/caret-up.svg");
+    background-size: 60% 40%;
+}
+
+.unity-scroll-view__vertical-scroller .unity-scroller__high-button,
+.unity-scroll-view__horizontal-scroller .unity-scroller__high-button {
+    background-image: url("../../../Icons/fontawesome-free-7.2.0/svgs/solid/caret-down.svg");
+    background-size: 60% 40%;
+}
+
+.unity-scroll-view__vertical-scroller .unity-scroller__low-button:hover,
+.unity-scroll-view__vertical-scroller .unity-scroller__high-button:hover,
+.unity-scroll-view__horizontal-scroller .unity-scroller__low-button:hover,
+.unity-scroll-view__horizontal-scroller .unity-scroller__high-button:hover {
+    background-color: var(--mat-scroll-view-button-hover-color);
+}
+
+.unity-scroll-view__vertical-scroller .unity-scroller__low-button:active,
+.unity-scroll-view__vertical-scroller .unity-scroller__high-button:active,
+.unity-scroll-view__horizontal-scroller .unity-scroller__low-button:active,
+.unity-scroll-view__horizontal-scroller .unity-scroller__high-button:active,
+.unity-scroll-view__vertical-scroller .unity-scroller__low-button:focus,
+.unity-scroll-view__vertical-scroller .unity-scroller__high-button:focus,
+.unity-scroll-view__horizontal-scroller .unity-scroller__low-button:focus,
+.unity-scroll-view__horizontal-scroller .unity-scroller__high-button:focus {
+    background-color: var(--mat-scroll-view-button-active-color);
+}
+
+.unity-scroll-view__vertical-scroller:disabled .unity-scroller__low-button,
+.unity-scroll-view__vertical-scroller:disabled .unity-scroller__high-button,
+.unity-scroll-view__horizontal-scroller:disabled .unity-scroller__low-button,
+.unity-scroll-view__horizontal-scroller:disabled .unity-scroller__high-button {
+    background-color: var(--mat-scroll-view-button-disabled-color);
+}
+
+
+

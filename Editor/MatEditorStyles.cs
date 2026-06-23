@@ -28,6 +28,7 @@ namespace Sim.Faciem.Material.Editor
         private const string MenuStylesPath        = PackageRoot + "/Runtime/Controls/Styles/MatMenuStyles.uss";
         private const string ListStylesPath        = PackageRoot + "/Runtime/Controls/Styles/MatListStyles.uss";
         private const string GridListStylesPath    = PackageRoot + "/Runtime/Controls/Styles/MatGridListStyles.uss";
+        private const string ScrollViewStyles    = PackageRoot + "/Runtime/Controls/Styles/MatScrollViewStyles.uss";
         private const string IndigoPath       = PackageRoot + "/Runtime/Themes/MatIndigoTheme.uss";
         private const string DeepPurplePath   = PackageRoot + "/Runtime/Themes/MatDeepPurpleTheme.uss";
         private const string PinkBlueGreyPath = PackageRoot + "/Runtime/Themes/MatPinkBlueGreyTheme.uss";
@@ -48,6 +49,7 @@ namespace Sim.Faciem.Material.Editor
         private static StyleSheet s_menuStyles;
         private static StyleSheet s_listStyles;
         private static StyleSheet s_gridListStyles;
+        private static StyleSheet s_scrollViewStyles;
         private static StyleSheet s_indigoSheet;
         private static StyleSheet s_deepPurpleSheet;
         private static StyleSheet s_pinkBlueGreySheet;
@@ -114,6 +116,7 @@ namespace Sim.Faciem.Material.Editor
             TryRemove(root, s_deepPurpleSheet);
             TryRemove(root, s_pinkBlueGreySheet);
             TryRemove(root, s_purpleGreenSheet);
+            TryRemove(root, s_scrollViewStyles);
         }
 
         // ── Faciem / Theme menu ────────────────────────────────────────────────
@@ -163,32 +166,54 @@ namespace Sim.Faciem.Material.Editor
         private static void ApplyCurrent(VisualElement root)
         {
             // Guard: root may have been detached between a theme change and this callback.
-            if (root?.panel == null) return;
+            if (root?.panel == null)
+            {
+                return;
+            }
 
             RemoveFrom(root);
             EnsureAllLoaded();
 
             if (s_buttonStyles != null)
+            {
                 root.styleSheets.Add(s_buttonStyles);
+            }
 
             if (s_formFieldStyles != null)
+            {
                 root.styleSheets.Add(s_formFieldStyles);
+            }
 
             if (s_selectStyles != null)
+            {
                 root.styleSheets.Add(s_selectStyles);
+            }
 
             if (s_menuStyles != null)
+            {
                 root.styleSheets.Add(s_menuStyles);
+            }
 
             if (s_listStyles != null)
+            {
                 root.styleSheets.Add(s_listStyles);
+            }
 
             if (s_gridListStyles != null)
+            {
                 root.styleSheets.Add(s_gridListStyles);
+            }
+
+            if (s_scrollViewStyles != null)
+            {
+                root.styleSheets.Add(s_scrollViewStyles);
+            }
 
             var themeSheet = GetThemeSheet(s_activeTheme.Value);
             if (themeSheet != null)
+            {
                 root.styleSheets.Add(themeSheet);
+            }
         }
 
         private static StyleSheet GetThemeSheet(MatEditorTheme theme) => theme switch
@@ -208,6 +233,7 @@ namespace Sim.Faciem.Material.Editor
             s_menuStyles        ??= AssetDatabase.LoadAssetAtPath<StyleSheet>(MenuStylesPath);
             s_listStyles        ??= AssetDatabase.LoadAssetAtPath<StyleSheet>(ListStylesPath);
             s_gridListStyles    ??= AssetDatabase.LoadAssetAtPath<StyleSheet>(GridListStylesPath);
+            s_scrollViewStyles ??= AssetDatabase.LoadAssetAtPath<StyleSheet>(ScrollViewStyles);
             s_indigoSheet       ??= AssetDatabase.LoadAssetAtPath<StyleSheet>(IndigoPath);
             s_deepPurpleSheet   ??= AssetDatabase.LoadAssetAtPath<StyleSheet>(DeepPurplePath);
             s_pinkBlueGreySheet ??= AssetDatabase.LoadAssetAtPath<StyleSheet>(PinkBlueGreyPath);
@@ -217,7 +243,9 @@ namespace Sim.Faciem.Material.Editor
         private static void TryRemove(VisualElement root, StyleSheet sheet)
         {
             if (sheet != null && root.styleSheets.Contains(sheet))
+            {
                 root.styleSheets.Remove(sheet);
+            }
         }
 
         private static void ClearCache()
@@ -228,6 +256,7 @@ namespace Sim.Faciem.Material.Editor
             s_menuStyles        = null;
             s_listStyles        = null;
             s_gridListStyles    = null;
+            s_scrollViewStyles = null;
             s_indigoSheet       = null;
             s_deepPurpleSheet   = null;
             s_pinkBlueGreySheet = null;

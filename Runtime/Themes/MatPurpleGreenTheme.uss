@@ -99,6 +99,12 @@
     --mat-menu-item-active-state-layer-color:          rgba(255, 255, 255, 0.12);
     --mat-menu-item-disabled-label-text-color:         rgba(255, 255, 255, 0.3);
 
+    /* ── Scroll view (dark, Chrome-like) ───────────────────────────────── */
+    --mat-scroll-view-track-color:                        rgba(255, 255, 255, 0.08);
+    --mat-scroll-view-track-hover-color:                  rgba(255, 255, 255, 0.12);
+    --mat-scroll-view-thumb-disabled-color:               rgba(255, 255, 255, 0.12);
+    --mat-scroll-view-button-disabled-color:              rgba(255, 255, 255, 0.12);
+
     /* ── List (dark) ────────────────────────────────────────────────────── */
     --mat-list-background:                              #424242;
     --mat-list-outline-color:                           rgba(255, 255, 255, 0.12);

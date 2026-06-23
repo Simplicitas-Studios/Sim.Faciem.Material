@@ -1,0 +1,23 @@
+/*
+ * MatScrollViewColors.uss
+ * Default fallback CSS custom property definitions for themed Unity ScrollView styling.
+ * Theme USS files may override these through aliased shared tokens.
+ */
+
+:root {
+    --mat-scroll-view-track-color:                 rgba(0, 0, 0, 0.08);
+    --mat-scroll-view-track-hover-color:           rgba(0, 0, 0, 0.12);
+    --mat-scroll-view-thumb-color:                 rgba(0, 0, 0, 0.28);
+    --mat-scroll-view-thumb-hover-color:           rgba(0, 0, 0, 0.38);
+    --mat-scroll-view-thumb-active-color:          rgba(0, 0, 0, 0.46);
+    --mat-scroll-view-thumb-disabled-color:        var(--mat-button-disabled-bg, rgba(0, 0, 0, 0.12));
+    --mat-scroll-view-button-color:                rgba(0, 0, 0, 0.20);
+    --mat-scroll-view-button-hover-color:          rgba(0, 0, 0, 0.30);
+    --mat-scroll-view-button-active-color:         rgba(0, 0, 0, 0.38);
+    --mat-scroll-view-button-disabled-color:       var(--mat-button-disabled-bg, rgba(0, 0, 0, 0.12));
+    --mat-scroll-view-scroller-size:               12px;
+    --mat-scroll-view-scroller-padding:            1px;
+    --mat-scroll-view-track-radius:                3px;
+    --mat-scroll-view-thumb-radius:                6px;
+    --mat-scroll-view-button-radius:               2px;
+}

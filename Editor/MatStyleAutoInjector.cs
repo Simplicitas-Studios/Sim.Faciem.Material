@@ -50,7 +50,9 @@ namespace Sim.Faciem.Material.Editor
         internal static string[] FindUnconfiguredPanelSettingsPaths()
         {
             if (!HasMaterialControlsInProject())
+            {
                 return System.Array.Empty<string>();
+            }
 
             return AssetDatabase
                 .FindAssets("t:PanelSettings")
@@ -78,10 +80,14 @@ namespace Sim.Faciem.Material.Editor
         private static void TryOpenSetupWindow()
         {
             if (SessionState.GetBool(SessionDismissedKey, false))
+            {
                 return;
+            }
 
             if (FindUnconfiguredPanelSettingsPaths().Length == 0)
+            {
                 return;
+            }
 
             MatMaterialSetupWindow.ShowWindow();
         }
@@ -99,7 +105,9 @@ namespace Sim.Faciem.Material.Editor
             string[] movedFromAssetPaths)
         {
             if (SessionState.GetBool(MatStyleAutoInjector.SessionDismissedKey, false))
+            {
                 return;
+            }
 
             var hasNewMaterialUxml = importedAssets.Any(path =>
                 path.EndsWith(".uxml")
@@ -107,10 +115,14 @@ namespace Sim.Faciem.Material.Editor
                 && File.ReadAllText(path).Contains("MatButton"));
 
             if (!hasNewMaterialUxml)
+            {
                 return;
+            }
 
             if (MatStyleAutoInjector.FindUnconfiguredPanelSettingsPaths().Length > 0)
+            {
                 MatMaterialSetupWindow.ShowWindow();
+            }
         }
     }
 }

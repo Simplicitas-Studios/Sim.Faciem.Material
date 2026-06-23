@@ -111,7 +111,6 @@ namespace Sim.Faciem.Material.Controls
         {
             AddToClassList(BaseClassName);
 
-            virtualizationMethod = CollectionVirtualizationMethod.DynamicHeight;
             selectionType = SelectionType.None;
             reorderable = false;
             showBorder = false;

@@ -6,10 +6,10 @@
 @import url("./MatGridListColors.uss");
 
 .mat-grid-list {
-    background-color: var(--mat-grid-list-background);
+    /*background-color: var(--mat-grid-list-background);*/
     border-radius: 8px;
-    border-width: 1px;
-    border-color: var(--mat-grid-list-outline-color);
+    /*border-width: 1px;*/
+    /*border-color: var(--mat-grid-list-outline-color);*/
     overflow: hidden;
 }
 

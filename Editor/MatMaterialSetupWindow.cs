@@ -85,7 +85,9 @@ namespace Sim.Faciem.Material.Editor
 
             EditorGUILayout.Space(8);
             if (GUILayout.Button("Close"))
+            {
                 Close();
+            }
         }
 
         private void DrawThemePicker()
@@ -125,10 +127,14 @@ namespace Sim.Faciem.Material.Editor
             EditorGUILayout.BeginHorizontal();
 
             if (GUILayout.Button("Select All"))
+            {
                 SetAllSelected(true);
+            }
 
             if (GUILayout.Button("Select None"))
+            {
                 SetAllSelected(false);
+            }
 
             GUILayout.FlexibleSpace();
 
@@ -141,7 +147,9 @@ namespace Sim.Faciem.Material.Editor
             using (new EditorGUI.DisabledScope(!HasAnySelected()))
             {
                 if (GUILayout.Button("Apply", GUILayout.Width(80)))
+                {
                     ApplyTheme();
+                }
             }
 
             EditorGUILayout.EndHorizontal();
@@ -176,10 +184,16 @@ namespace Sim.Faciem.Material.Editor
             var applied = 0;
             for (var i = 0; i < _unconfiguredPaths.Length; i++)
             {
-                if (!_selected[i]) continue;
+                if (!_selected[i])
+                {
+                    continue;
+                }
 
                 var settings = AssetDatabase.LoadAssetAtPath<PanelSettings>(_unconfiguredPaths[i]);
-                if (settings == null) continue;
+                if (settings == null)
+                {
+                    continue;
+                }
 
                 Undo.RecordObject(settings, "Apply Material Theme");
                 settings.themeStyleSheet = tss;
@@ -198,7 +212,9 @@ namespace Sim.Faciem.Material.Editor
             Refresh();
 
             if (_unconfiguredPaths.Length == 0)
+            {
                 Close();
+            }
         }
 
         private void SetAllSelected(bool value)
@@ -210,7 +226,11 @@ namespace Sim.Faciem.Material.Editor
         private bool HasAnySelected()
         {
             foreach (var s in _selected)
-                if (s) return true;
+                if (s)
+                {
+                    return true;
+                }
+
             return false;
         }
     }

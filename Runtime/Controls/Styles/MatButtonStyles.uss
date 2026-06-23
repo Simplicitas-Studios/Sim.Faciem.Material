@@ -72,7 +72,6 @@
 
 .mat-button__label {
     -unity-font-style: bold;
-    font-size: 14px;
     white-space: nowrap;
     -unity-text-align: middle-center;
 }
