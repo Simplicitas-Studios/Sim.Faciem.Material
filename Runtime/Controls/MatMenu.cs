@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Sim.Faciem.Material.Icons;
 using Sim.Faciem.Shared;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -50,8 +49,7 @@ namespace Sim.Faciem.Material.Controls
         private int _lastLocalPointerDownFrame = -1;
         private string _text = "Open menu";
         private bool _disabled;
-        private IconCollection _triggerIconCollection;
-        private string _triggerIconName = string.Empty;
+        private Background _triggerIconBackground;
 
         public override VisualElement contentContainer => _itemsContainer;
 
@@ -83,23 +81,12 @@ namespace Sim.Faciem.Material.Controls
         }
 
         [UxmlAttribute]
-        public IconCollection TriggerIconCollection
+        public Background TriggerIcon
         {
-            get => _triggerIconCollection;
+            get => _triggerIconBackground;
             set
             {
-                _triggerIconCollection = value;
-                UpdateTriggerVisualState();
-            }
-        }
-
-        [UxmlAttribute]
-        public string TriggerIconName
-        {
-            get => _triggerIconName;
-            set
-            {
-                _triggerIconName = value ?? string.Empty;
+                _triggerIconBackground = value;
                 UpdateTriggerVisualState();
             }
         }
@@ -169,7 +156,6 @@ namespace Sim.Faciem.Material.Controls
             _globalPointerSubscription?.Dispose();
             _globalPointerSubscription = GlobalPointerInputWatcher.Subscribe(OnGlobalPointerDown);
             RebuildPanelItems();
-            DiscoverIconsAsync();
         }
 
         private void CleanupOverlayPanel(DetachFromPanelEvent evt)
@@ -349,7 +335,7 @@ namespace Sim.Faciem.Material.Controls
 
             var icon = new VisualElement();
             icon.AddToClassList(ItemIconClassName);
-            SetIconVisual(icon, ResolveIcon(item.IconCollection, item.IconName));
+            SetIconVisual(icon, item.Icon);
             row.Add(icon);
 
             var text = new Label(item.Label);
@@ -443,7 +429,7 @@ namespace Sim.Faciem.Material.Controls
 
         private void UpdateTriggerVisualState()
         {
-            var icon = ResolveIcon(_triggerIconCollection, _triggerIconName);
+            var icon = TriggerIcon;
             var hasIcon = icon != null;
             var hasText = !string.IsNullOrWhiteSpace(_text);
             var iconOnly = hasIcon && !hasText;
@@ -456,14 +442,14 @@ namespace Sim.Faciem.Material.Controls
             SetIconVisual(_triggerIcon, icon);
         }
 
-        private static void SetIconVisual(VisualElement element, VectorImage icon)
+        private static void SetIconVisual(VisualElement element, Background icon)
         {
             if (element == null)
             {
                 return;
             }
 
-            if (icon == null)
+            if (!HasBackground(icon))
             {
                 element.style.display = DisplayStyle.None;
                 element.style.backgroundImage = StyleKeyword.None;
@@ -474,48 +460,12 @@ namespace Sim.Faciem.Material.Controls
             element.style.backgroundImage = new StyleBackground(icon);
         }
 
-        private static VectorImage ResolveIcon(IconCollection collection, string iconName)
+        private static bool HasBackground(Background background)
         {
-            if (collection?.Icons == null)
-            {
-                return null;
-            }
-
-            foreach (var icon in collection.Icons)
-            {
-                if (icon == null)
-                {
-                    continue;
-                }
-
-                if (string.Equals(icon.name, iconName, StringComparison.OrdinalIgnoreCase))
-                {
-                    return icon;
-                }
-            }
-
-            return null;
-        }
-
-        private async void DiscoverIconsAsync()
-        {
-            try
-            {
-                await IconCollectionRegistry.DiscoverCollectionsAsync();
-            }
-            catch (Exception ex)
-            {
-                Debug.LogWarning($"MatMenu icon discovery failed: {ex.Message}");
-            }
-
-            if (panel == null)
-            {
-                return;
-            }
-
-            UpdateTriggerVisualState();
-            RebuildPanelItems();
-            UpdatePanelPosition();
+            return background.texture != null
+                || background.sprite != null
+                || background.renderTexture != null
+                || background.vectorImage != null;
         }
 
         private static bool IsSelfOrDescendant(VisualElement target, VisualElement ancestor)

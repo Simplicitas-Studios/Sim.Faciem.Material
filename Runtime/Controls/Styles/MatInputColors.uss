@@ -1,0 +1,12 @@
+/*
+ * MatInputColors.uss
+ * Default (fallback) CSS custom property definitions for MatInput.
+ */
+
+:root {
+    --mat-input-text-color:                  var(--mat-button-on-surface, rgba(0, 0, 0, 0.87));
+    --mat-input-placeholder-color:           var(--mat-form-field-label-color, rgba(0, 0, 0, 0.42));
+    --mat-input-disabled-text-color:         var(--mat-button-disabled-color, rgba(0, 0, 0, 0.38));
+    --mat-input-icon-color:                  var(--mat-form-field-label-color, rgba(0, 0, 0, 0.54));
+    --mat-input-disabled-icon-color:         var(--mat-button-disabled-color, rgba(0, 0, 0, 0.38));
+}

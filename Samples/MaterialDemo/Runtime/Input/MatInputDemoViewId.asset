@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bb4efcb3a7e205489da8f0f37f36b38, type: 3}
+  m_Name: MatInputDemoViewId
+  m_EditorClassIdentifier: 
+  ViewId:
+    _id: Sim.Faciem/Material/InputDemo
+  View: {fileID: 9197481963319205126, guid: e3a6ac2306414e4abbb5c0eb6a0967d1, type: 3}
+  DataContext:
+    TypeName: Sim.Faciem.Material.Samples.IInputDemoDataContext, Sim.Faciem.Material.Samples,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    Script: {fileID: 11500000, guid: 734f88a285f4451da8d3d15cb9dbb488, type: 3}
+  ViewModel:
+    TypeName: Sim.Faciem.Material.Samples.InputDemoViewModel, Sim.Faciem.Material.Samples,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    Script: {fileID: 11500000, guid: a31b1b6f91744a1c9dbcc610bb57c77f, type: 3}
+  SourceCodeGeneration: 1
+  SourceFile: {fileID: 11500000, guid: de13bccad5764995b714b69bb48a939c, type: 3}

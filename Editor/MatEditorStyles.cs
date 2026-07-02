@@ -24,6 +24,7 @@ namespace Sim.Faciem.Material.Editor
         private const string PackageRoot           = "Packages/com.sim.faciem-material";
         private const string ButtonStylesPath      = PackageRoot + "/Runtime/Controls/Styles/MatButtonStyles.uss";
         private const string FormFieldStylesPath   = PackageRoot + "/Runtime/Controls/Styles/MatFormFieldStyles.uss";
+        private const string InputStylesPath       = PackageRoot + "/Runtime/Controls/Styles/MatInputStyles.uss";
         private const string SelectStylesPath      = PackageRoot + "/Runtime/Controls/Styles/MatSelectStyles.uss";
         private const string MenuStylesPath        = PackageRoot + "/Runtime/Controls/Styles/MatMenuStyles.uss";
         private const string ListStylesPath        = PackageRoot + "/Runtime/Controls/Styles/MatListStyles.uss";
@@ -45,6 +46,7 @@ namespace Sim.Faciem.Material.Editor
         // ── Style sheet cache ──────────────────────────────────────────────────
         private static StyleSheet s_buttonStyles;
         private static StyleSheet s_formFieldStyles;
+        private static StyleSheet s_inputStyles;
         private static StyleSheet s_selectStyles;
         private static StyleSheet s_menuStyles;
         private static StyleSheet s_listStyles;
@@ -108,6 +110,7 @@ namespace Sim.Faciem.Material.Editor
             EnsureAllLoaded();
             TryRemove(root, s_buttonStyles);
             TryRemove(root, s_formFieldStyles);
+            TryRemove(root, s_inputStyles);
             TryRemove(root, s_selectStyles);
             TryRemove(root, s_menuStyles);
             TryRemove(root, s_listStyles);
@@ -184,6 +187,11 @@ namespace Sim.Faciem.Material.Editor
                 root.styleSheets.Add(s_formFieldStyles);
             }
 
+            if (s_inputStyles != null)
+            {
+                root.styleSheets.Add(s_inputStyles);
+            }
+
             if (s_selectStyles != null)
             {
                 root.styleSheets.Add(s_selectStyles);
@@ -229,6 +237,7 @@ namespace Sim.Faciem.Material.Editor
         {
             s_buttonStyles      ??= AssetDatabase.LoadAssetAtPath<StyleSheet>(ButtonStylesPath);
             s_formFieldStyles   ??= AssetDatabase.LoadAssetAtPath<StyleSheet>(FormFieldStylesPath);
+            s_inputStyles       ??= AssetDatabase.LoadAssetAtPath<StyleSheet>(InputStylesPath);
             s_selectStyles      ??= AssetDatabase.LoadAssetAtPath<StyleSheet>(SelectStylesPath);
             s_menuStyles        ??= AssetDatabase.LoadAssetAtPath<StyleSheet>(MenuStylesPath);
             s_listStyles        ??= AssetDatabase.LoadAssetAtPath<StyleSheet>(ListStylesPath);
@@ -252,6 +261,7 @@ namespace Sim.Faciem.Material.Editor
         {
             s_buttonStyles      = null;
             s_formFieldStyles   = null;
+            s_inputStyles       = null;
             s_selectStyles      = null;
             s_menuStyles        = null;
             s_listStyles        = null;

@@ -40,6 +40,12 @@
                     <engine:DataBinding property="ThemeColor" data-source-path="SelectNavColor" binding-mode="ToTarget" update-trigger="WhenDirty" />
                 </Bindings>
             </Sim.Faciem.Material.Controls.MatButton>
+            <Sim.Faciem.Material.Controls.MatButton name="btnInput" text="Input" variant="Basic" class="mat-demo-nav-btn">
+                <Bindings>
+                    <engine:DataBinding property="Command" data-source-path="NavigateToInput" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                    <engine:DataBinding property="ThemeColor" data-source-path="InputNavColor" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                </Bindings>
+            </Sim.Faciem.Material.Controls.MatButton>
             <Sim.Faciem.Material.Controls.MatButton name="btnList" text="List" variant="Basic" class="mat-demo-nav-btn">
                 <Bindings>
                     <engine:DataBinding property="Command" data-source-path="NavigateToList" binding-mode="ToTarget" update-trigger="WhenDirty" />

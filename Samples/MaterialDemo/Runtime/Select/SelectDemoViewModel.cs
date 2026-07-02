@@ -34,6 +34,5 @@ namespace Sim.Faciem.Material.Samples
             get => _selectedStarter;
             set => SetProperty(ref _selectedStarter, value);
         }
-
     }
 }

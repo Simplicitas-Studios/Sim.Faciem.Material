@@ -249,6 +249,19 @@
     white-space: normal;
 }
 
+/* ══ Input demo helpers ═════════════════════════════════════════════════════ */
+.mat-demo-input-stack {
+    flex-direction: column;
+}
+
+.mat-demo-input-stack > * {
+    margin-bottom: 12px;
+}
+
+.mat-demo-output-label {
+    margin-top: 8px;
+}
+
 /* ══ Icon demo ═══════════════════════════════════════════════════════════════ */
 .mat-demo-icon-search-field {
     margin-bottom: 16px;

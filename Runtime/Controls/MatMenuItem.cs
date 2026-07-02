@@ -1,7 +1,6 @@
 using System;
 using R3;
 using Sim.Faciem.CommandBinding;
-using Sim.Faciem.Material.Icons;
 using Unity.Properties;
 using UnityEngine.UIElements;
 
@@ -17,8 +16,7 @@ namespace Sim.Faciem.Material.Controls
     {
         private string _label = string.Empty;
         private bool _disabled;
-        private IconCollection _iconCollection;
-        private string _iconName = string.Empty;
+        private Background _icon;
         private SerializedCommand _command;
         private DisposableBag _commandSubscriptions = new();
         private bool _commandCanExecute = true;
@@ -52,26 +50,13 @@ namespace Sim.Faciem.Material.Controls
         }
 
         [UxmlAttribute, CreateProperty]
-        public IconCollection IconCollection
+        public Background Icon
         {
-            get => _iconCollection;
+            get => _icon;
             set
             {
-                if (_iconCollection == value) return;
-                _iconCollection = value;
-                NotifyChanged();
-            }
-        }
-
-        [UxmlAttribute, CreateProperty]
-        public string IconName
-        {
-            get => _iconName;
-            set
-            {
-                var next = value ?? string.Empty;
-                if (_iconName == next) return;
-                _iconName = next;
+                if (Equals(_icon, value)) return;
+                _icon = value;
                 NotifyChanged();
             }
         }
@@ -90,7 +75,7 @@ namespace Sim.Faciem.Material.Controls
 
         internal bool IsVisible => _isVisible;
         internal bool IsEffectivelyDisabled => _disabled || !_commandCanExecute;
-        internal bool HasIcon => !string.IsNullOrWhiteSpace(_iconName);
+        internal bool HasIcon => Icon.texture != null || Icon.sprite != null || Icon.renderTexture != null || Icon.vectorImage != null;
 
         public MatMenuItem()
         {

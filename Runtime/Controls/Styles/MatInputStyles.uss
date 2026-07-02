@@ -1,0 +1,156 @@
+/*
+ * MatInputStyles.uss
+ * Structural and visual rules for MatInput.
+ */
+
+@import url("./MatInputColors.uss");
+
+.mat-input {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+}
+
+.mat-input__row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    min-height: 24px;
+}
+
+.mat-input__icon {
+    width: 18px;
+    height: 18px;
+    display: none;
+    flex-shrink: 0;
+    -unity-background-scale-mode: scale-to-fit;
+    -unity-background-image-tint-color: var(--mat-input-icon-color);
+}
+
+.mat-input__icon--leading {
+    margin-right: 12px;
+}
+
+.mat-input__icon--trailing {
+    margin-left: 12px;
+}
+
+.mat-input__field-host {
+    flex-grow: 1;
+    min-width: 0;
+    position: relative;
+    justify-content: center;
+}
+
+.mat-input__field,
+.mat-input__field.unity-base-field,
+.mat-input__field.unity-base-text-field,
+.mat-input__field.unity-text-field {
+    flex-grow: 1;
+    min-width: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    border-width: 0;
+    border-radius: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.mat-input__field > .unity-base-field__input,
+.mat-input__field > .unity-base-text-field__input,
+.mat-input__field > .unity-text-field__input,
+.mat-input__field-input {
+    min-height: 24px;
+    background-color: rgba(0, 0, 0, 0);
+    border-width: 0;
+    border-radius: 0;
+    margin: 0;
+    padding: 0;
+    color: var(--mat-input-text-color);
+    font-size: 16px;
+    -unity-text-align: middle-left;
+}
+
+.mat-input__field:hover,
+.mat-input__field:enabled:hover,
+.mat-input__field:focus,
+.mat-input__field:enabled:focus,
+.mat-input__field.unity-base-field:hover,
+.mat-input__field.unity-base-field:enabled:hover,
+.mat-input__field.unity-base-field:focus,
+.mat-input__field.unity-base-field:enabled:focus,
+.mat-input__field.unity-base-text-field:hover,
+.mat-input__field.unity-base-text-field:enabled:hover,
+.mat-input__field.unity-base-text-field:focus,
+.mat-input__field.unity-base-text-field:enabled:focus,
+.mat-input__field.unity-text-field:hover,
+.mat-input__field.unity-text-field:enabled:hover,
+.mat-input__field.unity-text-field:focus,
+.mat-input__field.unity-text-field:enabled:focus,
+.mat-input__field > .unity-base-field__input:hover,
+.mat-input__field > .unity-base-field__input:enabled:hover,
+.mat-input__field > .unity-base-field__input:focus,
+.mat-input__field > .unity-base-field__input:enabled:focus,
+.mat-input__field > .unity-base-text-field__input:hover,
+.mat-input__field > .unity-base-text-field__input:enabled:hover,
+.mat-input__field > .unity-base-text-field__input:focus,
+.mat-input__field > .unity-base-text-field__input:enabled:focus,
+.mat-input__field.unity-base-text-field:hover:enabled > .unity-base-text-field__input,
+.mat-input__field.unity-base-text-field:hover:enabled > .unity-base-text-field_input,
+.mat-input__field.unity-base-text-field:focus:enabled > .unity-base-text-field__input,
+.mat-input__field.unity-base-text-field:focus:enabled > .unity-base-text-field_input,
+.mat-input__field > .unity-text-field__input:hover,
+.mat-input__field > .unity-text-field__input:enabled:hover,
+.mat-input__field > .unity-text-field__input:focus,
+.mat-input__field > .unity-text-field__input:enabled:focus,
+.mat-input__field-input:hover,
+.mat-input__field-input:enabled:hover,
+.mat-input__field-input:focus,
+.mat-input__field-input:enabled:focus {
+    background-color: rgba(0, 0, 0, 0);
+    border-width: 0;
+    border-radius: 0;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    margin: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.mat-input__placeholder {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: none;
+    align-items: center;
+    color: var(--mat-input-placeholder-color);
+    font-size: 16px;
+    -unity-text-align: middle-left;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.mat-input--disabled .mat-input__field-input {
+    color: var(--mat-input-disabled-text-color);
+}
+
+.mat-input--disabled .mat-input__placeholder {
+    color: var(--mat-input-disabled-text-color);
+}
+
+.mat-input--disabled .mat-input__icon {
+    -unity-background-image-tint-color: var(--mat-input-disabled-icon-color);
+}

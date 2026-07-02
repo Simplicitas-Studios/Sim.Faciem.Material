@@ -13,6 +13,7 @@ namespace Sim.Faciem.Material.Samples
         Command NavigateToButton { get; }
         Command NavigateToMenu { get; }
         Command NavigateToSelect { get; }
+        Command NavigateToInput { get; }
         Command NavigateToList { get; }
         Command NavigateToGridList { get; }
 
@@ -22,6 +23,7 @@ namespace Sim.Faciem.Material.Samples
         MatButtonColor ButtonNavColor { get; }
         MatButtonColor MenuNavColor { get; }
         MatButtonColor SelectNavColor { get; }
+        MatButtonColor InputNavColor { get; }
         MatButtonColor ListNavColor { get; }
         MatButtonColor GridListNavColor { get; }
     }
