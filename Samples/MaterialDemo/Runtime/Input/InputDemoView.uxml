@@ -1,61 +1,57 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
     <engine:VisualElement name="Root" data-source-type="Sim.Faciem.Material.Samples.InputDemoViewModel, Sim.Faciem.Material.Samples" class="mat-demo-content">
-        <engine:Label text="Input" class="mat-demo-page-title" />
-        <engine:Label text="MatInput reuses the shared Material form-field chrome for text and numeric entry, while supporting fill and outline appearances plus optional leading and trailing Background-based icons." class="mat-demo-page-subtitle" />
-
-        <engine:Label text="Text input  ·  Fill appearance" class="mat-demo-section-title" />
-        <engine:Label text="This example shows the simplest text field setup: label, placeholder and hint text with the default fill appearance." class="mat-demo-body" />
+        <engine:Label text="Input" class="mat-demo-page-title"/>
+        <engine:Label text="MatInput reuses the shared Material form-field chrome for text and numeric entry, while supporting fill and outline appearances plus optional an optional Background-based icon placed on either the leading or trailing side." class="mat-demo-page-subtitle"/>
+        <engine:Label text="Text input  ·  Fill appearance" class="mat-demo-section-title"/>
+        <engine:Label text="This example shows the simplest text field setup: label, placeholder and hint text with the default fill appearance." class="mat-demo-body"/>
         <Sim.Faciem.Material.Controls.MatInput label="Trainer name" placeholder="Enter a trainer name" hint-text="Text mode with no icons">
             <Bindings>
-                <engine:DataBinding property="Value" data-source-path="TrainerName" binding-mode="TwoWay" update-trigger="WhenDirty" />
+                <engine:DataBinding property="Value" data-source-path="TrainerName" binding-mode="TwoWay" update-trigger="WhenDirty"/>
             </Bindings>
         </Sim.Faciem.Material.Controls.MatInput>
         <engine:Label class="mat-demo-body mat-demo-output-label">
             <Bindings>
-                <engine:DataBinding property="text" data-source-path="TrainerName" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                <engine:DataBinding property="text" data-source-path="TrainerName" binding-mode="ToTarget" update-trigger="WhenDirty"/>
             </Bindings>
         </engine:Label>
-
-        <engine:Label text="Text input  ·  Icon-ready layout" class="mat-demo-section-title" />
-        <engine:Label text="The field layout reserves clean leading and trailing icon slots, so Background assets can be assigned directly in UXML, UI Builder or code without changing the outer form-field chrome." class="mat-demo-body" />
-        <Sim.Faciem.Material.Controls.MatInput label="Pokédex search" placeholder="Search by species" hint-text="Leading and trailing icon example">
+        <engine:Label text="Text input  ·  Icon-ready layout" class="mat-demo-section-title"/>
+        <engine:Label text="The field layout supports one optional icon that can be placed on either the leading or trailing side, so Background assets can be assigned directly in UXML, UI Builder or code without changing the outer form-field chrome." class="mat-demo-body"/>
+        <Sim.Faciem.Material.Controls.MatInput label="Pokédex search" placeholder="Search by species" hint-text="Leading and trailing icon example" icon="project://database/Packages/com.sim.faciem-material/Icons/fontawesome-free-7.2.0/svgs/solid/search.svg?fileID=7388822144124034973&amp;guid=2672b93a52d6ea94990cc47b9b0bb284&amp;type=3#search" icon-position="Leading">
             <Bindings>
-                <engine:DataBinding property="Value" data-source-path="SearchQuery" binding-mode="TwoWay" update-trigger="WhenDirty" />
+                <engine:DataBinding property="Value" data-source-path="SearchQuery" binding-mode="TwoWay" update-trigger="WhenDirty"/>
             </Bindings>
         </Sim.Faciem.Material.Controls.MatInput>
         <engine:Label class="mat-demo-body mat-demo-output-label">
             <Bindings>
-                <engine:DataBinding property="text" data-source-path="SearchQuery" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                <engine:DataBinding property="text" data-source-path="SearchQuery" binding-mode="ToTarget" update-trigger="WhenDirty"/>
             </Bindings>
         </engine:Label>
-
-        <engine:Label text="Numeric input  ·  Integer and float" class="mat-demo-section-title" />
-        <engine:Label text="Switch the InputType attribute to Integer or Float to keep the same MatInput API while constraining the entered characters." class="mat-demo-body" />
+        <engine:Label text="Numeric input  ·  Integer and float" class="mat-demo-section-title"/>
+        <engine:Label text="Switch the InputType attribute to Integer or Float to keep the same MatInput API while constraining the entered characters." class="mat-demo-body"/>
         <engine:VisualElement class="mat-demo-input-stack">
             <Sim.Faciem.Material.Controls.MatInput label="Pokédex number" placeholder="025" input-type="Integer">
                 <Bindings>
-                    <engine:DataBinding property="Value" data-source-path="PokedexNumber" binding-mode="TwoWay" update-trigger="WhenDirty" />
+                    <engine:DataBinding property="Value" data-source-path="PokedexNumber" binding-mode="TwoWay" update-trigger="WhenDirty"/>
                 </Bindings>
             </Sim.Faciem.Material.Controls.MatInput>
             <Sim.Faciem.Material.Controls.MatInput appearance="Outline" label="Catch rate" placeholder="45.5" input-type="Float" hint-text="Outline appearance">
                 <Bindings>
-                    <engine:DataBinding property="Value" data-source-path="CatchRate" binding-mode="TwoWay" update-trigger="WhenDirty" />
+                    <engine:DataBinding property="Value" data-source-path="CatchRate" binding-mode="TwoWay" update-trigger="WhenDirty"/>
                 </Bindings>
             </Sim.Faciem.Material.Controls.MatInput>
         </engine:VisualElement>
         <engine:Label class="mat-demo-body mat-demo-output-label">
             <Bindings>
-                <engine:DataBinding property="text" data-source-path="PokedexNumber" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                <engine:DataBinding property="text" data-source-path="PokedexNumber" binding-mode="ToTarget" update-trigger="WhenDirty"/>
             </Bindings>
         </engine:Label>
         <engine:Label class="mat-demo-body mat-demo-output-label">
             <Bindings>
-                <engine:DataBinding property="text" data-source-path="CatchRate" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                <engine:DataBinding property="text" data-source-path="CatchRate" binding-mode="ToTarget" update-trigger="WhenDirty"/>
             </Bindings>
         </engine:Label>
-
-        <engine:Label text="Disabled input" class="mat-demo-section-title" />
-        <engine:Label text="Disabled MatInput keeps the shared Material outline/fill treatment while blocking editing and muting the content. Icon assets can still be assigned through the same Background-based API." class="mat-demo-body" />
-        <Sim.Faciem.Material.Controls.MatInput label="Secret base" placeholder="Valor Lakefront" disabled="true" value="Unavailable in this demo" />
+        <engine:Label text="Disabled input" class="mat-demo-section-title"/>
+        <engine:Label text="Disabled MatInput keeps the shared Material outline/fill treatment while blocking editing and muting the content. Icon assets can still be assigned through the same Background-based API and positioned on either side." class="mat-demo-body"/>
+        <Sim.Faciem.Material.Controls.MatInput label="Secret base" placeholder="Valor Lakefront" disabled="true" value="Unavailable in this demo"/>
     </engine:VisualElement>
 </engine:UXML>

@@ -10,9 +10,18 @@ using UnityEngine.UIElements;
 namespace Sim.Faciem.Material.Controls
 {
     /// <summary>
+    /// Controls where the optional icon is rendered inside <see cref="MatInput"/>.
+    /// </summary>
+    public enum MatInputIconPosition
+    {
+        Leading,
+        Trailing,
+    }
+
+    /// <summary>
     /// Material text / numeric input built on top of the shared <see cref="MatFormField"/> chrome.
     /// Supports fill / outline appearance, floating label, hint text, placeholder text and
-    /// optional leading / trailing SVG icons.
+    /// an optional icon that can be placed on the leading or trailing side.
     /// </summary>
     [UxmlElement]
     public partial class MatInput : VisualElement
@@ -51,8 +60,8 @@ namespace Sim.Faciem.Material.Controls
         private bool _disabled;
         private MatInputType _inputType = MatInputType.Text;
         private string _value = string.Empty;
-        private Background _leadingIconBackground;
-        private Background _trailingIconBackground;
+        private Background _iconBackground;
+        private MatInputIconPosition _iconPosition = MatInputIconPosition.Leading;
         private bool _isFocused;
         private bool _suppressFieldChange;
 
@@ -139,23 +148,23 @@ namespace Sim.Faciem.Material.Controls
         }
 
         [UxmlAttribute]
-        public Background LeadingIcon
+        public Background Icon
         {
-            get => _leadingIconBackground;
+            get => _iconBackground;
             set
             {
-                _leadingIconBackground = value;
+                _iconBackground = value;
                 UpdateIconVisuals();
             }
         }
 
         [UxmlAttribute]
-        public Background TrailingIcon
+        public MatInputIconPosition IconPosition
         {
-            get => _trailingIconBackground;
+            get => _iconPosition;
             set
             {
-                _trailingIconBackground = value;
+                _iconPosition = value;
                 UpdateIconVisuals();
             }
         }
@@ -387,8 +396,9 @@ namespace Sim.Faciem.Material.Controls
 
         private void UpdateIconVisuals()
         {
-            SetIconVisual(_leadingIcon, LeadingIcon);
-            SetIconVisual(_trailingIcon, TrailingIcon);
+            var showLeading = _iconPosition == MatInputIconPosition.Leading;
+            SetIconVisual(_leadingIcon, showLeading ? Icon : default);
+            SetIconVisual(_trailingIcon, showLeading ? default : Icon);
         }
 
         private static void SetIconVisual(VisualElement element, Background icon)
