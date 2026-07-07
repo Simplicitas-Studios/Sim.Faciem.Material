@@ -1,4 +1,4 @@
-﻿/*
+/*
  * MatDeepPurpleTheme.uss
  * Angular Material prebuilt theme: Deep Purple / Amber  (light)
  *
@@ -126,4 +126,27 @@
     --mat-grid-list-tile-background:                    rgba(103, 58, 183, 0.04);
     --mat-grid-list-tile-border-color:                  rgba(0, 0, 0, 0.08);
     --mat-grid-list-tile-label-text-color:              rgba(0, 0, 0, 0.87);
+
+    /* ── Slide toggle ──────────────────────────────────────────────────── */
+    --mat-slide-toggle-label-text-color:              rgba(0, 0, 0, 0.87);
+    --mat-slide-toggle-disabled-label-text-color:     rgba(0, 0, 0, 0.38);
+    --mat-slide-toggle-track-off-color:               #616161;
+    --mat-slide-toggle-track-off-hover-color:         #616161;
+    --mat-slide-toggle-track-disabled-color:          #616161;
+    --mat-slide-toggle-thumb-off-color:               #FAFAFA;
+    --mat-slide-toggle-thumb-disabled-color:          #BDBDBD;
+    --mat-slide-toggle-thumb-icon-off-color:        rgba(0, 0, 0, 0.54);
+    --mat-slide-toggle-thumb-icon-checked-color:    #FFFFFF;
+    --mat-slide-toggle-thumb-icon-disabled-color:   rgba(0, 0, 0, 0.38);
+    --mat-slide-toggle-checked-track-color:           rgba(103, 58, 183, 0.54);
+    --mat-slide-toggle-checked-thumb-color:           #673AB7;
+    --mat-slide-toggle-primary-track-color:           rgba(103, 58, 183, 0.54);
+    --mat-slide-toggle-primary-thumb-color:           #673AB7;
+    --mat-slide-toggle-accent-track-color:            rgba(255, 215, 64, 0.54);
+    --mat-slide-toggle-accent-thumb-color:            #FFD740;
+    --mat-slide-toggle-warn-track-color:              rgba(244, 67, 54, 0.54);
+    --mat-slide-toggle-warn-thumb-color:              #F44336;
+    --mat-slide-toggle-state-layer-color:             rgba(0, 0, 0, 0.04);
+    --mat-slide-toggle-focus-ring-color:              rgba(103, 58, 183, 0.24);
+
 }

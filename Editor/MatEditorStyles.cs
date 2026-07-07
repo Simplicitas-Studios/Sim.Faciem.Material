@@ -29,6 +29,7 @@ namespace Sim.Faciem.Material.Editor
         private const string MenuStylesPath        = PackageRoot + "/Runtime/Controls/Styles/MatMenuStyles.uss";
         private const string ListStylesPath        = PackageRoot + "/Runtime/Controls/Styles/MatListStyles.uss";
         private const string GridListStylesPath    = PackageRoot + "/Runtime/Controls/Styles/MatGridListStyles.uss";
+        private const string SlideToggleStylesPath = PackageRoot + "/Runtime/Controls/Styles/MatSlideToggleStyles.uss";
         private const string ScrollViewStyles    = PackageRoot + "/Runtime/Controls/Styles/MatScrollViewStyles.uss";
         private const string IndigoPath       = PackageRoot + "/Runtime/Themes/MatIndigoTheme.uss";
         private const string DeepPurplePath   = PackageRoot + "/Runtime/Themes/MatDeepPurpleTheme.uss";
@@ -51,6 +52,7 @@ namespace Sim.Faciem.Material.Editor
         private static StyleSheet s_menuStyles;
         private static StyleSheet s_listStyles;
         private static StyleSheet s_gridListStyles;
+        private static StyleSheet s_slideToggleStyles;
         private static StyleSheet s_scrollViewStyles;
         private static StyleSheet s_indigoSheet;
         private static StyleSheet s_deepPurpleSheet;
@@ -115,6 +117,7 @@ namespace Sim.Faciem.Material.Editor
             TryRemove(root, s_menuStyles);
             TryRemove(root, s_listStyles);
             TryRemove(root, s_gridListStyles);
+            TryRemove(root, s_slideToggleStyles);
             TryRemove(root, s_indigoSheet);
             TryRemove(root, s_deepPurpleSheet);
             TryRemove(root, s_pinkBlueGreySheet);
@@ -217,6 +220,11 @@ namespace Sim.Faciem.Material.Editor
                 root.styleSheets.Add(s_scrollViewStyles);
             }
 
+            if (s_slideToggleStyles != null)
+            {
+                root.styleSheets.Add(s_slideToggleStyles);
+            }
+
             var themeSheet = GetThemeSheet(s_activeTheme.Value);
             if (themeSheet != null)
             {
@@ -242,6 +250,7 @@ namespace Sim.Faciem.Material.Editor
             s_menuStyles        ??= AssetDatabase.LoadAssetAtPath<StyleSheet>(MenuStylesPath);
             s_listStyles        ??= AssetDatabase.LoadAssetAtPath<StyleSheet>(ListStylesPath);
             s_gridListStyles    ??= AssetDatabase.LoadAssetAtPath<StyleSheet>(GridListStylesPath);
+            s_slideToggleStyles ??= AssetDatabase.LoadAssetAtPath<StyleSheet>(SlideToggleStylesPath);
             s_scrollViewStyles ??= AssetDatabase.LoadAssetAtPath<StyleSheet>(ScrollViewStyles);
             s_indigoSheet       ??= AssetDatabase.LoadAssetAtPath<StyleSheet>(IndigoPath);
             s_deepPurpleSheet   ??= AssetDatabase.LoadAssetAtPath<StyleSheet>(DeepPurplePath);
@@ -266,6 +275,7 @@ namespace Sim.Faciem.Material.Editor
             s_menuStyles        = null;
             s_listStyles        = null;
             s_gridListStyles    = null;
+            s_slideToggleStyles = null;
             s_scrollViewStyles = null;
             s_indigoSheet       = null;
             s_deepPurpleSheet   = null;

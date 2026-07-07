@@ -1,0 +1,82 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <engine:VisualElement name="Root" data-source-type="Sim.Faciem.Material.Samples.SlideToggleDemoViewModel, Sim.Faciem.Material.Samples" class="mat-demo-content">
+        <engine:Label text="Slide Toggle" class="mat-demo-page-title" />
+        <engine:Label text="Material slide toggles expose a bindable boolean value with Default, Primary, Accent and Warn checked colours." class="mat-demo-page-subtitle" />
+
+        <engine:VisualElement class="mat-demo-btn-row" style="flex-direction: row;">
+            <Sim.Faciem.Material.Controls.MatButton text="Toggle Disabled State" variant="Stroked" theme-color="Warn">
+                <Bindings>
+                    <engine:DataBinding property="Command" data-source-path="ToggleEnabled" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                </Bindings>
+            </Sim.Faciem.Material.Controls.MatButton>
+        </engine:VisualElement>
+
+        <engine:Label text="Colors" class="mat-demo-section-title" />
+        <engine:Label text="The theme color is applied to the checked track and thumb." class="mat-demo-body" />
+        <engine:VisualElement class="mat-demo-btn-row" style="flex-direction: column; align-items: flex-start;">
+            <Sim.Faciem.Material.Controls.MatSlideToggle text="Default slide toggle" value="true">
+                <Bindings>
+                    <engine:DataBinding property="enabledSelf" data-source-path="TogglesEnabled" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                </Bindings>
+            </Sim.Faciem.Material.Controls.MatSlideToggle>
+            <Sim.Faciem.Material.Controls.MatSlideToggle text="Primary slide toggle" theme-color="Primary" value="true">
+                <Bindings>
+                    <engine:DataBinding property="enabledSelf" data-source-path="TogglesEnabled" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                </Bindings>
+            </Sim.Faciem.Material.Controls.MatSlideToggle>
+            <Sim.Faciem.Material.Controls.MatSlideToggle text="Accent slide toggle" theme-color="Accent" value="true">
+                <Bindings>
+                    <engine:DataBinding property="enabledSelf" data-source-path="TogglesEnabled" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                </Bindings>
+            </Sim.Faciem.Material.Controls.MatSlideToggle>
+            <Sim.Faciem.Material.Controls.MatSlideToggle text="Warn slide toggle" theme-color="Warn" value="true">
+                <Bindings>
+                    <engine:DataBinding property="enabledSelf" data-source-path="TogglesEnabled" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                </Bindings>
+            </Sim.Faciem.Material.Controls.MatSlideToggle>
+        </engine:VisualElement>
+
+        <engine:Label text="Label position" class="mat-demo-section-title" />
+        <engine:VisualElement class="mat-demo-btn-row" style="flex-direction: column; align-items: flex-start;">
+            <Sim.Faciem.Material.Controls.MatSlideToggle text="Label after" theme-color="Primary" label-position="After" value="true" />
+            <Sim.Faciem.Material.Controls.MatSlideToggle text="Label before" theme-color="Accent" label-position="Before" value="true" />
+        </engine:VisualElement>
+
+        <engine:Label text="Disabled" class="mat-demo-section-title" />
+        <engine:VisualElement class="mat-demo-btn-row" style="flex-direction: column; align-items: flex-start;">
+            <Sim.Faciem.Material.Controls.MatSlideToggle text="Disabled unchecked">
+                <Bindings>
+                    <engine:DataBinding property="enabledSelf" data-source-path="DisabledTogglesEnabled" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                </Bindings>
+            </Sim.Faciem.Material.Controls.MatSlideToggle>
+            <Sim.Faciem.Material.Controls.MatSlideToggle text="Disabled checked" theme-color="Primary" value="true">
+                <Bindings>
+                    <engine:DataBinding property="enabledSelf" data-source-path="DisabledTogglesEnabled" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                </Bindings>
+            </Sim.Faciem.Material.Controls.MatSlideToggle>
+        </engine:VisualElement>
+
+        <engine:Label text="Data binding" class="mat-demo-section-title" />
+        <engine:Label text="The first toggle writes to a ViewModel boolean; the second mirrors it. The button cycles the bound color." class="mat-demo-body" />
+        <engine:VisualElement class="mat-demo-btn-row" style="flex-direction: row; align-items: center;">
+            <Sim.Faciem.Material.Controls.MatSlideToggle text="Two-way bound value" label-position="After">
+                <Bindings>
+                    <engine:DataBinding property="Value" data-source-path="BoundValue" binding-mode="TwoWay" update-trigger="WhenDirty" />
+                    <engine:DataBinding property="ThemeColor" data-source-path="BoundColor" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                </Bindings>
+            </Sim.Faciem.Material.Controls.MatSlideToggle>
+            <Sim.Faciem.Material.Controls.MatSlideToggle text="Mirrors bound value" label-position="After">
+                <Bindings>
+                    <engine:DataBinding property="Value" data-source-path="BoundValue" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                    <engine:DataBinding property="ThemeColor" data-source-path="BoundColor" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                    <engine:DataBinding property="enabledSelf" data-source-path="DisabledTogglesEnabled" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                </Bindings>
+            </Sim.Faciem.Material.Controls.MatSlideToggle>
+            <Sim.Faciem.Material.Controls.MatButton text="Cycle Color" variant="Stroked" theme-color="Primary">
+                <Bindings>
+                    <engine:DataBinding property="Command" data-source-path="CycleBoundColor" binding-mode="ToTarget" update-trigger="WhenDirty" />
+                </Bindings>
+            </Sim.Faciem.Material.Controls.MatButton>
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>

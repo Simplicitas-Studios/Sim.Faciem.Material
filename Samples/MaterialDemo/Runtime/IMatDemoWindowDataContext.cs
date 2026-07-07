@@ -16,6 +16,7 @@ namespace Sim.Faciem.Material.Samples
         Command NavigateToInput { get; }
         Command NavigateToList { get; }
         Command NavigateToGridList { get; }
+        Command NavigateToSlideToggle { get; }
 
         MatButtonColor GettingStartedNavColor { get; }
         MatButtonColor ThemingNavColor { get; }
@@ -26,6 +27,7 @@ namespace Sim.Faciem.Material.Samples
         MatButtonColor InputNavColor { get; }
         MatButtonColor ListNavColor { get; }
         MatButtonColor GridListNavColor { get; }
+        MatButtonColor SlideToggleNavColor { get; }
     }
 }
 

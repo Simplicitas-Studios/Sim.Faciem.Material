@@ -35,6 +35,9 @@ namespace Sim.Faciem.Material.Samples
         // Generated Property for MatGridListDemoViewId.asset with asset id 8a8f41ef0f0f4dbe9e7d6cf4bd0d1c8f
         public static ViewId Sim_Faciem_Material_GridListDemo { get; } = ViewId.From("Sim.Faciem/Material/GridListDemo");
 
+        // Generated Property for MatSlideToggleDemoViewId.asset with asset id 753677b920a4af179d732c32b6340f14
+        public static ViewId Sim_Faciem_Material_SlideToggleDemo { get; } = ViewId.From("Sim.Faciem/Material/SlideToggleDemo");
+
         // Generated Property for MatDemoWindowViewId.asset with asset id 3b4810f334f64e649b59896a064b1ab3
         public static ViewId Sim_Faciem_Material_DemoWindow { get; } = ViewId.From("Sim.Faciem/Material/DemoWindow");
         

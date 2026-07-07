@@ -12,5 +12,6 @@
 @import url("../Controls/Styles/MatMenuStyles.uss");
 @import url("../Controls/Styles/MatListStyles.uss");
 @import url("../Controls/Styles/MatGridListStyles.uss");
+@import url("../Controls/Styles/MatSlideToggleStyles.uss");
 @import url("MatPurpleGreenTheme.uss");
 
